@@ -1,0 +1,52 @@
+/* NMVPP Design System tokens (Brand_Book v.01), copied from the design system artifact.
+   Extensions added for the website are marked "EXT v0.1" and listed in DESIGN_EXTENSIONS.md. */
+
+:root {
+  /* core palette */
+  --orange-500: #FF5A1F; --orange-600: #E84A12; --orange-700: #B83A0E; --orange-300: #FF8A5C; --orange-100: #3A1A0E;
+  --white-100: #E4E6E1; --white-200: #D3D6D0; --white-300: #B9BDB7;
+  --graphite-50: #8A8D8F; --graphite-100: #6B6E70; --graphite-200: #4A4C4E; --graphite-300: #5B5E60;
+  --graphite-400: #2E3032; --graphite-500: #232527; --graphite-600: #1A1B1D; --graphite-700: #131415; --graphite-800: #0C0D0E;
+  --status-ok: #9BD15C; --status-warn: #FFC23D; --status-error: #FF3B30;
+
+  /* semantic */
+  --bg-page: var(--graphite-800); --surface-1: var(--graphite-700); --surface-2: var(--graphite-600); --surface-3: var(--graphite-500);
+  --fg-1: var(--white-100); --fg-2: var(--white-300); --fg-3: var(--graphite-50); --fg-4: var(--graphite-100);
+  --fg-signal: var(--orange-500); --fg-on-signal: var(--graphite-800);
+  --line-1: var(--graphite-400); --line-2: var(--graphite-200); --line-strong: var(--white-300); --line-signal: var(--orange-500);
+  --accent: var(--orange-500); --accent-hover: var(--orange-300);
+
+  /* type */
+  --font-display: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, monospace;
+  --font-code: 'JetBrains Mono', ui-monospace, monospace;
+  --fs-mega: clamp(72px, 11vw, 180px); --fs-display: clamp(48px, 7vw, 88px); --fs-h1: clamp(36px, 4.4vw, 56px);
+  --fs-h2: clamp(26px, 2.8vw, 36px); --fs-h3: 24px; --fs-body-lg: 17px; --fs-body: 14px; --fs-small: 12px; --fs-micro: 10px;
+  --lh-tight: 0.88; --lh-heading: 0.95; --lh-body: 1.7; --lh-mono: 1.5;
+  --tracking-display: -0.03em; --tracking-heading: -0.02em; --tracking-mono: 0.08em; --tracking-label: 0.16em;
+
+  /* space and grid */
+  --space-2: 4px; --space-3: 8px; --space-4: 12px; --space-5: 16px; --space-6: 24px; --space-7: 32px; --space-8: 48px; --space-9: 64px; --space-10: 96px;
+  --grid-gutter: 24px; --grid-margin: clamp(16px, 5vw, 64px); --content-max: 1240px;
+  --control-h-sm: 28px; --control-h-md: 36px;
+
+  /* motion */
+  --ease-mech: cubic-bezier(.7, 0, .2, 1); --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --dur-snap: 80ms; --dur-fast: 140ms; --dur-base: 220ms;
+  --focus-ring: 0 0 0 2px var(--graphite-800), 0 0 0 3px var(--orange-500);
+
+  /* EXT v0.1: motion for scenes and line drawing */
+  --dur-scene: 600ms; --dur-draw: 1200ms; --ease-scroll: linear;
+
+  /* EXT v0.1: line-art drawings (plans, sections) */
+  --stroke-cut: 3px; --stroke-thin: 1px; --stroke-hidden-opacity: 0.45; --stroke-dim: 1px;
+
+  /* EXT v0.1: point cloud height ramp, graphite to signal orange (bottom to top) */
+  --ramp-0: #2E3032; --ramp-1: #5B5E60; --ramp-2: #B9BDB7; --ramp-3: #FF5A1F;
+
+  /* EXT v0.1: deviation ramp, 0 / 3 / 5 cm and more */
+  --dev-0: #6B6E70; --dev-1: #E4E6E1; --dev-2: #FF5A1F;
+
+  /* EXT v0.1: comparison colours, student A and B */
+  --cmp-a: #FF5A1F; --cmp-b: #E4E6E1;
+}

@@ -1,0 +1,13 @@
+{
+  "code": "NMVPP",
+  "name": {
+    "sl": "Napredno modeliranje in vizualizacija prostorskih podatkov",
+    "en": "Advanced Modelling and Visualisation of Spatial Data"
+  },
+  "year": "2026/27",
+  "holder": "doc. dr. Tomaž Berčič",
+  "faculty": { "sl": "Univerza v Ljubljani, Fakulteta za arhitekturo", "en": "University of Ljubljana, Faculty of Architecture" },
+  "faculty_url": "https://www.fa.uni-lj.si/",
+  "course_url": null,
+  "note": "course_url: link to the official course page; null shows a [vnesi] marker"
+}

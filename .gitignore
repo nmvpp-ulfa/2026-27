@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.log
+.DS_Store
+
+# local working files, not published
+.claude/
+NMVPP_prompt_posplosen_model_*.md
+NMVPP_spletna_stran_prompt_*.md
+NMVPP_besedila_koraki_*.md
+desktop.ini
+*.tmp

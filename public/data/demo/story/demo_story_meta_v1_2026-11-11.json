@@ -1,0 +1,49 @@
+{
+ "demo": true,
+ "note": "Synthetic stair hall for the v0.1 prototype. Not the FA reference capture.",
+ "count": 180000,
+ "bytes": 2520000,
+ "units": "mm (int16)",
+ "layout": [
+  "pos int16 x3",
+  "target int16 x3",
+  "attr uint8 (bit0 scan, bit1-3 layer, bit4 line)",
+  "order uint8"
+ ],
+ "maxOrder": 51,
+ "layers": [
+  "01_FLOORS",
+  "02_WALLS",
+  "03_CEILING",
+  "04_STAIRS",
+  "05_OPENINGS",
+  "CLUTTER"
+ ],
+ "bounds": {
+  "min": [
+   -0.024,
+   -0.028,
+   -0.024
+  ],
+  "max": [
+   6.025,
+   4.026,
+   6.425
+  ]
+ },
+ "scanB": {
+  "rotDeg": 6,
+  "pivot": [
+   3,
+   2,
+   0
+  ],
+  "t": [
+   0.42,
+   -0.26,
+   0.1
+  ]
+ },
+ "model": "data/demo/scenes/demo_stair_model_v1_2026-11-11.json",
+ "plan": "data/demo/scenes/demo_stair_plan_v1_2026-11-11.svg"
+}

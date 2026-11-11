@@ -1,0 +1,39 @@
+{
+  "predloga": "NMVPP oddaja, v1, 2026-11-11. Izpolnite vsa polja; kar ne velja, pustite prazno.",
+  "ime": "",
+  "priimek": "",
+  "soglasje_ime": false,
+  "soglasje_lokacija": false,
+  "faza": 1,
+  "lokacija": {
+    "ime": "Stopnišče FA",
+    "oznaka": "stopnisce-fa",
+    "vrsta": "stopnisce",
+    "lat": null,
+    "lon": null,
+    "dovoljenje_upravljavca": false
+  },
+  "datum_zajema": "LLLL-MM-DD",
+  "naprave": [
+    { "model": "", "lidar": true }
+  ],
+  "aplikacije": ["Scaniverse"],
+  "ai": [
+    { "asistent": "", "model": "", "dosezeni_korak": 0, "opomba": "" }
+  ],
+  "dosezeni_korak": 0,
+  "koraki": [
+    { "korak": 1, "cas_h": null, "kaj_ni_delovalo": "" },
+    { "korak": 2, "cas_h": null, "kaj_ni_delovalo": "" },
+    { "korak": 3, "cas_h": null, "kaj_ni_delovalo": "" },
+    { "korak": 4, "cas_h": null, "kaj_ni_delovalo": "" },
+    { "korak": 5, "cas_h": null, "kaj_ni_delovalo": "" },
+    { "korak": 6, "cas_h": null, "kaj_ni_delovalo": "" },
+    { "korak": 7, "cas_h": null, "kaj_ni_delovalo": "" },
+    { "korak": 8, "cas_h": null, "kaj_ni_delovalo": "" },
+    { "korak": 9, "cas_h": null, "kaj_ni_delovalo": "" }
+  ],
+  "besedilo_sl": "",
+  "besedilo_en": "",
+  "razstava": { "tisk": "", "merilo": "", "material": "" }
+}

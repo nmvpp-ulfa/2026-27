@@ -1,0 +1,402 @@
+{
+  "source": "NMVPP_besedila_koraki_v1_2026-11-11.md",
+  "intro": {
+    "sl": {
+      "title": "Potek dela",
+      "text": "Notranji prostor zajamemo s telefonom z LiDAR-jem in videom ter ga v devetih korakih pretvorimo v generaliziran, merljiv 3D model. Skripte v Pythonu piše in poganja AI asistent, samo z odprtokodnimi knjižnicami. Vsaka mera izhaja iz podatkov. Po vsakem koraku pregledamo sliko in povzetek, šele nato nadaljujemo. Pomaknite se navzdol in sledite prostoru skozi vse korake.",
+      "kv": [
+        [
+          "AI asistent",
+          "[vnesi]"
+        ]
+      ]
+    },
+    "en": {
+      "title": "Workflow",
+      "text": "We capture an interior with a LiDAR phone and video and turn it into a generalised, measurable 3D model in nine steps. An AI assistant writes and runs the Python scripts, using open-source libraries only. Every measurement comes from the data. After each step we review an image and a summary before moving on. Scroll down to follow the space through all nine steps.",
+      "kv": [
+        [
+          "AI assistant",
+          "[vnesi]"
+        ]
+      ]
+    }
+  },
+  "steps": [
+    {
+      "n": "01",
+      "id": "capture",
+      "live": true,
+      "anchor": {
+        "sl": "2 skeniranji",
+        "en": "2 scans"
+      },
+      "sl": {
+        "title": "Zajem",
+        "text": "Prostor zajamemo z dvema LiDAR skeniranjema v aplikaciji Scaniverse, z enim ali dvema videoposnetkoma in s fotografijami elementov, ki jih izmerimo s trakom. Vsak vir najprej pregledamo posebej: število točk, obseg, enote, gostoto, pokritost prostora in znake zamika, kot so podvojene stene ali ukrivljena tla. Za vsak vir izrišemo tloris, obarvan po višini.",
+        "tools": "Scaniverse, telefon z LiDAR-jem [vnesi: model], merilni trak; laspy, open3d, numpy [preveri]",
+        "time": "[vnesi]",
+        "fail": "[vnesi]"
+      },
+      "en": {
+        "title": "Capture",
+        "text": "We capture the space with two LiDAR scans in Scaniverse, one or two walk-through videos and photos of elements measured with a tape. Each source is first inspected on its own: point count, extent, units, density, coverage and signs of drift such as doubled walls or bent floors. Each source gets a plan view coloured by height.",
+        "tools": "Scaniverse, LiDAR phone [vnesi: model], measuring tape; laspy, open3d, numpy [preveri]",
+        "time": "[vnesi]",
+        "fail": "[vnesi]"
+      }
+    },
+    {
+      "n": "02",
+      "id": "clean",
+      "live": true,
+      "anchor": {
+        "sl": "1,5 cm",
+        "en": "1.5 cm"
+      },
+      "sl": {
+        "title": "Čiščenje",
+        "text": "Oblak razredčimo z vokselsko mrežo 1,5 cm, odstranimo statistične osamelce in ocenimo normale. Oblak zasučemo tako, da so tla natančno vodoravna in os z kaže navzgor. Pohištvo in premične predmete odstranimo, kjer je to mogoče.",
+        "tools": "open3d, numpy [preveri]",
+        "time": "[vnesi]",
+        "fail": "[vnesi]"
+      },
+      "en": {
+        "title": "Cleaning",
+        "text": "The cloud is downsampled on a 1.5 cm voxel grid, statistical outliers are removed and normals are estimated. We rotate it so the floor is exactly horizontal, with z pointing up. Furniture and loose objects are removed where possible.",
+        "tools": "open3d, numpy [preveri]",
+        "time": "[vnesi]",
+        "fail": "[vnesi]"
+      }
+    },
+    {
+      "n": "03",
+      "id": "align",
+      "live": true,
+      "anchor": {
+        "sl": "5 cm",
+        "en": "5 cm"
+      },
+      "sl": {
+        "title": "Poravnava",
+        "text": "Boljše od obeh skeniranj vzamemo za referenco. Grobo poravnavo najdemo s primerjavo tlorisov navpičnih ploskev pri zasukih od 0 do 359 stopinj (navzkrižna korelacija), natančno pa z ICP v korakih 10, 5, 3 in 2 cm. Skeniranje z zamikom razdelimo po prostorih ali etažah in vsak del poravnamo posebej. Obdržimo le dele, ki se ujemajo znotraj 5 cm, in jih združimo v en oblak.",
+        "kv": [
+          [
+            "Mediana odstopanja",
+            "[vnesi] cm"
+          ],
+          [
+            "Delež točk znotraj 5 cm",
+            "[vnesi] %"
+          ]
+        ],
+        "tools": "ICP; open3d, numpy, scipy [preveri]",
+        "time": "[vnesi]",
+        "fail": "[vnesi]"
+      },
+      "en": {
+        "title": "Alignment",
+        "text": "The better of the two scans becomes the reference. Coarse alignment comes from comparing plan views of vertical surfaces over rotations from 0 to 359 degrees (cross-correlation), fine alignment from ICP in stages of 10, 5, 3 and 2 cm. A scan with drift is split per room or per level and each part is aligned separately. Only parts that match within 5 cm are kept and merged into one cloud.",
+        "kv": [
+          [
+            "Median deviation",
+            "[vnesi] cm"
+          ],
+          [
+            "Share of points within 5 cm",
+            "[vnesi] %"
+          ]
+        ],
+        "tools": "ICP; open3d, numpy, scipy [preveri]",
+        "time": "[vnesi]",
+        "fail": "[vnesi]"
+      }
+    },
+    {
+      "n": "04",
+      "id": "video",
+      "live": true,
+      "anchor": {
+        "sl": "2 do 3 slike/s",
+        "en": "2 to 3 frames/s"
+      },
+      "sl": {
+        "title": "Video in SfM",
+        "text": "Iz videa izluščimo 2 do 3 slike na sekundo in zavržemo zamegljene. S COLMAP izračunamo strukturo iz gibanja (SfM), rezultat umerimo in poravnamo na LiDAR oblak. Video zapolni vrzeli in služi kot neodvisna kontrola, ne kot glavna geometrija.",
+        "kv": [
+          [
+            "Registrirane slike",
+            "[vnesi] od [vnesi]"
+          ]
+        ],
+        "tools": "COLMAP (pycolmap); ffmpeg [preveri]; RealityScan [preveri: ali in v katerem koraku]",
+        "time": "[vnesi]",
+        "fail": "[vnesi]"
+      },
+      "en": {
+        "title": "Video and SfM",
+        "text": "We extract 2 to 3 frames per second from the video and drop blurred ones. COLMAP computes structure from motion (SfM); the result is scaled and aligned to the LiDAR cloud. The video fills gaps and serves as an independent check, not as the main geometry.",
+        "kv": [
+          [
+            "Registered frames",
+            "[vnesi] of [vnesi]"
+          ]
+        ],
+        "tools": "COLMAP (pycolmap); ffmpeg [preveri]; RealityScan [preveri: whether and in which step]",
+        "time": "[vnesi]",
+        "fail": "[vnesi]"
+      }
+    },
+    {
+      "n": "05",
+      "id": "scale",
+      "live": true,
+      "anchor": {
+        "sl": "3 cm",
+        "en": "3 cm"
+      },
+      "sl": {
+        "title": "Kontrola merila",
+        "text": "V združenem oblaku izmerimo iste elemente kot s trakom: širino vrat, višino stropa in dolžino stene. Rezultate zberemo v tabeli. Če je katera od razlik večja od 3 cm, postopek ustavimo.",
+        "table": {
+          "head": [
+            "Element",
+            "Trak",
+            "Oblak",
+            "Razlika"
+          ],
+          "rows": [
+            [
+              "Širina vrat",
+              "[vnesi]",
+              "[vnesi]",
+              "[vnesi]"
+            ],
+            [
+              "Višina stropa",
+              "[vnesi]",
+              "[vnesi]",
+              "[vnesi]"
+            ],
+            [
+              "Dolžina stene",
+              "[vnesi]",
+              "[vnesi]",
+              "[vnesi]"
+            ]
+          ]
+        },
+        "tools": "merilni trak; open3d, numpy [preveri]",
+        "time": "[vnesi]",
+        "fail": "[vnesi]"
+      },
+      "en": {
+        "title": "Scale check",
+        "text": "In the merged cloud we measure the same elements as with the tape: door width, ceiling height and wall length. The results go into a table. If any difference exceeds 3 cm, the process stops.",
+        "table": {
+          "head": [
+            "Element",
+            "Tape",
+            "Cloud",
+            "Difference"
+          ],
+          "rows": [
+            [
+              "Door width",
+              "[vnesi]",
+              "[vnesi]",
+              "[vnesi]"
+            ],
+            [
+              "Ceiling height",
+              "[vnesi]",
+              "[vnesi]",
+              "[vnesi]"
+            ],
+            [
+              "Wall length",
+              "[vnesi]",
+              "[vnesi]",
+              "[vnesi]"
+            ]
+          ]
+        },
+        "tools": "measuring tape; open3d, numpy [preveri]",
+        "time": "[vnesi]",
+        "fail": "[vnesi]"
+      }
+    },
+    {
+      "n": "06",
+      "id": "detect",
+      "live": true,
+      "anchor": {
+        "sl": "1,0 m",
+        "en": "1.0 m"
+      },
+      "sl": {
+        "title": "Prepoznava geometrije",
+        "text": "Oblak prerežemo vodoravno, približno 1,0 m nad vsako etažo, in navpično. Z metodo RANSAC poiščemo ravnine tal, stropov in sten, stopnice in odprtine: vrata, okna in prehode. Višino in globino stopnice odčitamo iz profila.",
+        "tools": "RANSAC; open3d, numpy, shapely [preveri]",
+        "time": "[vnesi]",
+        "fail": "[vnesi]"
+      },
+      "en": {
+        "title": "Geometry detection",
+        "text": "We slice the cloud horizontally, about 1.0 m above each floor level, and cut vertical sections. RANSAC detects the planes of floors, ceilings and walls, the stairs and the openings: doors, windows and passages. Riser and tread are read from a stair profile.",
+        "tools": "RANSAC; open3d, numpy, shapely [preveri]",
+        "time": "[vnesi]",
+        "fail": "[vnesi]"
+      }
+    },
+    {
+      "n": "07",
+      "id": "generalise",
+      "live": true,
+      "anchor": {
+        "sl": "3°",
+        "en": "3°"
+      },
+      "sl": {
+        "title": "Generalizacija",
+        "text": "Generalizacija je osrednja ideja predmeta. Pravila določimo pred modeliranjem. Iz oblaka točk ostanejo črte in ravnine, vsako odločitev pa zapišemo skupaj z razlogom.",
+        "list_title": "Pravila",
+        "list": [
+          "Stena je navpična ravnina s površino vsaj 0,5 m². Pohištvo, cevi in drobne predmete prezremo.",
+          "Kote, ki so od 90 ali 180 stopinj oddaljeni največ 3 stopinje, poravnamo na pravi ali iztegnjeni kot.",
+          "Mere zaokrožimo na 1 cm. Stopnišče dobi enotno višino in globino stopnice.",
+          "Model prikazuje samo notranje ploskve, brez debeline sten.",
+          "Ukrivljene ploskve, na primer oboke, poenostavimo v nekaj ravnin ali en valj."
+        ],
+        "tools": "numpy, shapely [preveri]",
+        "time": "[vnesi]",
+        "fail": "[vnesi]"
+      },
+      "en": {
+        "title": "Generalisation",
+        "text": "Generalisation is the core idea of the course. Rules are fixed before modelling. The point cloud is reduced to lines and planes, and every decision is recorded with its reason.",
+        "list_title": "Rules",
+        "list": [
+          "A wall is a vertical plane of at least 0.5 m². Furniture, pipes and clutter are ignored.",
+          "Angles within 3 degrees of 90 or 180 are snapped to exact right or straight angles.",
+          "Dimensions are rounded to 1 cm. A stair gets one uniform riser and tread.",
+          "The model shows interior surfaces only, without wall thickness.",
+          "Curved surfaces such as vaults are simplified to a few planes or one cylinder."
+        ],
+        "tools": "numpy, shapely [preveri]",
+        "time": "[vnesi]",
+        "fail": "[vnesi]"
+      }
+    },
+    {
+      "n": "08",
+      "id": "model",
+      "live": true,
+      "anchor": {
+        "sl": "1:50",
+        "en": "1:50"
+      },
+      "sl": {
+        "title": "Model in izdelki",
+        "text": "Iz ravninskih ploskev sestavimo zaprt generaliziran model s plastmi 01_FLOORS, 02_WALLS, 03_CEILING, 04_STAIRS in 05_OPENINGS. Izdelamo tloris in prerez v merilu 1:50 z glavnimi merami. Odstopanje oblaka od modela podamo z mediano, deležem točk znotraj 5 cm in barvno sliko.",
+        "list_title": "Izdelki",
+        "list": [
+          "združeni oblak točk: PLY, LAS",
+          "model: 3DM (v metrih), OBJ",
+          "tloris in prerez: DXF, PDF, 1:50",
+          "tabela meritev: CSV",
+          "odstopanje oblaka od modela: barvna slika"
+        ],
+        "kv": [
+          [
+            "Mediana odstopanja od modela",
+            "[vnesi] cm"
+          ],
+          [
+            "Delež točk znotraj 5 cm",
+            "[vnesi] %"
+          ]
+        ],
+        "tools": "rhino3dm, trimesh, ezdxf, laspy [preveri]",
+        "time": "[vnesi]",
+        "fail": "[vnesi]"
+      },
+      "en": {
+        "title": "Model and outputs",
+        "text": "Planar faces are assembled into a closed generalised model on layers 01_FLOORS, 02_WALLS, 03_CEILING, 04_STAIRS and 05_OPENINGS. A floor plan and a section are drawn at 1:50 with main dimensions. The deviation of the cloud from the model is given as a median, a share of points within 5 cm and a colour image.",
+        "list_title": "Outputs",
+        "list": [
+          "merged point cloud: PLY, LAS",
+          "model: 3DM (metres), OBJ",
+          "floor plan and section: DXF, PDF, 1:50",
+          "measurement table: CSV",
+          "deviation of the cloud from the model: colour image"
+        ],
+        "kv": [
+          [
+            "Median deviation from the model",
+            "[vnesi] cm"
+          ],
+          [
+            "Share of points within 5 cm",
+            "[vnesi] %"
+          ]
+        ],
+        "tools": "rhino3dm, trimesh, ezdxf, laspy [preveri]",
+        "time": "[vnesi]",
+        "fail": "[vnesi]"
+      }
+    },
+    {
+      "n": "09",
+      "id": "exhibition",
+      "live": true,
+      "anchor": {
+        "sl": "[vnesi]",
+        "en": "[vnesi]"
+      },
+      "sl": {
+        "title": "Razstava in poročilo",
+        "text": "Vsak zajem zaključimo s kratkim poročilom: kaj je delovalo, kaj ni, kaj je negotovo in kateri deli prostora manjkajo. Poročilo gre v dnevnik dela. Generalizirane modele natisnemo v 3D [preveri: vse ali izbrane] in jih pokažemo na razstavi.",
+        "kv": [
+          [
+            "Kraj",
+            "[vnesi]"
+          ],
+          [
+            "Datum",
+            "[vnesi]"
+          ],
+          [
+            "Tisk",
+            "[vnesi: tehnika, merilo, material]"
+          ]
+        ],
+        "tools": "3D tiskalnik [vnesi]",
+        "time": "[vnesi]",
+        "fail": "[vnesi]"
+      },
+      "en": {
+        "title": "Exhibition and report",
+        "text": "Each capture ends with a short report: what worked, what did not, what is uncertain and which parts of the space are missing. The report goes into the work log. The generalised models are 3D printed [preveri: all or a selection] and shown at the exhibition.",
+        "kv": [
+          [
+            "Venue",
+            "[vnesi]"
+          ],
+          [
+            "Date",
+            "[vnesi]"
+          ],
+          [
+            "Print",
+            "[vnesi: method, scale, material]"
+          ]
+        ],
+        "tools": "3D printer [vnesi]",
+        "time": "[vnesi]",
+        "fail": "[vnesi]"
+      }
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 560" width="760" height="560" stroke-linecap="square">
+<!-- DEMO: synthetic plan for the v0.1 prototype, section at +1.00 m. Not a student result. -->
+<path class="ln ln-cut" pathLength="1" d="M80.0 480.0L680.0 480.0" stroke="#E4E6E1" stroke-width="3" fill="none"/>
+<path class="ln ln-cut" pathLength="1" d="M80.0 80.0L280.0 80.0" stroke="#E4E6E1" stroke-width="3" fill="none"/>
+<path class="ln ln-cut" pathLength="1" d="M440.0 80.0L680.0 80.0" stroke="#E4E6E1" stroke-width="3" fill="none"/>
+<path class="ln ln-thin" pathLength="1" d="M280.0 80.0L440.0 80.0" stroke="#8A8D8F" stroke-width="1" fill="none"/>
+<path class="ln ln-thin" pathLength="1" d="M280.0 86.0L440.0 86.0" stroke="#8A8D8F" stroke-width="1" fill="none"/>
+<path class="ln ln-cut" pathLength="1" d="M80.0 480.0L80.0 80.0" stroke="#E4E6E1" stroke-width="3" fill="none"/>
+<path class="ln ln-cut" pathLength="1" d="M680.0 480.0L680.0 430.0" stroke="#E4E6E1" stroke-width="3" fill="none"/>
+<path class="ln ln-cut" pathLength="1" d="M680.0 330.0L680.0 80.0" stroke="#E4E6E1" stroke-width="3" fill="none"/>
+<path class="ln ln-thin" pathLength="1" d="M680.0 330.0L580.0 330.0" stroke="#8A8D8F" stroke-width="1" fill="none"/>
+<path class="ln ln-thin" pathLength="1" d="M580.0 330.0A100 100 0 0 0 680.0 430.0" stroke="#8A8D8F" stroke-width="1" fill="none"/>
+<path class="ln ln-thin" pathLength="1" d="M160.0 480.0L160.0 340.0" stroke="#8A8D8F" stroke-width="1" fill="none"/>
+<path class="ln ln-thin" pathLength="1" d="M190.0 480.0L190.0 340.0" stroke="#8A8D8F" stroke-width="1" fill="none"/>
+<path class="ln ln-thin" pathLength="1" d="M220.0 480.0L220.0 340.0" stroke="#8A8D8F" stroke-width="1" fill="none"/>
+<path class="ln ln-thin" pathLength="1" d="M250.0 480.0L250.0 340.0" stroke="#8A8D8F" stroke-width="1" fill="none"/>
+<path class="ln ln-thin" pathLength="1" d="M280.0 480.0L280.0 340.0" stroke="#8A8D8F" stroke-width="1" fill="none"/>
+<path class="ln ln-thin" pathLength="1" d="M310.0 480.0L310.0 340.0" stroke="#8A8D8F" stroke-width="1" fill="none"/>
+<path class="ln ln-thin" pathLength="1" d="M340.0 480.0L340.0 340.0" stroke="#8A8D8F" stroke-width="1" fill="none"/>
+<path class="ln ln-thin" pathLength="1" d="M160.0 340.0L340.0 340.0" stroke="#8A8D8F" stroke-width="1" fill="none"/>
+<path class="ln ln-thin" pathLength="1" d="M335.0 480.0L355.0 420.0L340.0 402.0L365.0 340.0" stroke="#8A8D8F" stroke-width="1" fill="none"/>
+<path class="ln ln-sig" pathLength="1" d="M175.0 410.0L320.0 410.0" stroke="#FF5A1F" stroke-width="1.5" fill="none"/>
+<path class="ln ln-sig" pathLength="1" d="M308.0 420.0L322.0 410.0L308.0 400.0" stroke="#FF5A1F" stroke-width="1.5" fill="none"/>
+<path class="ln ln-hid" pathLength="1" d="M160.0 330.0L430.0 330.0L430.0 190.0L160.0 190.0Z" stroke="#5B5E60" stroke-width="1" fill="none"/>
+<path class="ln ln-hid" pathLength="1" d="M400.0 330.0L400.0 190.0" stroke="#5B5E60" stroke-width="1" fill="none"/>
+<path class="ln ln-hid" pathLength="1" d="M370.0 330.0L370.0 190.0" stroke="#5B5E60" stroke-width="1" fill="none"/>
+<path class="ln ln-hid" pathLength="1" d="M340.0 330.0L340.0 190.0" stroke="#5B5E60" stroke-width="1" fill="none"/>
+<path class="ln ln-hid" pathLength="1" d="M310.0 330.0L310.0 190.0" stroke="#5B5E60" stroke-width="1" fill="none"/>
+<path class="ln ln-hid" pathLength="1" d="M280.0 330.0L280.0 190.0" stroke="#5B5E60" stroke-width="1" fill="none"/>
+<path class="ln ln-hid" pathLength="1" d="M250.0 330.0L250.0 190.0" stroke="#5B5E60" stroke-width="1" fill="none"/>
+<path class="ln ln-hid" pathLength="1" d="M220.0 330.0L220.0 190.0" stroke="#5B5E60" stroke-width="1" fill="none"/>
+<path class="ln ln-hid" pathLength="1" d="M190.0 330.0L190.0 190.0" stroke="#5B5E60" stroke-width="1" fill="none"/>
+<path class="ln ln-hid" pathLength="1" d="M430.0 480.0L610.0 480.0L610.0 190.0L430.0 190.0Z" stroke="#5B5E60" stroke-width="1" fill="none"/>
+<path class="ln ln-hid" pathLength="1" d="M160.0 190.0L680.0 190.0" stroke="#5B5E60" stroke-width="1" fill="none"/>
+<path class="ln ln-hid" pathLength="1" d="M160.0 480.0L160.0 330.0" stroke="#5B5E60" stroke-width="1" fill="none"/>
+<path class="ln ln-dim" pathLength="1" d="M80.0 525.0L680.0 525.0" stroke="#FF5A1F" stroke-width="1" fill="none"/>
+<path class="ln ln-dim" pathLength="1" d="M74.0 531.0L86.0 519.0" stroke="#FF5A1F" stroke-width="1.5" fill="none"/>
+<path class="ln ln-dim" pathLength="1" d="M674.0 531.0L686.0 519.0" stroke="#FF5A1F" stroke-width="1.5" fill="none"/>
+<text class="lbl" x="380.0" y="547.0" fill="#FF5A1F" font-family="JetBrains Mono, monospace" font-size="16" text-anchor="middle">600</text>
+<path class="ln ln-dim" pathLength="1" d="M35.0 480.0L35.0 80.0" stroke="#FF5A1F" stroke-width="1" fill="none"/>
+<path class="ln ln-dim" pathLength="1" d="M29.0 486.0L41.0 474.0" stroke="#FF5A1F" stroke-width="1.5" fill="none"/>
+<path class="ln ln-dim" pathLength="1" d="M29.0 86.0L41.0 74.0" stroke="#FF5A1F" stroke-width="1.5" fill="none"/>
+<text class="lbl" x="23.0" y="280.0" fill="#FF5A1F" font-family="JetBrains Mono, monospace" font-size="16" text-anchor="middle" transform="rotate(-90 23.0 280.0)">400</text>
+</svg>

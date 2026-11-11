@@ -1,0 +1,22 @@
+{
+  "name": "nmvpp-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "NMVPP course website, UL FA. v0.1 prototype with demo data.",
+  "author": "Tomaž Berčič",
+  "scripts": {
+    "dev": "node scripts/vite.mjs dev",
+    "build": "node scripts/vite.mjs build",
+    "preview": "node scripts/vite.mjs preview",
+    "demo-data": "node scripts/make_demo_data.mjs"
+  },
+  "dependencies": {
+    "gsap": "^3.12.5",
+    "leaflet": "^1.9.4",
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  }
+}

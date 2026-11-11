@@ -1,0 +1,751 @@
+{
+ "demo": true,
+ "generated": "2026-11-11",
+ "note": "Demo records from scripts/make_demo_data.mjs. Replaced by scripts/build_manifest.py in v0.3.",
+ "students": [
+  {
+   "id": "s01",
+   "demo": true,
+   "display_name": "Študent 01",
+   "consent_name": false,
+   "avatar_seed": "demo-s01",
+   "phase": 1,
+   "status": "in_progress",
+   "reached_step": 7,
+   "scene": "stair",
+   "location": {
+    "name": "UL FA, Zoisova 12",
+    "lat": 46.0446,
+    "lon": 14.5003,
+    "type": "fa"
+   },
+   "consent_location_publication": true,
+   "devices": [
+    "demo: telefon z LiDAR-jem"
+   ],
+   "lidar": true,
+   "apps": [
+    "Scaniverse"
+   ],
+   "ai_models": [
+    {
+     "name": "Model A (demo)",
+     "reached_step": 7
+    },
+    {
+     "name": "Model B (demo)",
+     "reached_step": 4
+    }
+   ],
+   "metrics": {
+    "points": 110008,
+    "median_dev_cm": 0.3,
+    "within_5cm_pct": 100,
+    "scale_err_cm": 1
+   },
+   "measurements": [
+    {
+     "element": "door_width",
+     "tape_cm": 100,
+     "cloud_cm": 100.1
+    },
+    {
+     "element": "ceiling_height",
+     "tape_cm": 640,
+     "cloud_cm": 641.3
+    },
+    {
+     "element": "wall_length",
+     "tape_cm": 600,
+     "cloud_cm": 601
+    }
+   ],
+   "files": {
+    "pointcloud": "data/s01/demo_s01_pointcloud_v1_2026-11-11.bin",
+    "pointcloud_count": 110008,
+    "splat": null,
+    "mesh": null,
+    "model_glb": null,
+    "model_json": "data/demo/scenes/demo_stair_model_v1_2026-11-11.json",
+    "plan_svg": "data/demo/scenes/demo_stair_plan_v1_2026-11-11.svg",
+    "sheets": [
+     {
+      "week": 1,
+      "file": null
+     },
+     {
+      "week": 2,
+      "file": null
+     },
+     {
+      "week": 3,
+      "file": null
+     },
+     {
+      "week": 4,
+      "file": null
+     },
+     {
+      "week": 5,
+      "file": null
+     },
+     {
+      "week": 6,
+      "file": null
+     }
+    ],
+    "downloads": [
+     {
+      "type": "DXF",
+      "file": null
+     },
+     {
+      "type": "PDF",
+      "file": null
+     },
+     {
+      "type": "OBJ",
+      "file": null
+     },
+     {
+      "type": "3DM",
+      "file": null
+     }
+    ]
+   },
+   "worklog": [
+    {
+     "date": "[vnesi]",
+     "text_sl": "[vnesi]",
+     "text_en": "[vnesi]"
+    }
+   ],
+   "exhibition": {
+    "selected": null,
+    "print": null
+   },
+   "text_sl": "[vnesi] Kratek opis zajema, poskusov in modela.",
+   "text_en": "[vnesi] Short description of the capture, attempts and model."
+  },
+  {
+   "id": "s02",
+   "demo": true,
+   "display_name": "Študent 02",
+   "consent_name": false,
+   "avatar_seed": "demo-s02",
+   "phase": 1,
+   "status": "in_progress",
+   "reached_step": 6,
+   "scene": "stair",
+   "location": {
+    "name": "UL FA, Zoisova 12",
+    "lat": 46.0446,
+    "lon": 14.5003,
+    "type": "fa"
+   },
+   "consent_location_publication": true,
+   "devices": [
+    "demo: telefon z LiDAR-jem"
+   ],
+   "lidar": true,
+   "apps": [
+    "Scaniverse"
+   ],
+   "ai_models": [
+    {
+     "name": "Model A (demo)",
+     "reached_step": 6
+    },
+    {
+     "name": "Model B (demo)",
+     "reached_step": 3
+    }
+   ],
+   "metrics": {
+    "points": 95446,
+    "median_dev_cm": 0.5,
+    "within_5cm_pct": 100,
+    "scale_err_cm": -1.6
+   },
+   "measurements": [
+    {
+     "element": "door_width",
+     "tape_cm": 100,
+     "cloud_cm": 99.9
+    },
+    {
+     "element": "ceiling_height",
+     "tape_cm": 640,
+     "cloud_cm": 638.9
+    },
+    {
+     "element": "wall_length",
+     "tape_cm": 600,
+     "cloud_cm": 598.4
+    }
+   ],
+   "files": {
+    "pointcloud": "data/s02/demo_s02_pointcloud_v1_2026-11-11.bin",
+    "pointcloud_count": 95446,
+    "splat": null,
+    "mesh": null,
+    "model_glb": null,
+    "model_json": "data/demo/scenes/demo_stair_model_v1_2026-11-11.json",
+    "plan_svg": "data/demo/scenes/demo_stair_plan_v1_2026-11-11.svg",
+    "sheets": [
+     {
+      "week": 1,
+      "file": null
+     },
+     {
+      "week": 2,
+      "file": null
+     },
+     {
+      "week": 3,
+      "file": null
+     },
+     {
+      "week": 4,
+      "file": null
+     },
+     {
+      "week": 5,
+      "file": null
+     },
+     {
+      "week": 6,
+      "file": null
+     }
+    ],
+    "downloads": [
+     {
+      "type": "DXF",
+      "file": null
+     },
+     {
+      "type": "PDF",
+      "file": null
+     },
+     {
+      "type": "OBJ",
+      "file": null
+     },
+     {
+      "type": "3DM",
+      "file": null
+     }
+    ]
+   },
+   "worklog": [
+    {
+     "date": "[vnesi]",
+     "text_sl": "[vnesi]",
+     "text_en": "[vnesi]"
+    }
+   ],
+   "exhibition": {
+    "selected": null,
+    "print": null
+   },
+   "text_sl": "[vnesi] Kratek opis zajema, poskusov in modela.",
+   "text_en": "[vnesi] Short description of the capture, attempts and model."
+  },
+  {
+   "id": "s03",
+   "demo": true,
+   "display_name": "Študent 03",
+   "consent_name": false,
+   "avatar_seed": "demo-s03",
+   "phase": 1,
+   "status": "in_progress",
+   "reached_step": 5,
+   "scene": "stair",
+   "location": {
+    "name": "UL FA, Zoisova 12",
+    "lat": 46.0446,
+    "lon": 14.5003,
+    "type": "fa"
+   },
+   "consent_location_publication": true,
+   "devices": [
+    "demo: telefon brez LiDAR-ja"
+   ],
+   "lidar": false,
+   "apps": [
+    "demo: fotogrametrija"
+   ],
+   "ai_models": [
+    {
+     "name": "Model A (demo)",
+     "reached_step": 5
+    },
+    {
+     "name": "Model B (demo)",
+     "reached_step": 2
+    }
+   ],
+   "metrics": {
+    "points": 69791,
+    "median_dev_cm": 1.1,
+    "within_5cm_pct": 99.8,
+    "scale_err_cm": 8.2
+   },
+   "measurements": [
+    {
+     "element": "door_width",
+     "tape_cm": 100,
+     "cloud_cm": 102.3
+    },
+    {
+     "element": "ceiling_height",
+     "tape_cm": 640,
+     "cloud_cm": 648.8
+    },
+    {
+     "element": "wall_length",
+     "tape_cm": 600,
+     "cloud_cm": 608.2
+    }
+   ],
+   "files": {
+    "pointcloud": "data/s03/demo_s03_pointcloud_v1_2026-11-11.bin",
+    "pointcloud_count": 69791,
+    "splat": null,
+    "mesh": null,
+    "model_glb": null,
+    "model_json": "data/demo/scenes/demo_stair_model_v1_2026-11-11.json",
+    "plan_svg": "data/demo/scenes/demo_stair_plan_v1_2026-11-11.svg",
+    "sheets": [
+     {
+      "week": 1,
+      "file": null
+     },
+     {
+      "week": 2,
+      "file": null
+     },
+     {
+      "week": 3,
+      "file": null
+     },
+     {
+      "week": 4,
+      "file": null
+     },
+     {
+      "week": 5,
+      "file": null
+     },
+     {
+      "week": 6,
+      "file": null
+     }
+    ],
+    "downloads": [
+     {
+      "type": "DXF",
+      "file": null
+     },
+     {
+      "type": "PDF",
+      "file": null
+     },
+     {
+      "type": "OBJ",
+      "file": null
+     },
+     {
+      "type": "3DM",
+      "file": null
+     }
+    ]
+   },
+   "worklog": [
+    {
+     "date": "[vnesi]",
+     "text_sl": "[vnesi]",
+     "text_en": "[vnesi]"
+    }
+   ],
+   "exhibition": {
+    "selected": null,
+    "print": null
+   },
+   "text_sl": "[vnesi] Kratek opis zajema, poskusov in modela.",
+   "text_en": "[vnesi] Short description of the capture, attempts and model."
+  },
+  {
+   "id": "s04",
+   "demo": true,
+   "display_name": "Študent 04",
+   "consent_name": false,
+   "avatar_seed": "demo-s04",
+   "phase": 1,
+   "status": "in_progress",
+   "reached_step": 3,
+   "scene": "stair",
+   "location": {
+    "name": "UL FA, Zoisova 12",
+    "lat": 46.0446,
+    "lon": 14.5003,
+    "type": "fa"
+   },
+   "consent_location_publication": true,
+   "devices": [
+    "demo: telefon brez LiDAR-ja"
+   ],
+   "lidar": false,
+   "apps": [
+    "demo: fotogrametrija"
+   ],
+   "ai_models": [
+    {
+     "name": "Model A (demo)",
+     "reached_step": 3
+    },
+    {
+     "name": "Model B (demo)",
+     "reached_step": 1
+    }
+   ],
+   "metrics": {
+    "points": 60534,
+    "median_dev_cm": 1.4,
+    "within_5cm_pct": 98.3,
+    "scale_err_cm": -4.1
+   },
+   "measurements": [
+    {
+     "element": "door_width",
+     "tape_cm": 100,
+     "cloud_cm": 98.7
+    },
+    {
+     "element": "ceiling_height",
+     "tape_cm": 640,
+     "cloud_cm": 633.6
+    },
+    {
+     "element": "wall_length",
+     "tape_cm": 600,
+     "cloud_cm": 595.9
+    }
+   ],
+   "files": {
+    "pointcloud": "data/s04/demo_s04_pointcloud_v1_2026-11-11.bin",
+    "pointcloud_count": 60534,
+    "splat": null,
+    "mesh": null,
+    "model_glb": null,
+    "model_json": "data/demo/scenes/demo_stair_model_v1_2026-11-11.json",
+    "plan_svg": "data/demo/scenes/demo_stair_plan_v1_2026-11-11.svg",
+    "sheets": [
+     {
+      "week": 1,
+      "file": null
+     },
+     {
+      "week": 2,
+      "file": null
+     },
+     {
+      "week": 3,
+      "file": null
+     },
+     {
+      "week": 4,
+      "file": null
+     },
+     {
+      "week": 5,
+      "file": null
+     },
+     {
+      "week": 6,
+      "file": null
+     }
+    ],
+    "downloads": [
+     {
+      "type": "DXF",
+      "file": null
+     },
+     {
+      "type": "PDF",
+      "file": null
+     },
+     {
+      "type": "OBJ",
+      "file": null
+     },
+     {
+      "type": "3DM",
+      "file": null
+     }
+    ]
+   },
+   "worklog": [
+    {
+     "date": "[vnesi]",
+     "text_sl": "[vnesi]",
+     "text_en": "[vnesi]"
+    }
+   ],
+   "exhibition": {
+    "selected": null,
+    "print": null
+   },
+   "text_sl": "[vnesi] Kratek opis zajema, poskusov in modela.",
+   "text_en": "[vnesi] Short description of the capture, attempts and model."
+  },
+  {
+   "id": "s05",
+   "demo": true,
+   "display_name": "Študent 05",
+   "consent_name": false,
+   "avatar_seed": "demo-s05",
+   "phase": 2,
+   "status": "in_progress",
+   "reached_step": 6,
+   "scene": "room",
+   "location": {
+    "name": "Demo lokacija 01",
+    "lat": 46.0514,
+    "lon": 14.506,
+    "type": "venue"
+   },
+   "consent_location_publication": true,
+   "devices": [
+    "demo: telefon z LiDAR-jem"
+   ],
+   "lidar": true,
+   "apps": [
+    "Scaniverse"
+   ],
+   "ai_models": [
+    {
+     "name": "Model A (demo)",
+     "reached_step": 6
+    },
+    {
+     "name": "Model B (demo)",
+     "reached_step": 3
+    }
+   ],
+   "metrics": {
+    "points": 90002,
+    "median_dev_cm": 0.4,
+    "within_5cm_pct": 100,
+    "scale_err_cm": 2.4
+   },
+   "measurements": [
+    {
+     "element": "door_width",
+     "tape_cm": 100,
+     "cloud_cm": 100.3
+    },
+    {
+     "element": "ceiling_height",
+     "tape_cm": 340,
+     "cloud_cm": 340.8
+    },
+    {
+     "element": "wall_length",
+     "tape_cm": 700,
+     "cloud_cm": 702.4
+    }
+   ],
+   "files": {
+    "pointcloud": "data/s05/demo_s05_pointcloud_v1_2026-11-11.bin",
+    "pointcloud_count": 90002,
+    "splat": null,
+    "mesh": null,
+    "model_glb": null,
+    "model_json": "data/demo/scenes/demo_room_model_v1_2026-11-11.json",
+    "plan_svg": "data/demo/scenes/demo_room_plan_v1_2026-11-11.svg",
+    "sheets": [
+     {
+      "week": 1,
+      "file": null
+     },
+     {
+      "week": 2,
+      "file": null
+     },
+     {
+      "week": 3,
+      "file": null
+     },
+     {
+      "week": 4,
+      "file": null
+     },
+     {
+      "week": 5,
+      "file": null
+     },
+     {
+      "week": 6,
+      "file": null
+     }
+    ],
+    "downloads": [
+     {
+      "type": "DXF",
+      "file": null
+     },
+     {
+      "type": "PDF",
+      "file": null
+     },
+     {
+      "type": "OBJ",
+      "file": null
+     },
+     {
+      "type": "3DM",
+      "file": null
+     }
+    ]
+   },
+   "worklog": [
+    {
+     "date": "[vnesi]",
+     "text_sl": "[vnesi]",
+     "text_en": "[vnesi]"
+    }
+   ],
+   "exhibition": {
+    "selected": null,
+    "print": null
+   },
+   "text_sl": "[vnesi] Kratek opis zajema, poskusov in modela.",
+   "text_en": "[vnesi] Short description of the capture, attempts and model."
+  },
+  {
+   "id": "s06",
+   "demo": true,
+   "display_name": "Študent 06",
+   "consent_name": false,
+   "avatar_seed": "demo-s06",
+   "phase": 2,
+   "status": "in_progress",
+   "reached_step": 4,
+   "scene": "room",
+   "location": {
+    "name": "Demo lokacija 02",
+    "lat": 46.0497,
+    "lon": 14.5021,
+    "type": "venue"
+   },
+   "consent_location_publication": false,
+   "devices": [
+    "demo: telefon brez LiDAR-ja"
+   ],
+   "lidar": false,
+   "apps": [
+    "demo: fotogrametrija"
+   ],
+   "ai_models": [
+    {
+     "name": "Model A (demo)",
+     "reached_step": 4
+    },
+    {
+     "name": "Model B (demo)",
+     "reached_step": 1
+    }
+   ],
+   "metrics": {
+    "points": 66762,
+    "median_dev_cm": 1.1,
+    "within_5cm_pct": 99.8,
+    "scale_err_cm": 6
+   },
+   "measurements": [
+    {
+     "element": "door_width",
+     "tape_cm": 100,
+     "cloud_cm": 102.3
+    },
+    {
+     "element": "ceiling_height",
+     "tape_cm": 340,
+     "cloud_cm": 343.8
+    },
+    {
+     "element": "wall_length",
+     "tape_cm": 700,
+     "cloud_cm": 706
+    }
+   ],
+   "files": {
+    "pointcloud": null,
+    "pointcloud_count": 0,
+    "splat": null,
+    "mesh": null,
+    "model_glb": null,
+    "model_json": "data/demo/scenes/demo_room_model_v1_2026-11-11.json",
+    "plan_svg": "data/demo/scenes/demo_room_plan_v1_2026-11-11.svg",
+    "sheets": [
+     {
+      "week": 1,
+      "file": null
+     },
+     {
+      "week": 2,
+      "file": null
+     },
+     {
+      "week": 3,
+      "file": null
+     },
+     {
+      "week": 4,
+      "file": null
+     },
+     {
+      "week": 5,
+      "file": null
+     },
+     {
+      "week": 6,
+      "file": null
+     }
+    ],
+    "downloads": [
+     {
+      "type": "DXF",
+      "file": null
+     },
+     {
+      "type": "PDF",
+      "file": null
+     },
+     {
+      "type": "OBJ",
+      "file": null
+     },
+     {
+      "type": "3DM",
+      "file": null
+     }
+    ]
+   },
+   "worklog": [
+    {
+     "date": "[vnesi]",
+     "text_sl": "[vnesi]",
+     "text_en": "[vnesi]"
+    }
+   ],
+   "exhibition": {
+    "selected": null,
+    "print": null
+   },
+   "text_sl": "[vnesi] Kratek opis zajema, poskusov in modela.",
+   "text_en": "[vnesi] Short description of the capture, attempts and model."
+  }
+ ]
+}
