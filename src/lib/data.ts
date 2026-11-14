@@ -3,14 +3,21 @@ import stepsData from '../../content/steps.json';
 import courseData from '../../content/course.json';
 import { lang, t } from './i18n';
 
-export interface Measurement { element: string; tape_cm: number; cloud_cm: number }
+export interface Exercise {
+  n: number; date: string | null; steps: number[];
+  title_sl?: string; title_en?: string;
+  summary_sl: string[]; summary_en: string[];
+  images: { file: string; caption_sl?: string; caption_en?: string }[];
+  video: string | null; mesh: string | null; sheet: string | null;
+}
+export interface Measurement { element: string; tape_cm: number | null; cloud_cm: number; model_cm?: number | null }
 export interface Student {
   id: string; demo?: boolean; display_name: string; consent_name: boolean; avatar_seed: string;
   phase: number; status: string; reached_step: number; scene: string;
-  location: { name: string; lat: number; lon: number; type: string };
-  consent_location_publication: boolean; devices: string[]; lidar: boolean; apps: string[];
+  location: { name: string; name_en?: string; lat: number | null; lon: number | null; type: string };
+  consent_location_publication: boolean; devices: string[]; lidar: boolean | null; apps: string[];
   ai_models: { name: string; reached_step: number }[];
-  metrics: { points: number; median_dev_cm: number; within_5cm_pct: number; scale_err_cm: number };
+  metrics: { points: number | null; median_dev_cm: number | null; within_5cm_pct: number | null; scale_err_cm: number | null };
   measurements: Measurement[];
   files: {
     pointcloud: string | null; pointcloud_count: number; splat: string | null; mesh: string | null;
@@ -19,6 +26,7 @@ export interface Student {
   };
   worklog: { date: string; text_sl: string; text_en: string }[];
   exhibition: { selected: boolean | null; print: string | null };
+  exercises?: Exercise[];
   text_sl: string; text_en: string;
 }
 
@@ -45,6 +53,8 @@ export function label(s: Student): string {
 
 export const pick = (obj: any, key: string) => obj?.[lang()]?.[key] ?? obj?.sl?.[key] ?? '';
 export const textOf = (s: Student) => (lang() === 'sl' ? s.text_sl : s.text_en);
+export const locName = (s: Student) => (lang() === 'en' && s.location.name_en) || s.location.name;
+export const hasCoords = (s: Student) => typeof s.location.lat === 'number' && typeof s.location.lon === 'number';
 
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
 

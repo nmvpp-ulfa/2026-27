@@ -154,3 +154,8 @@ select.select { height: var(--control-h-sm); background: var(--surface-1); color
   .motion-tg { padding: 0 10px; font-size: 0; gap: 0; }
   .motion-tg i { width: 10px; height: 10px; }
 }
+
+/* card thumbnail without a plan drawing: the nine steps */
+.thumb-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: min(70%, 180px); }
+.thumb-steps span { display: grid; place-items: center; aspect-ratio: 1; border: 1px solid var(--line-2); font: 500 13px/1 var(--font-code); color: var(--fg-4); }
+.thumb-steps span.on { background: var(--orange-100); border-color: var(--orange-500); color: var(--orange-500); }

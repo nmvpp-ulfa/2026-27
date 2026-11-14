@@ -62,3 +62,37 @@
   .ai-row { grid-template-columns: 1fr auto; }
   .ai-row .steps-bar { grid-column: 1 / -1; }
 }
+
+/* Exercises (process material per student) */
+.ex-list { display: grid; gap: 14px; }
+.ex { border: 1px solid var(--line-1); background: var(--surface-1); padding: 14px 16px; display: grid; gap: 12px; }
+.ex-head { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; }
+.ex-n { font: 900 44px/0.8 var(--font-display); color: transparent; -webkit-text-stroke: 1px var(--orange-500); }
+.ex-meta { display: grid; gap: 4px; }
+.ex-meta b { font: 700 16px/1.3 var(--font-display); }
+.ex-steps { display: grid; gap: 4px; justify-items: end; }
+.ex-steps .steps-bar { width: 160px; }
+.ex-sum { margin: 0; padding-left: 18px; display: grid; gap: 4px; color: var(--fg-2); font-size: var(--fs-small); }
+.ex-sum li::marker { color: var(--orange-500); }
+.ex-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+.ex-img { padding: 0; border: 1px solid var(--line-1); background: var(--graphite-800); cursor: zoom-in; aspect-ratio: 4 / 3; overflow: hidden; }
+.ex-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s var(--ease-out); }
+[data-motion="on"] .ex-img:hover img { transform: scale(1.06); }
+.ex-video { width: 100%; max-height: 420px; background: #000; border: 1px solid var(--line-1); }
+.ex-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn--sm { height: 30px; padding: 0 10px; }
+.lightbox { position: fixed; inset: 0; z-index: 100; background: rgba(12, 13, 14, .94); display: grid; place-items: center; padding: 48px 64px; }
+.lightbox figure { margin: 0; display: grid; gap: 10px; max-width: 100%; max-height: 100%; }
+.lightbox img { max-width: 100%; max-height: calc(100vh - 140px); object-fit: contain; border: 1px solid var(--line-1); }
+.lightbox button { position: absolute; background: var(--surface-2); color: var(--fg-1); border: 1px solid var(--line-2); padding: 8px 12px; font: 400 var(--fs-micro)/1 var(--font-mono); letter-spacing: var(--tracking-label); text-transform: uppercase; cursor: pointer; }
+.lightbox button:hover { border-color: var(--orange-500); color: var(--orange-500); }
+.lightbox .lb-prev { left: 12px; top: 50%; }
+.lightbox .lb-next { right: 12px; top: 50%; }
+.lightbox .lb-close { right: 12px; top: 12px; }
+@media (max-width: 760px) {
+  .ex-head { grid-template-columns: auto 1fr; }
+  .ex-steps { grid-column: 1 / -1; justify-items: start; }
+  .lightbox { padding: 48px 12px; }
+}
+.st-viewer.is-empty { height: 120px; }
+.st-viewer.is-empty canvas { display: none; }

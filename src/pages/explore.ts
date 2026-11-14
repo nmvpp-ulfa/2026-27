@@ -6,7 +6,7 @@ import '../styles/pages.css';
 import * as L from 'leaflet/dist/leaflet-src.esm.js';
 import { mountChrome } from '../lib/chrome';
 import { onLang, t } from '../lib/i18n';
-import { label, students, url, type Student } from '../lib/data';
+import { label, students, url, type Student, hasCoords } from '../lib/data';
 import { cardHtml } from '../lib/cards';
 
 mountChrome('atlas');
@@ -15,8 +15,10 @@ const state: Record<string, string> = { location: 'all', device: 'all', phase: '
 const params = new URLSearchParams(location.search);
 for (const k of Object.keys(state)) if (params.get(k)) state[k] = params.get(k)!;
 
+// site = building or place, the part of the location name before the comma (UL FA, klet -> UL FA)
+const site = (s: Student) => s.location.name.split(',')[0].trim();
 const match = (s: Student) =>
-  (state.location === 'all' || s.location.name === state.location) &&
+  (state.location === 'all' || site(s) === state.location) &&
   (state.device === 'all' || (state.device === 'lidar') === s.lidar) &&
   (state.phase === 'all' || String(s.phase) === state.phase) &&
   (state.status === 'all' || s.status === state.status);
@@ -35,14 +37,19 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 const groups = new Map<string, Student[]>();
-for (const s of students) groups.set(s.location.name, [...(groups.get(s.location.name) || []), s]);
+for (const s of students.filter(hasCoords)) groups.set(site(s), [...(groups.get(site(s)) || []), s]);
 const markers: { name: string; m: L.Marker; list: Student[] }[] = [];
 for (const [name, list] of groups) {
-  const { lat, lon } = list[0].location;
+  const lat = list[0].location.lat as number, lon = list[0].location.lon as number;
   const m = L.marker([lat, lon], { icon: L.divIcon({ className: '', html: '', iconSize: [0, 0] }) }).addTo(map);
   markers.push({ name, m, list });
 }
-if (students.length) map.fitBounds(L.latLngBounds(students.map((s) => [s.location.lat, s.location.lon] as [number, number])).pad(0.6));
+{
+  const uniq = new Map(students.filter(hasCoords).map((s) => [`${s.location.lat},${s.location.lon}`, [s.location.lat, s.location.lon] as [number, number]]));
+  const pts = [...uniq.values()];
+  if (pts.length > 1) map.fitBounds(L.latLngBounds(pts).pad(0.6));
+  else if (pts.length === 1) map.setView(pts[0], 15);
+}
 
 function renderMarkers() {
   for (const { name, m, list } of markers) {

@@ -3,7 +3,7 @@ import '../styles/base.css';
 import '../styles/pages.css';
 import { mountChrome } from '../lib/chrome';
 import { lang, num, int, onLang, t } from '../lib/i18n';
-import { byId, label, rich, students, textOf, url, type Student } from '../lib/data';
+import { byId, label, locName, rich, students, textOf, url, type Exercise, type Student } from '../lib/data';
 import { avatarSvg } from '../lib/avatar';
 import { appLabel, deviceLabel, stepsBar } from '../lib/cards';
 import { Viewer, type MeasureResult } from '../three/viewer';
@@ -16,10 +16,38 @@ const st = byId(id);
 const fmtM = (m: number) => `${num(m, 2)} m`;
 
 let viewer: Viewer | null = null;
-const layers = { cloud: true, model: false, deviation: false };
+const layers = { cloud: true, model: false, deviation: false, mesh: false };
 let measuring = false;
 let section = 62; // default cutaway removes the ceiling so the interior is visible
 const myMeasures: number[] = [];
+
+// Textured meshes, photos and videos show the place itself: only with consent for the location.
+const media = (s: Student) => s.consent_location_publication;
+const meshOf = (s: Student) => (media(s) ? s.files.mesh || [...(s.exercises ?? [])].reverse().find((e) => e.mesh)?.mesh || null : null);
+const L = (o: any, k: string) => (lang() === 'sl' ? o[k + '_sl'] : o[k + '_en']) ?? o[k + '_sl'];
+
+function exerciseCard(s: Student, e: Exercise) {
+  const steps = Array.from({ length: 9 }, (_, k) => `<i class="${e.steps.includes(k + 1) ? 'on' : ''}" title="${String(k + 1).padStart(2, '0')}"></i>`).join('');
+  const sum = (L(e, 'summary') as string[] | undefined) ?? [];
+  const imgs = media(s) ? e.images : [];
+  return `<article class="ex" id="ex${e.n}">
+    <header class="ex-head">
+      <span class="ex-n">${String(e.n).padStart(2, '0')}</span>
+      <div class="ex-meta">
+        <span class="label">${t('st.ex')} ${String(e.n).padStart(2, '0')}${e.date ? ' // ' + e.date : ''}</span>
+        ${L(e, 'title') ? `<b>${rich(L(e, 'title'))}</b>` : ''}
+      </div>
+      <div class="ex-steps"><span class="label">${t('st.steps')}</span><div class="steps-bar">${steps}</div></div>
+    </header>
+    ${sum.length ? `<ul class="ex-sum">${sum.map((x) => `<li>${rich(x)}</li>`).join('')}</ul>` : ''}
+    ${imgs.length ? `<div class="ex-gallery">${imgs.map((im, k) => `<button type="button" class="ex-img" data-ex="${e.n}" data-k="${k}"><img src="${url(im.file)}" alt="${rich(L(im, 'caption') || t('st.ex') + ' ' + e.n)}" loading="lazy"></button>`).join('')}</div>` : ''}
+    ${media(s) && e.video ? `<video class="ex-video" controls preload="none" src="${url(e.video)}"></video>` : ''}
+    <div class="ex-actions">
+      ${media(s) && e.mesh ? `<button type="button" class="btn btn--sm" data-mesh="${e.mesh}">${t('st.open3d')}</button>` : ''}
+      ${e.sheet ? `<a class="btn btn--sm btn--ghost" href="${url(e.sheet)}" target="_blank" rel="noopener">${t('st.workmap')} ↗</a>` : ''}
+    </div>
+  </article>`;
+}
 
 function demoBadge(s: Student) { return s.demo ? `<span class="badge badge--demo">${t('demo.tag')}</span>` : ''; }
 
@@ -33,9 +61,11 @@ function renderPage(s: Student) {
   const prev = students[(i - 1 + students.length) % students.length];
   const next = students[(i + 1) % students.length];
   const other = students.find((o) => o.id !== s.id && o.phase === s.phase && o.lidar !== s.lidar) || next;
+  const cm = (v: number | null | undefined) => (v === null || v === undefined ? '—' : `${num(v)} cm`);
   const measRows = s.measurements.map((m) => {
-    const d = m.cloud_cm - m.tape_cm;
-    return `<tr><td>${t('el.' + m.element)}</td><td class="num">${num(m.tape_cm)} cm</td><td class="num">${num(m.cloud_cm)} cm</td><td class="num${Math.abs(d) > 3 ? ' warn' : ''}">${d >= 0 ? '+' : ''}${num(d)} cm</td></tr>`;
+    const ref = m.tape_cm ?? m.model_cm ?? null;
+    const d = ref === null ? null : Math.round((m.cloud_cm - ref) * 10) / 10;
+    return `<tr><td>${t('el.' + m.element)}</td><td class="num">${cm(m.tape_cm)}</td><td class="num">${cm(m.cloud_cm)}</td><td class="num">${cm(m.model_cm)}</td><td class="num${d !== null && Math.abs(d) > 3 ? ' warn' : ''}">${d === null ? '—' : (d >= 0 ? '+' : '') + num(d) + ' cm'}</td></tr>`;
   }).join('');
 
   main.innerHTML = `<div class="wrap">
@@ -48,7 +78,7 @@ function renderPage(s: Student) {
       </div>
       <dl class="kv">
         <dt>${t('m.phase')}</dt><dd>${t('phase.' + s.phase)}</dd>
-        <dt>${t('m.location')}</dt><dd>${s.location.name}</dd>
+        <dt>${t('m.location')}</dt><dd>${locName(s)}</dd>
         <dt>${t('m.device')}</dt><dd>${deviceLabel(s)}</dd>
         <dt>${t('m.app')}</dt><dd>${appLabel(s)}</dd>
         <dt>${t('m.status')}</dt><dd class="live">${t('status.' + s.status)}</dd>
@@ -60,7 +90,7 @@ function renderPage(s: Student) {
       <div class="group"><span class="label">${t('st.layers')}</span>
         ${chip('cloud', hasCloud && layers.cloud, !hasCloud)}
         ${chip('splat', false, !s.files.splat)}
-        ${chip('mesh', false, !s.files.mesh)}
+        ${chip('mesh', layers.mesh, !meshOf(s))}
         ${chip('model', !hasCloud || layers.model, !s.files.model_json)}
         ${chip('deviation', hasCloud && layers.deviation, !hasCloud)}
       </div>
@@ -85,39 +115,43 @@ function renderPage(s: Student) {
         <div class="sec-head"><span class="label"><b>01</b> // ${t('st.desc')}</span></div>
         <p>${rich(textOf(s))}</p>
       </section>
+      <section class="sec wide">
+        <div class="sec-head"><span class="label"><b>02</b> // ${t('st.exercises')}</span></div>
+        ${s.exercises?.length ? `<div class="ex-list">${s.exercises.map((e) => exerciseCard(s, e)).join('')}</div>` : `<p class="notice">${t('st.noEx')}</p>`}
+      </section>
       <section class="sec">
-        <div class="sec-head"><span class="label"><b>02</b> // ${t('st.data')} ${demoBadge(s)}</span></div>
+        <div class="sec-head"><span class="label"><b>03</b> // ${t('st.data')} ${demoBadge(s)}</span></div>
         <div class="metrics">
-          <div class="metric"><span class="label">${t('m.points')}</span><span class="v">${int(s.metrics.points)}</span></div>
-          <div class="metric"><span class="label">${t('m.median')}</span><span class="v">${num(s.metrics.median_dev_cm)}<small>cm</small></span></div>
-          <div class="metric"><span class="label">${t('m.within')}</span><span class="v">${num(s.metrics.within_5cm_pct)}<small>%</small></span></div>
-          <div class="metric"><span class="label">${t('m.scale')}</span><span class="v">${s.metrics.scale_err_cm >= 0 ? '+' : ''}${num(s.metrics.scale_err_cm)}<small>cm</small></span></div>
+          <div class="metric"><span class="label">${t('m.points')}</span><span class="v">${s.metrics.points === null ? '—' : int(s.metrics.points)}</span></div>
+          <div class="metric"><span class="label">${t('m.median')}</span><span class="v">${s.metrics.median_dev_cm === null ? '—' : num(s.metrics.median_dev_cm) + '<small>cm</small>'}</span></div>
+          <div class="metric"><span class="label">${t('m.within')}</span><span class="v">${s.metrics.within_5cm_pct === null ? '—' : num(s.metrics.within_5cm_pct) + '<small>%</small>'}</span></div>
+          <div class="metric"><span class="label">${t('m.scale')}</span><span class="v">${s.metrics.scale_err_cm === null ? '—' : (s.metrics.scale_err_cm >= 0 ? '+' : '') + num(s.metrics.scale_err_cm) + '<small>cm</small>'}</span></div>
         </div>
       </section>
       <section class="sec">
-        <div class="sec-head"><span class="label"><b>03</b> // ${t('st.measurements')} ${demoBadge(s)}</span></div>
-        <table class="tbl"><thead><tr><th>${t('el.element')}</th><th class="num">${t('el.tape')}</th><th class="num">${t('el.cloud')}</th><th class="num">${t('el.diff')}</th></tr></thead><tbody>${measRows}</tbody></table>
+        <div class="sec-head"><span class="label"><b>04</b> // ${t('st.measurements')} ${demoBadge(s)}</span></div>
+        ${s.measurements.length ? `<table class="tbl"><thead><tr><th>${t('el.element')}</th><th class="num">${t('el.tape')}</th><th class="num">${t('el.cloud')}</th><th class="num">${t('el.model')}</th><th class="num">${t('el.diff')}</th></tr></thead><tbody>${measRows}</tbody></table><p class="label" style="margin-top:8px">${t('el.diffNote')}</p>` : `<p class="notice">${t('notStated')}</p>`}
         <div style="margin-top:16px"><span class="label">${t('st.yourMeas')}</span><ol class="data" id="myMeas" style="margin:6px 0 0;padding-left:20px"></ol></div>
       </section>
       <section class="sec">
-        <div class="sec-head"><span class="label"><b>04</b> // ${t('st.attempts')}</span></div>
+        <div class="sec-head"><span class="label"><b>05</b> // ${t('st.attempts')}</span></div>
         <div class="label" style="margin-bottom:6px">${t('st.ai')}</div>
-        ${s.ai_models.map((m) => `<div class="ai-row"><span>${m.name}</span>${stepsBar(m.reached_step)}<span class="label">${t('st.upto')} ${String(m.reached_step).padStart(2, '0')}</span></div>`).join('')}
-        <div class="label" style="margin:18px 0 6px">${t('st.worklog')}</div>
-        <dl class="kv">${s.worklog.map((w) => `<dt>${rich(w.date)}</dt><dd>${rich(lang() === 'sl' ? w.text_sl : w.text_en)}</dd>`).join('')}</dl>
+        ${s.ai_models.length ? s.ai_models.map((m) => `<div class="ai-row"><span>${m.name}</span>${stepsBar(m.reached_step)}<span class="label">${t('st.upto')} ${String(m.reached_step).padStart(2, '0')}</span></div>`).join('') : `<p class="data" style="color:var(--fg-3)">${t('notStated')}</p>`}
+        ${s.worklog.length ? `<div class="label" style="margin:18px 0 6px">${t('st.worklog')}</div>
+        <dl class="kv">${s.worklog.map((w) => `<dt>${rich(w.date)}</dt><dd>${rich(lang() === 'sl' ? w.text_sl : w.text_en)}</dd>`).join('')}</dl>` : ''}
       </section>
       <section class="sec wide">
-        <div class="sec-head"><span class="label"><b>05</b> // ${t('st.sheets')}</span></div>
-        <div class="sheets">${s.files.sheets.map((sh) => `<div class="sheet"><span class="label">${t('st.week')} ${String(sh.week).padStart(2, '0')}</span><div class="bar"></div><span class="badge badge--missing">${sh.file ? 'PDF' : t('st.missing')}</span></div>`).join('')}</div>
+        <div class="sec-head"><span class="label"><b>06</b> // ${t('st.sheets')}</span></div>
+        ${s.files.sheets.length ? '' : `<p class="notice">${t('st.notPublished')}</p>`}<div class="sheets">${s.files.sheets.map((sh) => `<div class="sheet"><span class="label">${t('st.week')} ${String(sh.week).padStart(2, '0')}</span><div class="bar"></div><span class="badge badge--missing">${sh.file ? 'PDF' : t('st.missing')}</span></div>`).join('')}</div>
       </section>
       <section class="sec">
-        <div class="sec-head"><span class="label"><b>06</b> // ${t('st.outputs')}</span></div>
-        <div class="downloads">${s.files.downloads.map((d) => d.file
+        <div class="sec-head"><span class="label"><b>07</b> // ${t('st.outputs')}</span></div>
+        ${s.files.downloads.length ? '' : `<p class="notice">${t('st.notPublished')}</p>`}<div class="downloads">${s.files.downloads.map((d) => d.file
           ? `<a class="dl-row" href="${url(d.file)}" download><span>${d.type}</span><span class="label label--signal">↓</span></a>`
           : `<div class="dl-row"><span>${d.type}</span><span class="badge badge--missing">${t('st.missing')}</span></div>`).join('')}</div>
       </section>
       <section class="sec">
-        <div class="sec-head"><span class="label"><b>07</b> // ${t('st.exhibition')}</span></div>
+        <div class="sec-head"><span class="label"><b>08</b> // ${t('st.exhibition')}</span></div>
         <dl class="kv">
           <dt>${t('st.selected')}</dt><dd>${s.exhibition.selected === null ? rich('[vnesi]') : s.exhibition.selected ? 'DA' : 'NE'}</dd>
           <dt>${t('st.print')}</dt><dd>${rich(s.exhibition.print ?? '[vnesi]')}</dd>
@@ -146,6 +180,7 @@ function applyLayers(hasCloud: boolean) {
   viewer.setCloudVisible(hasCloud && layers.cloud);
   viewer.setModelVisible(!hasCloud || layers.model, hasCloud && layers.cloud ? 0.25 : 0.55);
   viewer.setColor(layers.deviation ? 'deviation' : 'height');
+  viewer.setMeshVisible(layers.mesh);
 }
 
 function bindTools(s: Student, hasCloud: boolean) {
@@ -186,6 +221,58 @@ function bindTools(s: Student, hasCloud: boolean) {
     viewer?.setMeasure(measuring, onMeasure, fmtM);
   });
   document.getElementById('clear')!.addEventListener('click', () => { viewer?.clearMeasures(); myMeasures.length = 0; renderMyMeasures(); });
+  document.querySelectorAll<HTMLButtonElement>('[data-mesh]').forEach((b) => b.addEventListener('click', () => openMesh(s, b.dataset.mesh!, b)));
+  document.querySelectorAll<HTMLButtonElement>('.ex-img').forEach((b) => b.addEventListener('click', () => openLightbox(s, Number(b.dataset.ex), Number(b.dataset.k))));
+}
+
+let meshLoaded: string | null = null;
+async function openMesh(s: Student, file: string, btn?: HTMLButtonElement) {
+  if (!viewer) return;
+  document.getElementById('viewer')!.scrollIntoView({ behavior: motionOn() ? 'smooth' : 'auto', block: 'center' });
+  if (meshLoaded !== file) {
+    const label0 = btn?.textContent;
+    if (btn) { btn.disabled = true; btn.textContent = t('st.loading3d'); }
+    try {
+      await viewer.loadMesh(url(file), (f) => { if (btn) btn.textContent = `${t('st.loading3d')} ${Math.round(f * 100)} %`; });
+      meshLoaded = file;
+      document.getElementById('viewer')!.querySelector('.viewer-poster')?.remove();
+      if (!s.files.pointcloud && !s.files.model_json) viewer.fit();
+    } catch (e) { console.error(e); }
+    if (btn) { btn.disabled = false; btn.textContent = label0 ?? t('st.open3d'); }
+  }
+  layers.mesh = true;
+  document.querySelectorAll<HTMLButtonElement>('[data-layer="mesh"]').forEach((c) => { c.disabled = false; c.setAttribute('aria-pressed', 'true'); });
+  applyLayers(!!s.files.pointcloud && s.consent_location_publication);
+}
+
+// simple lightbox over the exercise images (arrow keys, Esc)
+function openLightbox(s: Student, n: number, k: number) {
+  const e = s.exercises?.find((x) => x.n === n);
+  if (!e || !e.images.length) return;
+  let i = k;
+  const box = document.createElement('div');
+  box.className = 'lightbox';
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  const draw = () => {
+    const im = e.images[i];
+    box.innerHTML = `<figure><img src="${url(im.file)}" alt=""><figcaption class="label">${t('st.ex')} ${String(n).padStart(2, '0')} // ${i + 1} / ${e.images.length}${L(im, 'caption') ? ' // ' + rich(L(im, 'caption')) : ''}</figcaption></figure>
+      <button type="button" class="lb-prev" aria-label="prev">←</button><button type="button" class="lb-next" aria-label="next">→</button>
+      <button type="button" class="lb-close">${t('st.close')} ✕</button>`;
+    box.querySelector('.lb-prev')!.addEventListener('click', (ev) => { ev.stopPropagation(); i = (i - 1 + e.images.length) % e.images.length; draw(); });
+    box.querySelector('.lb-next')!.addEventListener('click', (ev) => { ev.stopPropagation(); i = (i + 1) % e.images.length; draw(); });
+    box.querySelector('.lb-close')!.addEventListener('click', close);
+  };
+  const key = (ev: KeyboardEvent) => {
+    if (ev.key === 'Escape') close();
+    if (ev.key === 'ArrowRight') { i = (i + 1) % e.images.length; draw(); }
+    if (ev.key === 'ArrowLeft') { i = (i - 1 + e.images.length) % e.images.length; draw(); }
+  };
+  function close() { box.remove(); document.removeEventListener('keydown', key); }
+  box.addEventListener('click', (ev) => { if (ev.target === box) close(); });
+  document.addEventListener('keydown', key);
+  draw();
+  document.body.appendChild(box);
 }
 
 function onMeasure(r: MeasureResult) { myMeasures.push(r.d); renderMyMeasures(); }
@@ -201,7 +288,17 @@ async function initViewer(s: Student) {
   try {
     if (hasCloud) await viewer.loadCloud(url(s.files.pointcloud!), s.files.pointcloud_count);
     if (s.files.model_json) await viewer.loadModel(url(s.files.model_json));
+    // no cloud and no generalised model yet: start with the latest scan mesh
+    const m = meshOf(s);
+    if (!hasCloud && !s.files.model_json && m) { await viewer.loadMesh(url(m)); meshLoaded = m; layers.mesh = true; }
   } catch (e) { console.error(e); }
+  if (viewer.bounds.isEmpty()) {
+    // nothing to show yet: a short placeholder instead of an empty viewer with tools
+    const p = vEl.querySelector('.viewer-poster'); if (p) p.textContent = t('st.no3d');
+    vEl.classList.add('is-empty');
+    document.querySelector<HTMLElement>('.viewer-tools')?.style.setProperty('display', 'none');
+    return;
+  }
   vEl.querySelector('.viewer-poster')?.remove();
   applyLayers(hasCloud);
   viewer.fit();

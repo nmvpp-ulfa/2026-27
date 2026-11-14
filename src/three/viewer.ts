@@ -2,6 +2,8 @@
 // horizontal section plane and a two-point measuring tool.
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { fetchJson, loadStudentCloud, srgb, viewerMaterial } from './cloud';
 import { buildModel, setModelOpacity, type ModelJson } from './model';
 
@@ -16,6 +18,7 @@ export class Viewer {
   controls: OrbitControls;
   points: THREE.Points | null = null;
   model: THREE.Group | null = null;
+  mesh: THREE.Object3D | null = null;
   clip = new THREE.Plane(new THREE.Vector3(0, 0, -1), 1e4);
   bounds = new THREE.Box3();
   onCamera: (() => void) | null = null;
@@ -100,6 +103,42 @@ export class Viewer {
     this.sweep = { from: this.bounds.min.z, to: z, t0: performance.now(), ms };
   }
 
+  // Textured scan mesh or student model (GLB, Y up by spec) shown unlit so baked colours read as captured.
+  async loadMesh(path: string, onProgress?: (f: number) => void) {
+    const loader = new GLTFLoader();
+    loader.setMeshoptDecoder(MeshoptDecoder);
+    const gltf = await loader.loadAsync(path, (e) => { if (onProgress && e.total) onProgress(e.loaded / e.total); });
+    if (this.mesh) { this.scene.remove(this.mesh); this.disposeObject(this.mesh); }
+    const root = gltf.scene;
+    root.rotation.x = Math.PI / 2; // glTF Y up -> site Z up
+    root.updateMatrixWorld(true);
+    root.traverse((o) => {
+      const m = o as THREE.Mesh;
+      if (!m.isMesh) return;
+      const src = (Array.isArray(m.material) ? m.material[0] : m.material) as THREE.MeshStandardMaterial;
+      m.material = new THREE.MeshBasicMaterial({
+        map: src?.map ?? null, color: src?.map ? 0xffffff : (src?.color ?? new THREE.Color('#8A8D8F')),
+        vertexColors: !!m.geometry.getAttribute('color'), side: THREE.DoubleSide, clippingPlanes: [this.clip],
+      });
+    });
+    // put the lowest point on z = 0 like the clouds and models
+    const bb = new THREE.Box3().setFromObject(root);
+    if (this.bounds.isEmpty()) { root.position.z -= bb.min.z; root.updateMatrixWorld(true); }
+    this.mesh = root;
+    this.scene.add(root);
+    this.bounds.union(new THREE.Box3().setFromObject(root));
+  }
+  setMeshVisible(on: boolean) { if (this.mesh) this.mesh.visible = on; }
+  private disposeObject(o: THREE.Object3D) {
+    o.traverse((c) => {
+      const m = c as THREE.Mesh;
+      if (!m.isMesh) return;
+      m.geometry.dispose();
+      const mat = m.material as THREE.MeshBasicMaterial;
+      mat.map?.dispose(); mat.dispose();
+    });
+  }
+
   setCloudVisible(on: boolean) { if (this.points) this.points.visible = on; }
   setModelVisible(on: boolean, surf = 0.5) { if (this.model) setModelOpacity(this.model, on ? surf : 0, on ? 0.95 : 0); }
 
@@ -167,6 +206,7 @@ export class Viewer {
     const targets: THREE.Object3D[] = [];
     if (this.points?.visible) targets.push(this.points);
     if (this.model?.visible) this.model.traverse((c) => { if ((c as THREE.Mesh).isMesh) targets.push(c); });
+    if (this.mesh?.visible) this.mesh.traverse((c) => { if ((c as THREE.Mesh).isMesh) targets.push(c); });
     const hits = ray.intersectObjects(targets, false).filter((h) => this.clip.distanceToPoint(h.point) >= 0);
     if (!hits.length) return;
     const p = hits[0].point.clone();

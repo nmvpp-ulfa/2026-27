@@ -55,7 +55,7 @@ export function mountChrome(page: Page) {
   demo.className = 'demo-bar';
   const ftr = document.createElement('footer');
   ftr.className = 'ftr';
-  document.body.prepend(hdr, ...(isDemo ? [demo] : []));
+  document.body.prepend(hdr, demo);
   document.body.append(ftr);
 
   const render = () => {
@@ -83,7 +83,9 @@ export function mountChrome(page: Page) {
     hdr.querySelectorAll<HTMLButtonElement>('.lang button').forEach((b) =>
       b.addEventListener('click', () => setLang(b.dataset.l as Lang)));
     hdr.querySelector('.motion-tg')!.addEventListener('click', () => setMotion(!motionOn()));
-    demo.innerHTML = `<div class="wrap"><strong>${t('demo.tag')} //</strong><span>${t('demo.bar')}</span></div>`;
+    demo.innerHTML = isDemo
+      ? `<div class="wrap"><strong>${t('demo.tag')} //</strong><span>${t('demo.bar')}</span></div>`
+      : `<div class="wrap"><strong>${t('state.tag')} //</strong><span>${t('state.bar')}</span></div>`;
     ftr.innerHTML = `<div class="wrap ftr-uni">
       ${courseBlock('ftr-course')}
       <a class="uni" href="${course.faculty_url}">${logoImg('uni-logo')}<span class="uni-txt"><b>${t('uni.ul')}</b><span>${t('uni.fa')}</span></span></a>

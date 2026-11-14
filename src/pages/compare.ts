@@ -3,7 +3,7 @@ import '../styles/base.css';
 import '../styles/pages.css';
 import { mountChrome } from '../lib/chrome';
 import { num, int, onLang, t } from '../lib/i18n';
-import { byId, label, students, url, type Student } from '../lib/data';
+import { byId, label, students, url, type Student, locName } from '../lib/data';
 import { appLabel, deviceLabel } from '../lib/cards';
 import { Viewer } from '../three/viewer';
 import { motionOn, onMotion } from '../lib/motion';
@@ -26,6 +26,7 @@ let va: Viewer | null = null, vb: Viewer | null = null;
 main.innerHTML = `<div class="wrap">
   <div class="page-title"><span class="label"><b class="label--signal">03</b> // Index_Code: NMVPP_compare</span><h1 id="ttl"></h1><p id="lead"></p></div>
   <div class="cmp-controls" id="controls"></div>
+  <p class="notice" id="noCloud" style="display:none;margin-bottom:12px"></p>
   <div class="cmp-stage" id="stage">
     <div class="viewer" id="va"></div>
     <div class="viewer" id="vb"></div>
@@ -72,21 +73,36 @@ function tag(s: Student, letter: string, col: string) {
   return `<div class="cmp-tag"><i style="background:${col}"></i>${letter} // ${label(s)} · ${deviceLabel(s)}</div>`;
 }
 
+// No published point cloud on either side: say so instead of showing two empty viewers.
+function noCloudNotice() {
+  const pub = (s: Student) => !!s.files.pointcloud && s.consent_location_publication;
+  const el = document.getElementById('noCloud')!;
+  const none = !pub(A) && !pub(B);
+  el.style.display = none ? '' : 'none';
+  el.textContent = t('cmp.noCloud');
+  stage.style.display = none ? 'none' : '';
+  document.getElementById('handle')!.style.display = none ? 'none' : '';
+}
+
 function renderMetrics() {
+  noCloudNotice();
   const row = (k: string, a: string, b: string, d = '') => `<tr><td>${k}</td><td class="num">${a}</td><td class="num">${b}</td><td class="num">${d}</td></tr>`;
-  const dn = (x: number, y: number, digits = 1, unit = '') => `${y - x >= 0 ? '+' : ''}${num(y - x, digits)}${unit}`;
+  const dn = (x: number | null, y: number | null, digits = 1, unit = '') => (x === null || y === null ? '—' : `${y - x >= 0 ? '+' : ''}${num(y - x, digits)}${unit}`);
+  const v = (x: number | null, unit: string, digits = 1) => (x === null ? '—' : `${num(x, digits)}${unit}`);
+  const iv = (x: number | null) => (x === null ? '—' : int(x));
   const ma = A.metrics, mb = B.metrics;
   document.getElementById('metrics')!.innerHTML = `
     <div style="display:flex;gap:8px;margin-bottom:10px">${A.demo || B.demo ? `<span class="badge badge--demo">${t('demo.tag')}</span>` : ''}</div>
     <table class="tbl"><thead><tr><th>${t('cmp.metric')}</th><th class="num">A // ${label(A)}</th><th class="num">B // ${label(B)}</th><th class="num">B − A</th></tr></thead><tbody>
-      ${row(t('m.points'), int(ma.points), int(mb.points), `${mb.points - ma.points >= 0 ? '+' : ''}${int(mb.points - ma.points)}`)}
-      ${row(t('m.median'), `${num(ma.median_dev_cm)} cm`, `${num(mb.median_dev_cm)} cm`, dn(ma.median_dev_cm, mb.median_dev_cm, 1, ' cm'))}
-      ${row(t('m.within'), `${num(ma.within_5cm_pct)} %`, `${num(mb.within_5cm_pct)} %`, dn(ma.within_5cm_pct, mb.within_5cm_pct, 1, ' %'))}
-      ${row(t('m.scale'), `${num(ma.scale_err_cm)} cm`, `${num(mb.scale_err_cm)} cm`, dn(ma.scale_err_cm, mb.scale_err_cm, 1, ' cm'))}
+      ${row(t('m.points'), iv(ma.points), iv(mb.points), ma.points === null || mb.points === null ? '—' : `${mb.points - ma.points >= 0 ? '+' : ''}${int(mb.points - ma.points)}`)}
+      ${row(t('m.median'), v(ma.median_dev_cm, ' cm', 2), v(mb.median_dev_cm, ' cm', 2), dn(ma.median_dev_cm, mb.median_dev_cm, 2, ' cm'))}
+      ${row(t('m.within'), v(ma.within_5cm_pct, ' %'), v(mb.within_5cm_pct, ' %'), dn(ma.within_5cm_pct, mb.within_5cm_pct, 1, ' %'))}
+      ${row(t('m.scale'), v(ma.scale_err_cm, ' cm'), v(mb.scale_err_cm, ' cm'), dn(ma.scale_err_cm, mb.scale_err_cm, 1, ' cm'))}
+      ${row(t('m.step'), String(A.reached_step).padStart(2, '0') + ' / 09', String(B.reached_step).padStart(2, '0') + ' / 09')}
       ${row(t('m.device'), deviceLabel(A), deviceLabel(B))}
       ${row(t('m.app'), appLabel(A), appLabel(B))}
       ${row(t('m.phase'), t('phase.' + A.phase), t('phase.' + B.phase))}
-      ${row(t('m.location'), A.location.name, B.location.name)}
+      ${row(t('m.location'), locName(A), locName(B))}
     </tbody></table>
     <p style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap">
       <a class="btn btn--ghost" href="${url('student/?id=' + A.id)}">A // ${label(A)} →</a>
