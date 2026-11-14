@@ -20,8 +20,9 @@ mountChrome('story');
 let anim = motionOn();
 const mobile = matchMedia('(max-width: 760px)').matches;
 const coarse = matchMedia('(pointer: coarse)').matches;
-const META = 'data/demo/story/demo_story_meta_v1_2026-11-11.json';
-const BIN = 'data/demo/story/demo_story_cloud_v1_2026-11-11.bin';
+// Reference capture by the course holder: staircase to the WC, two LiDAR scans and the generalised model.
+const META = 'data/story/story_tb_meta_v1_2026-11-14.json';
+const BIN = 'data/story/story_tb_cloud_v1_2026-11-14.bin';
 // still state shown per step when motion is off
 const REP = [0.62, 1.62, 2.96, 3.62, 4.8, 5.9, 6.96, 7.5, 8.7];
 
@@ -76,7 +77,7 @@ function renderStory() {
   storyEl.innerHTML = `
   <section class="hero" id="top">
     <div class="wrap hero-in">
-      <div class="hero-top"><span class="label">${t('hero.kicker')}</span><span class="badge badge--demo">${t('demo.tag')} // ${t('hero.scene')}</span></div>
+      <div class="hero-top"><span class="label">${t('hero.kicker')}</span><span class="badge badge--demo">${t('ref.tag')} // ${t('hero.scene')}</span></div>
       <p class="hero-course">${course.name[lang()]}</p>
       <h1 class="mega">${words(t('hero.title'))}</h1>
       <div class="hero-cols">
@@ -256,7 +257,7 @@ const slices = new THREE.Group();
 scene.add(slices);
 
 // step 01: scanner positions (scan A below, scan B on the gallery)
-const SCAN_A = new THREE.Vector3(4.8, 3.3, 1.3), SCAN_B = new THREE.Vector3(3.0, 3.5, 4.6);
+const SCAN_A = new THREE.Vector3(4.8, 3.3, 1.3), SCAN_B = new THREE.Vector3(3.0, 3.5, 4.6); // replaced by meta.scene
 const tiltFrame = new THREE.Group(), bFrame = new THREE.Group();
 tiltFrame.matrixAutoUpdate = false; bFrame.matrixAutoUpdate = false;
 scene.add(tiltFrame); tiltFrame.add(bFrame);
@@ -275,17 +276,15 @@ function scanner(p: THREE.Vector3, color: string, parent: THREE.Object3D) {
   g.add(ring);
   parent.add(g);
 }
-scanner(SCAN_A, '#E4E6E1', tiltFrame);
-scanner(SCAN_B, '#FF5A1F', bFrame);
 
 // step 04: camera positions from the video (SfM), along a walk up the stairs
 const PATH = [[0.2, 0.7, 1.5], [0.8, 0.7, 1.5], [3.5, 0.7, 3.1], [4.4, 0.7, 3.1], [4.4, 2.2, 3.1], [3.5, 2.2, 3.1], [0.8, 2.2, 4.7], [0.4, 3.4, 4.7], [3.0, 3.5, 4.7], [5.5, 3.4, 4.7]]
   .map(([x, y, z]) => new THREE.Vector3(x, y, z));
-const pathCurve = new THREE.CatmullRomCurve3(PATH, false, 'centripetal');
+let pathCurve = new THREE.CatmullRomCurve3(PATH, false, 'centripetal');
 const N_FR = 22;
 const frMat = new THREE.LineBasicMaterial({ color: '#FF5A1F', transparent: true, opacity: 0, depthTest: false });
 const pathMat = new THREE.LineBasicMaterial({ color: '#E4E6E1', transparent: true, opacity: 0, depthTest: false });
-const frustums = (() => {
+function frustumGeo() {
   const v: number[] = [];
   for (let k = 0; k < N_FR; k++) {
     const u = k / (N_FR - 1);
@@ -306,10 +305,10 @@ const frustums = (() => {
   }
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.Float32BufferAttribute(v, 3));
-  const ls = new THREE.LineSegments(g, frMat);
-  ls.renderOrder = 5;
-  return ls;
-})();
+  return g;
+}
+const frustums = new THREE.LineSegments(frustumGeo(), frMat);
+frustums.renderOrder = 5;
 const pathLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pathCurve.getSpacedPoints(240)), pathMat);
 pathLine.renderOrder = 5;
 scene.add(frustums, pathLine);
@@ -332,7 +331,7 @@ const dims: Dim[] = [
   labelsEl.appendChild(el);
   return { a: new THREE.Vector3(...(d.a as [number, number, number])), b: new THREE.Vector3(...(d.b as [number, number, number])), tick: new THREE.Vector3(...(d.tick as [number, number, number])), key: d.key, line, el };
 });
-const DIM_NAME: Record<string, [string, string]> = { door: ['Vrata', 'Door'], height: ['Svetla višina', 'Clear height'], wall: ['Stena', 'Wall'] };
+const DIM_NAME: Record<string, [string, string]> = { door: ['Vrata', 'Door'], height: ['Svetla višina', 'Clear height'], wall: ['Stena', 'Wall'], level: ['Med etažama', 'Floor to floor'] };
 
 function resize() {
   if (!renderer) return;
@@ -371,13 +370,13 @@ function updateLegend(s: number, loading: boolean) {
   else if (s < 2) row = `${sw('#FFC23D')}${sl ? 'Osamelci in predmeti' : 'Outliers and objects'}${sw('#E4E6E1')}${sl ? 'Vokselska mreža (povečano)' : 'Voxel grid (exaggerated)'}`;
   else if (s < 3) row = `${sl ? 'Iskanje zasuka 0 do 359°' : 'Rotation search 0 to 359°'}${A}`;
   else if (s < 4) row = `${sw('#FF5A1F')}${sl ? 'Položaji kamere iz videa' : 'Camera positions from video'}${sw('#E4E6E1')}${sl ? 'Pot' : 'Path'}`;
-  else if (s < 5) row = `${sw('#FF5A1F')}${sl ? 'Kontrolne mere demo modela' : 'Check dimensions, demo model'}`;
-  else if (s < 6) row = `${sw('#FF5A1F')}${sl ? 'Rez +1,00 in +4,20, ravnine RANSAC' : 'Slices +1.00 and +4.20, RANSAC planes'}`;
+  else if (s < 5) row = `${sw('#FF5A1F')}${sl ? 'Kontrolne mere modela' : 'Check dimensions on the model'}`;
+  else if (s < 6) row = `${sw('#FF5A1F')}${sl ? `Rez +${num(SLICES[0], 2)} in +${num(SLICES[1], 2)}, ravnine RANSAC` : `Slices +${num(SLICES[0], 2)} and +${num(SLICES[1], 2)}, RANSAC planes`}`;
   else if (s < 7) row = `${sw('#E4E6E1')}${sl ? 'Črte' : 'Lines'}${sw('#3A3D40')}${sl ? 'Ravnine' : 'Planes'}`;
   else if (s < 8) row = ['01_FLOORS', '02_WALLS', '03_CEILING', '04_STAIRS', '05_OPENINGS'].map((k) => `${sw(LAYER_TINT[k])}${k}`).join('');
   else row = `${sw('#E4E6E1')}${sl ? 'Model' : 'Model'}${sw('linear-gradient(90deg,#2E3032,#B9BDB7,#FF5A1F)')}${sl ? 'Oblak točk' : 'Point cloud'}`;
   const hint = coarse ? t('scene.dragTouch') : t('scene.drag');
-  const html = `<span class="label">${row}</span><span class="label">${t('demo.tag')} // ${t('hero.scene')}</span><span class="label hint">↔ ${hint}</span>`;
+  const html = `<span class="label">${row}</span><span class="label">${t('ref.tag')} // ${t('hero.scene')}</span><span class="label hint">↔ ${hint}</span>`;
   if (html !== lastLegend) { legend.innerHTML = html; lastLegend = html; }
   const active = Math.floor(s);
   rail.querySelectorAll('a').forEach((a, i) => a.classList.toggle('on', i === active));
@@ -399,7 +398,7 @@ function apply(s: number, time: number) {
   u.uAlign.value = align;
   u.uScanTint.value = sm(-0.5, 0, s) * (1 - sm(2.65, 2.95, s));
   u.uCapHide.value = sm(-0.3, 0, s) * (1 - sm(0.5, 0.62, s));
-  u.uCapR.value = lerp(0.3, 11, sm(0.0, 0.52, s));
+  u.uCapR.value = lerp(0.3, 14, sm(0.0, 0.52, s));
   u.uCapOn.value = sm(-0.05, 0.15, s) * (1 - sm(0.85, 1.0, s));
   // step 02: outliers and objects flagged then removed, cloud levelled, voxel grid
   const tilt = THREE.MathUtils.degToRad(4) * sm(-0.3, 0, s) * (1 - sm(1.25, 1.7, s));
@@ -448,9 +447,9 @@ function apply(s: number, time: number) {
     }
   });
   // step 06: slices, planes light up
-  u.uSlice.value = lerp(-0.3, 6.7, sm(5.0, 5.4, s));
+  u.uSlice.value = lerp(meta.bounds.min[2] - 0.3, meta.bounds.max[2] + 0.3, sm(5.0, 5.4, s));
   u.uSliceOn.value = sm(4.98, 5.04, s) * (1 - sm(5.4, 5.5, s));
-  u.uSliceX.value = lerp(-0.3, 6.3, sm(5.02, 5.38, s));
+  u.uSliceX.value = lerp(meta.bounds.min[0] - 0.3, meta.bounds.max[0] + 0.3, sm(5.02, 5.38, s));
   u.uSliceXOn.value = sm(5.0, 5.05, s) * (1 - sm(5.38, 5.45, s));
   u.uRevealOn.value = sm(5.38, 5.48, s) * (1 - sm(6.25, 6.55, s));
   u.uReveal.value = (meta.maxOrder + 6) * sm(5.42, 5.95, s);
@@ -483,18 +482,53 @@ function apply(s: number, time: number) {
   u.uMouseOn.value = hoverOn;
 }
 
+// Geometry-specific set-up from meta.scene: scanners, video path, check dimensions, slices, camera frame.
+let SLICES = [1.0, 4.2];
+const KEYS0 = KEYS.map((k) => ({ p: [...k.p] as [number, number, number], t: [...k.t] as [number, number, number] }));
+function setupScene(m: StoryMeta) {
+  const sc = m.scene;
+  if (sc) {
+    SCAN_A.set(...(sc.scanA as [number, number, number]));
+    SCAN_B.set(...(sc.scanB as [number, number, number]));
+    pathCurve = new THREE.CatmullRomCurve3(sc.path.map((p) => new THREE.Vector3(...(p as [number, number, number]))), false, 'centripetal');
+    frustums.geometry.dispose(); frustums.geometry = frustumGeo();
+    pathLine.geometry.dispose(); pathLine.geometry = new THREE.BufferGeometry().setFromPoints(pathCurve.getSpacedPoints(240));
+    sc.dims.slice(0, dims.length).forEach((d, k) => {
+      dims[k].a.set(...(d.a as [number, number, number])); dims[k].b.set(...(d.b as [number, number, number]));
+      dims[k].tick.set(...(d.tick as [number, number, number])); dims[k].key = d.key;
+    });
+    SLICES = sc.slices;
+  }
+  scanner(SCAN_A, '#E4E6E1', tiltFrame);
+  scanner(SCAN_B, '#FF5A1F', bFrame);
+  // camera keyframes were set for the 6 x 4 m demo hall: move and scale them to this scene
+  const box = new THREE.Box3();
+  if (model) box.setFromObject(model);
+  if (box.isEmpty()) box.set(new THREE.Vector3(...(m.bounds.min as [number, number, number])), new THREE.Vector3(...(m.bounds.max as [number, number, number])));
+  const c1 = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());
+  const c0 = new THREE.Vector3(3, 2, 3.2), k = Math.max(size.x, size.y) / 5.0;
+  KEYS.forEach((key, i) => {
+    const p = new THREE.Vector3(...KEYS0[i].p).sub(c0).multiplyScalar(k).add(c1);
+    const t = new THREE.Vector3(...KEYS0[i].t).sub(c0).multiplyScalar(k).add(c1);
+    key.p = [p.x, p.y, p.z]; key.t = [t.x, t.y, t.z];
+  });
+}
+
 async function init() {
   if (!renderer) return;
   updateLegend(-1, true);
   meta = await fetchJson<StoryMeta>(url(META));
   const geo = await loadStoryCloud(url(BIN), meta, mobile ? 2 : 1);
   mat = storyMaterial(meta);
+  // the reference capture is larger and sparser than the demo hall: larger points
+  if (meta.demo === false) mat.uniforms.uSize.value = 0.026;
   scene.add(new THREE.Points(geo, mat));
   model = buildModel(await fetchJson<ModelJson>(url(meta.model)));
   setModelOpacity(model, 0, 0);
   scene.add(model);
   const b = meta.bounds;
-  for (const z of [1.0, 4.2]) {
+  setupScene(meta);
+  for (const z of SLICES) {
     const pts = [[b.min[0] - 0.3, b.min[1] - 0.3], [b.max[0] + 0.3, b.min[1] - 0.3], [b.max[0] + 0.3, b.max[1] + 0.3], [b.min[0] - 0.3, b.max[1] + 0.3]]
       .map(([x, y]) => new THREE.Vector3(x, y, z));
     slices.add(new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(pts), sliceMat));

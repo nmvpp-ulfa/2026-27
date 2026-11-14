@@ -3,7 +3,10 @@
 import * as THREE from 'three';
 
 export interface Surf { layer: string; o: number[]; u: number[]; v: number[]; lu: number; lv: number; holes: number[][] }
-export interface ModelJson { surfaces: Surf[]; openings: Surf[] }
+// Mesh models (from Rhino): triangles per layer plus outline polylines.
+export interface MeshPart { layer: string; pos: number[]; idx: number[] }
+export interface LinePart { layer: string; pts: number[] }
+export interface ModelJson { surfaces: Surf[]; openings: Surf[]; meshes?: MeshPart[]; lines?: LinePart[] }
 
 const BASE = new THREE.Color('#3A3D40');
 // EXT v0.1b: layer tints for the exploded model
@@ -69,6 +72,21 @@ export function buildModel(json: ModelJson, clippingPlanes: THREE.Plane[] = []) 
     L.g.add(mesh);
     outline(s, L.edges);
   }
+  for (const m of json.meshes ?? []) {
+    const L = layer(m.layer);
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.Float32BufferAttribute(m.pos, 3));
+    geo.setIndex(m.idx);
+    const mesh = new THREE.Mesh(geo, L.mat);
+    mesh.userData.layer = m.layer;
+    L.g.add(mesh);
+  }
+  const openPts: number[] = [];
+  for (const l of json.lines ?? []) {
+    const out = l.layer === '05_OPENINGS' ? openPts : layer(l.layer).edges;
+    for (let i = 0; i + 5 < l.pts.length; i += 3) out.push(l.pts[i], l.pts[i + 1], l.pts[i + 2], l.pts[i + 3], l.pts[i + 4], l.pts[i + 5]);
+  }
+  if (openPts.length) layer('05_OPENINGS').g.add(lines(openPts, openMat));
   for (const L of layers.values()) if (L.edges.length) L.g.add(lines(L.edges, edgeMat));
 
   const op: number[] = [];

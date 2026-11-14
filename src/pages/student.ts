@@ -16,7 +16,7 @@ const st = byId(id);
 const fmtM = (m: number) => `${num(m, 2)} m`;
 
 let viewer: Viewer | null = null;
-const layers = { cloud: true, model: false, deviation: false, mesh: false };
+const layers = { cloud: true, rgb: true, model: false, deviation: false, mesh: false };
 let measuring = false;
 let section = 62; // default cutaway removes the ceiling so the interior is visible
 const myMeasures: number[] = [];
@@ -30,6 +30,7 @@ function exerciseCard(s: Student, e: Exercise) {
   const steps = Array.from({ length: 9 }, (_, k) => `<i class="${e.steps.includes(k + 1) ? 'on' : ''}" title="${String(k + 1).padStart(2, '0')}"></i>`).join('');
   const sum = (L(e, 'summary') as string[] | undefined) ?? [];
   const imgs = media(s) ? e.images : [];
+  const vids = media(s) ? [...(e.videos ?? []), ...(e.video ? [{ file: e.video }] : [])] : [];
   return `<article class="ex" id="ex${e.n}">
     <header class="ex-head">
       <span class="ex-n">${String(e.n).padStart(2, '0')}</span>
@@ -40,8 +41,8 @@ function exerciseCard(s: Student, e: Exercise) {
       <div class="ex-steps"><span class="label">${t('st.steps')}</span><div class="steps-bar">${steps}</div></div>
     </header>
     ${sum.length ? `<ul class="ex-sum">${sum.map((x) => `<li>${rich(x)}</li>`).join('')}</ul>` : ''}
-    ${imgs.length ? `<div class="ex-gallery">${imgs.map((im, k) => `<button type="button" class="ex-img" data-ex="${e.n}" data-k="${k}"><img src="${url(im.file)}" alt="${rich(L(im, 'caption') || t('st.ex') + ' ' + e.n)}" loading="lazy"></button>`).join('')}</div>` : ''}
-    ${media(s) && e.video ? `<video class="ex-video" controls preload="none" src="${url(e.video)}"></video>` : ''}
+    ${vids.length ? `<div class="ex-videos${vids.length === 1 ? ' one' : ''}">${vids.map((v: any) => `<figure class="ex-vid"><video controls preload="none" playsinline${v.poster ? ` poster="${url(v.poster)}"` : ''} src="${url(v.file)}"></video>${L(v, 'caption') ? `<figcaption class="label">${rich(L(v, 'caption'))}</figcaption>` : ''}</figure>`).join('')}</div>` : ''}
+    ${imgs.length ? `<div class="ex-gallery">${imgs.map((im, k) => `<button type="button" class="ex-img" data-ex="${e.n}" data-k="${k}" title="${rich(L(im, 'caption') || '')}"><img src="${url(im.file)}" alt="${rich(L(im, 'caption') || t('st.ex') + ' ' + e.n)}" loading="lazy">${L(im, 'caption') ? `<span class="ex-cap">${rich(L(im, 'caption'))}</span>` : ''}</button>`).join('')}</div>` : ''}
     <div class="ex-actions">
       ${media(s) && e.mesh ? `<button type="button" class="btn btn--sm" data-mesh="${e.mesh}">${t('st.open3d')}</button>` : ''}
       ${e.sheet ? `<a class="btn btn--sm btn--ghost" href="${url(e.sheet)}" target="_blank" rel="noopener">${t('st.workmap')} ↗</a>` : ''}
@@ -89,10 +90,11 @@ function renderPage(s: Student) {
     <div class="viewer-tools">
       <div class="group"><span class="label">${t('st.layers')}</span>
         ${chip('cloud', hasCloud && layers.cloud, !hasCloud)}
+        ${chip('rgb', hasCloud && layers.rgb, !hasCloud || !s.files.pointcloud_rgb)}
         ${chip('splat', false, !s.files.splat)}
         ${chip('mesh', layers.mesh, !meshOf(s))}
         ${chip('model', !hasCloud || layers.model, !s.files.model_json)}
-        ${chip('deviation', hasCloud && layers.deviation, !hasCloud)}
+        ${chip('deviation', hasCloud && layers.deviation, !hasCloud || !s.files.model_json)}
       </div>
       <div class="group range"><span class="label">${t('st.section')}</span>
         <input type="range" min="0" max="100" value="${section}" id="section" aria-label="${t('st.section')}">
@@ -179,7 +181,7 @@ function applyLayers(hasCloud: boolean) {
   if (!viewer) return;
   viewer.setCloudVisible(hasCloud && layers.cloud);
   viewer.setModelVisible(!hasCloud || layers.model, hasCloud && layers.cloud ? 0.25 : 0.55);
-  viewer.setColor(layers.deviation ? 'deviation' : 'height');
+  viewer.setColor(layers.deviation ? 'deviation' : layers.rgb && viewer.hasRgb() ? 'rgb' : 'height');
   viewer.setMeshVisible(layers.mesh);
 }
 
@@ -196,7 +198,8 @@ function bindTools(s: Student, hasCloud: boolean) {
     const k = b.dataset.layer as keyof typeof layers;
     if (!(k in layers)) return;
     layers[k] = !layers[k];
-    if (k === 'deviation' && layers.deviation) layers.cloud = true;
+    if (k === 'deviation' && layers.deviation) { layers.cloud = true; layers.rgb = false; }
+    if (k === 'rgb' && layers.rgb) { layers.cloud = true; layers.deviation = false; }
     if (k === 'cloud' && !layers.cloud) layers.deviation = false;
     document.querySelectorAll<HTMLButtonElement>('[data-layer]').forEach((c) => {
       const kk = c.dataset.layer as keyof typeof layers;

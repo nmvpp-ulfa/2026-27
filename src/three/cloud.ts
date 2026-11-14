@@ -43,6 +43,9 @@ export interface StoryMeta {
   bounds: { min: number[]; max: number[] };
   scanB: { rotDeg: number; pivot: number[]; t: number[] };
   model: string; plan: string;
+  demo?: boolean;
+  // geometry-specific story set-up (scanner positions, video path, check dimensions, slice heights)
+  scene?: { scanA: number[]; scanB: number[]; path: number[][]; dims: { key: string; a: number[]; b: number[]; tick: number[] }[]; slices: number[] };
 }
 
 export async function loadStoryCloud(path: string, meta: StoryMeta, stride = 1) {
@@ -213,16 +216,21 @@ export function storyMaterial(meta: StoryMeta) {
 }
 
 // ---------------------------------------------------------------- student cloud
+// Layout: int16 mm xyz, uint8 deviation (mm), then optional uint8 rgb (captured colour).
 export async function loadStudentCloud(path: string, count: number) {
   const buf = await fetchBuffer(path);
   const pos = new Int16Array(buf, 0, 3 * count);
   const dev = new Uint8Array(buf, 6 * count, count);
-  const P = new Float32Array(3 * count), D = new Float32Array(count);
+  const hasRgb = buf.byteLength >= 10 * count;
+  const P = new Float32Array(3 * count), D = new Float32Array(count), C = new Float32Array(3 * count).fill(0.6);
   for (let i = 0; i < 3 * count; i++) P[i] = pos[i] * 0.001;
   for (let i = 0; i < count; i++) D[i] = dev[i] * 0.001;
+  if (hasRgb) { const rgb = new Uint8Array(buf, 7 * count, 3 * count); for (let i = 0; i < 3 * count; i++) C[i] = rgb[i] / 255; }
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(P, 3));
   g.setAttribute('aDev', new THREE.BufferAttribute(D, 1));
+  g.setAttribute('aRgb', new THREE.BufferAttribute(C, 3));
+  g.userData.rgb = hasRgb;
   g.computeBoundingBox();
   g.computeBoundingSphere();
   return g;
@@ -238,6 +246,7 @@ export function viewerMaterial(zmin: number, zmax: number) {
     vertexShader: /* glsl */ `
       #include <clipping_planes_pars_vertex>
       attribute float aDev;
+      attribute vec3 aRgb;
       uniform float uSize, uScale, uZmin, uZmax, uMode;
       uniform vec3 uColor;
       varying vec3 vColor;
@@ -249,7 +258,8 @@ export function viewerMaterial(zmin: number, zmax: number) {
         float h = clamp((position.z - uZmin) / (uZmax - uZmin), 0.0, 1.0);
         vec3 col = rampHeight(h);
         if (uMode > 0.5 && uMode < 1.5) col = mix(uColor * 0.55, uColor, h * 0.7 + 0.3);
-        if (uMode > 1.5) col = rampDev(aDev);
+        if (uMode > 1.5 && uMode < 2.5) col = rampDev(aDev);
+        if (uMode > 2.5) col = aRgb;
         vColor = col;
         gl_PointSize = clamp(uSize * uScale / max(0.1, -mvPosition.z), 1.0, 8.0);
       }`,

@@ -7,7 +7,7 @@ import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { fetchJson, loadStudentCloud, srgb, viewerMaterial } from './cloud';
 import { buildModel, setModelOpacity, type ModelJson } from './model';
 
-export type ColorMode = 'height' | 'flat' | 'deviation';
+export type ColorMode = 'height' | 'flat' | 'deviation' | 'rgb';
 export interface MeasureResult { a: THREE.Vector3; b: THREE.Vector3; d: number }
 
 export class Viewer {
@@ -69,6 +69,8 @@ export class Viewer {
     this.camera.updateProjectionMatrix();
     if (this.points) (this.points.material as THREE.ShaderMaterial).uniforms.uScale.value = h * this.renderer.getPixelRatio() * 0.5;
   }
+
+  hasRgb() { return !!this.points?.geometry.userData.rgb; }
 
   async loadCloud(path: string, count: number) {
     const g = await loadStudentCloud(path, count);
@@ -145,7 +147,7 @@ export class Viewer {
   setColor(mode: ColorMode, hex = '#FF5A1F') {
     if (!this.points) return;
     const u = (this.points.material as THREE.ShaderMaterial).uniforms;
-    u.uMode.value = mode === 'height' ? 0 : mode === 'flat' ? 1 : 2;
+    u.uMode.value = mode === 'height' ? 0 : mode === 'flat' ? 1 : mode === 'deviation' ? 2 : 3;
     u.uColor.value = srgb(hex);
   }
 

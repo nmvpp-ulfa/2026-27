@@ -49,7 +49,7 @@ src/three/        oblak točk (shaderji), generaliziran model, pregledovalnik
 src/lib/          jezik SL/EN, podatki, kartice, avatar, glava in noga
 src/styles/       tokeni design systema, osnovni slog, strani
 content/          steps.json (besedila korakov), students.json (zapisi študentov)
-public/data/      spletni podatki: demo/ (zgodba, prizori), s01 ... s06/
+public/data/      spletni podatki: story/ (referenčni zajem za zgodbo), s01 ... s06/ (slike, videi, oblaki točk)
 scripts/          make_demo_data.mjs (demo podatki), vite.mjs (zagon brez node_modules v Drive)
 docs/screenshots/ slike zaslona za pregled
 ```
@@ -57,16 +57,17 @@ docs/screenshots/ slike zaslona za pregled
 ## Podatki
 
 - `content/students.json` sledi podatkovnemu modelu iz prompta (id, display_name, consent_name, avatar_seed, phase, location, consent_location_publication, devices, apps, ai_models, metrics, files, text_sl, text_en). Dodana polja: `demo`, `status`, `reached_step`, `scene`, `measurements`, `worklog`, `exhibition`, `files.model_json`.
-- Zdaj ga piše `scripts/make_demo_data.mjs`. V v0.3 ga nadomesti `scripts/build_manifest.py`, ki prebere mapo z rezultati po vzorcu `priimek_lokacija_element_vN_LLLL-MM-DD.ext`.
-- Demo podatki so umetni: generično stopnišče (namesto stopnišča FA) in generičen prostor s stebri (namesto lokacije v centru). Metrike so izračunane iz teh umetnih oblakov, niso študentski rezultati.
-- Vsi študenti so anonimni (`consent_name: false`), dokler ni seznama soglasij s Teamsov. `s06` ima `consent_location_publication: false` in prikazuje samo generaliziran model.
-- Oblak točk v0.1: binarni int16 (mm). Generaliziran model v0.1: JSON s ploskvami. Potree, GLB in SPZ pridejo z resničnimi podatki.
+- Zapisi so resnični: dnevniki, poročila, videi in skeni iz mape `0 results` na SharePointu predmeta (do 10. 11. 2026). Imena, slike, videi in skeni so objavljeni s soglasjem študentov (nosilec, 14. 11. 2026). Zasebni naslovi niso objavljeni.
+- Priimka Grete in Lize v oddanem gradivu nista navedena, zato sta zapisani samo z imenom.
+- Pretvorba je lokalna (`private/`, ni objavljeno): `import_media.py` (slike do 1600 px brez metapodatkov, videi H.264 brez zvoka, oblaki točk), `apply_media.mjs` (zapis v `content/students.json`), `make_story_tb.py` (zgodba).
+- Oblak točk: binarni int16 (mm) + odstopanje (uint8) + barva zajema (uint8 RGB), središče v izhodišču, tla na z = 0.
+- Zgodba na začetni strani: referenčni zajem nosilca, stopnišče do WC v Zlati ladjici. Dva LiDAR skena (Scaniverse, iPhone) sta poravnana na posplošen model v Rhinu (`prostor_stopnisce_model_v1.1_2026-11-01_1.3dm`); zamik skena B v koraku 03 je dejanski zamik, ki ga je dal telefon (42°, približno 9 m). Model v JSON ima mreže po plasteh in obrise.
 
 ## Odprto
 
-1. Pot do demo skenov Scaniverse 2022–2024 na Drive (zamenjajo umetni oblak, označeni "demo").
-2. Pot do referenčnega zajema stopnišča FA in do mape z rezultati.
-3. Seznam soglasij s Teamsov (predmet NMVPP).
+1. Ko bodo oddani posplošeni modeli študentov (GLB ali 3DM), jih dodati v pregledovalnik in primerjavo.
+2. Kopija `NMVPP_web_uvoz` na OneDrivu nosilca je začasna in jo lahko izbrišete.
+3. Priimka Grete in Lize, če naj bosta izpisana.
 4. Čas in "kaj ni delovalo" za korake 01 do 09 (Tomaž, iz referenčnega zajema); drugi `[vnesi]` in `[preveri]` v `content/steps.json`.
 5. `[preveri]` koordinate FA v `scripts/make_demo_data.mjs` (46.0446, 14.5003).
 6. `/student/?id=..` je zdaj poizvedba; prompt predvideva `/student/[id]`. Strani po študentih lahko ustvari gradnja v v0.3.

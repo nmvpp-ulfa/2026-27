@@ -9,10 +9,11 @@ export interface Exercise {
   summary_sl: string[]; summary_en: string[];
   images: { file: string; caption_sl?: string; caption_en?: string }[];
   video: string | null; mesh: string | null; sheet: string | null;
+  videos?: { file: string; poster?: string; caption_sl?: string; caption_en?: string }[];
 }
 export interface Measurement { element: string; tape_cm: number | null; cloud_cm: number; model_cm?: number | null }
 export interface Student {
-  id: string; demo?: boolean; display_name: string; consent_name: boolean; avatar_seed: string;
+  id: string; demo?: boolean; cover?: string; display_name: string; consent_name: boolean; avatar_seed: string;
   phase: number; status: string; reached_step: number; scene: string;
   location: { name: string; name_en?: string; lat: number | null; lon: number | null; type: string };
   consent_location_publication: boolean; devices: string[]; lidar: boolean | null; apps: string[];
@@ -20,7 +21,7 @@ export interface Student {
   metrics: { points: number | null; median_dev_cm: number | null; within_5cm_pct: number | null; scale_err_cm: number | null };
   measurements: Measurement[];
   files: {
-    pointcloud: string | null; pointcloud_count: number; splat: string | null; mesh: string | null;
+    pointcloud: string | null; pointcloud_count: number; pointcloud_rgb?: boolean; splat: string | null; mesh: string | null;
     model_glb: string | null; model_json: string | null; plan_svg: string | null;
     sheets: { week: number; file: string | null }[]; downloads: { type: string; file: string | null }[];
   };

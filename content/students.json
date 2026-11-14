@@ -1,31 +1,102 @@
 {
   "demo": false,
   "generated": "2026-11-14",
-  "note": "Real student records, anonymised. Source: course SharePoint, folder 0 results (logs and reports up to 2026-11-10). No names, no private locations, no media until consent is collected. Mapping to students is kept locally in private/ and is not published.",
+  "note": "Real student records with names and media, published with the students' consent (course holder, 2026-11-14). Source: course SharePoint, folder 0 results (logs, reports, videos and scans up to 2026-11-10). Private addresses are not published.",
   "students": [
     {
-      "id": "s01", "display_name": "", "consent_name": false, "avatar_seed": "k7q2-rv91",
-      "phase": 1, "status": "in_progress", "reached_step": 8, "scene": "",
-      "location": { "name": "UL FA, klet", "name_en": "UL FA, basement", "lat": 46.0446, "lon": 14.5003, "type": "public" },
-      "consent_location_publication": false,
-      "devices": ["iPhone 17"], "lidar": true,
-      "apps": ["3D Scanner App", "Scaniverse", "ffmpeg", "COLMAP", "Open3D", "Python", "Rhino", "Blender"],
-      "ai_models": [{ "name": "Claude", "reached_step": 8 }],
-      "metrics": { "points": null, "median_dev_cm": 4.9, "within_5cm_pct": null, "scale_err_cm": null },
-      "measurements": [
-        { "element": "door_height", "tape_cm": 198.0, "cloud_cm": 201.0, "model_cm": 201.0 },
-        { "element": "counter_height", "tape_cm": 109.0, "cloud_cm": 108.0, "model_cm": 108.0 },
-        { "element": "stair_riser", "tape_cm": 14.2, "cloud_cm": 13.8, "model_cm": 14.2 }
+      "id": "s01",
+      "display_name": "Anastasija Ristova",
+      "consent_name": true,
+      "avatar_seed": "k7q2-rv91",
+      "phase": 1,
+      "status": "in_progress",
+      "reached_step": 8,
+      "scene": "",
+      "location": {
+        "name": "UL FA, klet",
+        "name_en": "UL FA, basement",
+        "lat": 46.0446,
+        "lon": 14.5003,
+        "type": "public"
+      },
+      "consent_location_publication": true,
+      "devices": [
+        "iPhone 17"
       ],
-      "files": { "pointcloud": null, "pointcloud_count": 0, "splat": null, "mesh": null, "model_glb": null, "model_json": null, "plan_svg": null, "sheets": [], "downloads": [] },
+      "lidar": true,
+      "apps": [
+        "3D Scanner App",
+        "Scaniverse",
+        "ffmpeg",
+        "COLMAP",
+        "Open3D",
+        "Python",
+        "Rhino",
+        "Blender"
+      ],
+      "ai_models": [
+        {
+          "name": "Claude",
+          "reached_step": 8
+        }
+      ],
+      "metrics": {
+        "points": null,
+        "median_dev_cm": 4.9,
+        "within_5cm_pct": null,
+        "scale_err_cm": null
+      },
+      "measurements": [
+        {
+          "element": "door_height",
+          "tape_cm": 198,
+          "cloud_cm": 201,
+          "model_cm": 201
+        },
+        {
+          "element": "counter_height",
+          "tape_cm": 109,
+          "cloud_cm": 108,
+          "model_cm": 108
+        },
+        {
+          "element": "stair_riser",
+          "tape_cm": 14.2,
+          "cloud_cm": 13.8,
+          "model_cm": 14.2
+        }
+      ],
+      "files": {
+        "pointcloud": "data/s01/s01_pointcloud_v1_2026-11-14.bin",
+        "pointcloud_count": 220000,
+        "splat": null,
+        "mesh": null,
+        "model_glb": null,
+        "model_json": null,
+        "plan_svg": null,
+        "sheets": [],
+        "downloads": [],
+        "pointcloud_rgb": true
+      },
       "worklog": [],
-      "exhibition": { "selected": null, "print": null },
+      "exhibition": {
+        "selected": null,
+        "print": null
+      },
       "text_sl": "Zajemi z LiDAR-jem in z videom, obdelava v Pythonu s pomočjo Claude. Najdlje je prišel zajem obokanega hodnika v kleti UL FA: od oblaka točk do modela s plastmi, tlorisa in kontrole mer s trakom.",
       "text_en": "LiDAR and video captures, processed in Python with help from Claude. The furthest result is the vaulted basement corridor of UL FA: from point cloud to a layered model, a plan and a tape check.",
       "exercises": [
         {
-          "n": 1, "date": "2026-10-20", "steps": [1, 6, 7, 8],
-          "title_sl": "Zajem z LiDAR-jem in tloris", "title_en": "LiDAR capture and plan",
+          "n": 1,
+          "date": "2026-10-20",
+          "steps": [
+            1,
+            6,
+            7,
+            8
+          ],
+          "title_sl": "Zajem z LiDAR-jem in tloris",
+          "title_en": "LiDAR capture and plan",
           "summary_sl": [
             "Dva zajema z LiDAR-jem: dnevna soba v muzejski hiši na prostem (3D Scanner App, 3 min) in hodnik s stopniščem čez dve etaži (Scaniverse, način Area, 1,5 min).",
             "Obdelava v Pythonu s pomočjo Claude: vodoravni rezi od 0,2 do 2,4 m, ravnine sten po metodi RANSAC, tloris 1 : 50 (PDF, DXF), pogledi sten in video od skena do modela.",
@@ -40,11 +111,77 @@
             "What did not work: drift during capture (room depth 5.25 m at one end and 6.72 m at the other, floor curved by about 10 cm); the second cloud is sparse, closed doors are invisible, importing into Rhino in millimetres made the model 1000 times too small.",
             "No tape measurements."
           ],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "images": [
+            {
+              "file": "data/s01/s01_v01_03_v1_2026-11-14.jpg",
+              "caption_sl": "Oblak točk v pravih barvah, iPhone LiDAR",
+              "caption_en": "Point cloud in true colour, iPhone LiDAR"
+            },
+            {
+              "file": "data/s01/s01_v01_04_v1_2026-11-14.jpg",
+              "caption_sl": "Oblak točk, obarvan po višini",
+              "caption_en": "Point cloud coloured by height"
+            },
+            {
+              "file": "data/s01/s01_v01_05_v1_2026-11-14.jpg",
+              "caption_sl": "Stena B: globina glede na ravnino stene",
+              "caption_en": "Wall B: depth relative to the wall plane"
+            },
+            {
+              "file": "data/s01/s01_v01_06_v1_2026-11-14.jpg",
+              "caption_sl": "Posplošen model",
+              "caption_en": "Generalised model"
+            },
+            {
+              "file": "data/s01/s01_v01_07_v1_2026-11-14.jpg",
+              "caption_sl": "Tloris 1:50",
+              "caption_en": "Floor plan 1:50"
+            },
+            {
+              "file": "data/s01/s01_v01_08_v1_2026-11-14.jpg",
+              "caption_sl": "Dve etaži, skenirani s telefonom",
+              "caption_en": "Two floors scanned with a phone"
+            },
+            {
+              "file": "data/s01/s01_v01_09_v1_2026-11-14.jpg",
+              "caption_sl": "Posplošen model stopnišča",
+              "caption_en": "Generalised model of the stair"
+            },
+            {
+              "file": "data/s01/s01_v01_10_v1_2026-11-14.jpg",
+              "caption_sl": "Tloris pritličja in nadstropja",
+              "caption_en": "Plan of ground and upper floor"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": [
+            {
+              "file": "data/s01/s01_v01_01_v1_2026-11-14.mp4",
+              "poster": "data/s01/s01_v01_01_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Riga: od skena do modela",
+              "caption_en": "Riga: from scan to model"
+            },
+            {
+              "file": "data/s01/s01_v01_02_v1_2026-11-14.mp4",
+              "poster": "data/s01/s01_v01_02_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Ljubljana: od skena do modela",
+              "caption_en": "Ljubljana: from scan to model"
+            }
+          ]
         },
         {
-          "n": 2, "date": "2026-11-01", "steps": [1, 4, 5, 8],
-          "title_sl": "Video v 3D (SfM) na UL FA", "title_en": "Video to 3D (SfM) at UL FA",
+          "n": 2,
+          "date": "2026-11-01",
+          "steps": [
+            1,
+            4,
+            5,
+            8
+          ],
+          "title_sl": "Video v 3D (SfM) na UL FA",
+          "title_en": "Video to 3D (SfM) at UL FA",
           "summary_sl": [
             "Trije videoposnetki na UL FA: hodnik, stopnišče v klet, klet in kavarna; tretji tudi z LiDAR-jem (3D Scanner App).",
             "Sličice s ffmpeg, rekonstrukcija s COLMAP, gost oblak z optičnim tokom; skripte s pomočjo Claude.",
@@ -57,11 +194,81 @@
             "Best result (ultra-wide video, exhaustive matching, about 15 min): 175 of 175 cameras, 40,236 sparse and 50,684 dense points.",
             "What did not work: videos sent via WhatsApp were compressed from 4K to 464 × 832; the model split in two at a plain door; the stair appeared twice in the first run; the scale is only provisional (assumed phone height 1.45 m), so no DXF."
           ],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "images": [
+            {
+              "file": "data/s01/s01_v02_05_v1_2026-11-14.jpg",
+              "caption_sl": "Video 2: pot kamere in oblak točk",
+              "caption_en": "Video 2: camera path and point cloud"
+            },
+            {
+              "file": "data/s01/s01_v02_06_v1_2026-11-14.jpg",
+              "caption_sl": "Tloris in prerez iz oblaka točk",
+              "caption_en": "Plan and section from the point cloud"
+            },
+            {
+              "file": "data/s01/s01_v02_07_v1_2026-11-14.jpg",
+              "caption_sl": "Zgoščen oblak: kletni hodnik",
+              "caption_en": "Dense cloud: basement corridor"
+            },
+            {
+              "file": "data/s01/s01_v02_08_v1_2026-11-14.jpg",
+              "caption_sl": "Tloris kleti UL FA",
+              "caption_en": "UL FA basement plan"
+            },
+            {
+              "file": "data/s01/s01_v02_09_v1_2026-11-14.jpg",
+              "caption_sl": "Tloris kafeterije",
+              "caption_en": "Cafeteria plan"
+            },
+            {
+              "file": "data/s01/s01_v02_10_v1_2026-11-14.jpg",
+              "caption_sl": "Pot videa 3 na tlorisu",
+              "caption_en": "Path of video 3 on the plan"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": [
+            {
+              "file": "data/s01/s01_v02_01_v1_2026-11-14.mp4",
+              "poster": "data/s01/s01_v02_01_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Video B: kamere in oblak točk iz videa",
+              "caption_en": "Video B: cameras and point cloud from video"
+            },
+            {
+              "file": "data/s01/s01_v02_02_v1_2026-11-14.mp4",
+              "poster": "data/s01/s01_v02_02_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Video 3: pritličje, stopnice, klet, kafeterija",
+              "caption_en": "Video 3: ground floor, stairs, basement, cafeteria"
+            },
+            {
+              "file": "data/s01/s01_v02_03_v1_2026-11-14.mp4",
+              "poster": "data/s01/s01_v02_03_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Pot telefona na LiDAR tlorisu kleti",
+              "caption_en": "Phone path on the LiDAR plan of the basement"
+            },
+            {
+              "file": "data/s01/s01_v02_04_v1_2026-11-14.mp4",
+              "poster": "data/s01/s01_v02_04_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Izvorni video A",
+              "caption_en": "Source video A"
+            }
+          ]
         },
         {
-          "n": 4, "date": "2026-11-10", "steps": [2, 3, 5, 6, 7, 8],
-          "title_sl": "Klet UL FA: od oblaka do modela", "title_en": "UL FA basement: from cloud to model",
+          "n": 4,
+          "date": "2026-11-10",
+          "steps": [
+            2,
+            3,
+            5,
+            6,
+            7,
+            8
+          ],
+          "title_sl": "Klet UL FA: od oblaka do modela",
+          "title_en": "UL FA basement: from cloud to model",
           "summary_sl": [
             "Podatki: zajemi Študenta 02 (iPhone 13 Pro, SiteScape), lastne fotografije meritev s trakom in video sprehoda.",
             "Čiščenje (vokseli 1,5 cm), poravnava (zasuk 131°, ±0,00 je mediana tal), rez na +1,10 m, prereza A-A in B-B, obok kot krožnica s polmerom 1,41 m, stopnice kot 16 enakih nastopnih ploskev.",
@@ -74,29 +281,106 @@
             "Closed layered model, plan (DXF, PDF), 3DM, OBJ, STL; check of 150,000 points against the model: median deviation 4.9 cm.",
             "What did not work: large PLY files would not load, one capture is incomplete and was excluded, stairs look like a ramp in LiDAR, the floor is not flat (±7 cm), the cafeteria is too dark and was excluded."
           ],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "images": [
+            {
+              "file": "data/s01/s01_v04_01_v1_2026-11-14.jpg",
+              "caption_sl": "Model obokanega hodnika in stopnic",
+              "caption_en": "Model of the vaulted corridor and stair"
+            },
+            {
+              "file": "data/s01/s01_v04_02_v1_2026-11-14.jpg",
+              "caption_sl": "Tloris odseka B",
+              "caption_en": "Plan of section B"
+            },
+            {
+              "file": "data/s01/s01_v04_03_v1_2026-11-14.jpg",
+              "caption_sl": "Kontrolna mera: vrata 198 cm",
+              "caption_en": "Check measurement: door 198 cm"
+            },
+            {
+              "file": "data/s01/s01_v04_04_v1_2026-11-14.jpg",
+              "caption_sl": "Kontrolna mera: pult 109 cm",
+              "caption_en": "Check measurement: counter 109 cm"
+            },
+            {
+              "file": "data/s01/s01_v04_05_v1_2026-11-14.jpg",
+              "caption_sl": "Kontrolna mera: stopnica 14,2 cm",
+              "caption_en": "Check measurement: step 14.2 cm"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": []
         }
-      ]
+      ],
+      "cover": "data/s01/s01_v01_03_v1_2026-11-14.jpg"
     },
     {
-      "id": "s02", "display_name": "", "consent_name": false, "avatar_seed": "m3d8-xa40",
-      "phase": 1, "status": "in_progress", "reached_step": 8, "scene": "",
-      "location": { "name": "UL FA, pritličje in klet", "name_en": "UL FA, ground floor and basement", "lat": 46.0446, "lon": 14.5003, "type": "public" },
-      "consent_location_publication": false,
-      "devices": ["iPhone 13 Pro"], "lidar": true,
-      "apps": ["Polycam", "Scaniverse", "KIRI Engine", "RealityScan", "SiteScape", "Rhino"],
+      "id": "s02",
+      "display_name": "Greta",
+      "consent_name": true,
+      "avatar_seed": "m3d8-xa40",
+      "phase": 1,
+      "status": "in_progress",
+      "reached_step": 8,
+      "scene": "",
+      "location": {
+        "name": "UL FA, pritličje in klet",
+        "name_en": "UL FA, ground floor and basement",
+        "lat": 46.0446,
+        "lon": 14.5003,
+        "type": "public"
+      },
+      "consent_location_publication": true,
+      "devices": [
+        "iPhone 13 Pro"
+      ],
+      "lidar": true,
+      "apps": [
+        "Polycam",
+        "Scaniverse",
+        "KIRI Engine",
+        "RealityScan",
+        "SiteScape",
+        "Rhino"
+      ],
       "ai_models": [],
-      "metrics": { "points": null, "median_dev_cm": null, "within_5cm_pct": null, "scale_err_cm": null },
+      "metrics": {
+        "points": null,
+        "median_dev_cm": null,
+        "within_5cm_pct": null,
+        "scale_err_cm": null
+      },
       "measurements": [],
-      "files": { "pointcloud": null, "pointcloud_count": 0, "splat": null, "mesh": null, "model_glb": null, "model_json": null, "plan_svg": null, "sheets": [], "downloads": [] },
+      "files": {
+        "pointcloud": "data/s02/s02_pointcloud_v1_2026-11-14.bin",
+        "pointcloud_count": 220000,
+        "splat": null,
+        "mesh": null,
+        "model_glb": null,
+        "model_json": null,
+        "plan_svg": null,
+        "sheets": [],
+        "downloads": [],
+        "pointcloud_rgb": true
+      },
       "worklog": [],
-      "exhibition": { "selected": null, "print": null },
+      "exhibition": {
+        "selected": null,
+        "print": null
+      },
       "text_sl": "Sistematična primerjava aplikacij za zajem, nato zajemi pritličja in kleti UL FA s SiteScape in Scaniverse ter ročni model kleti v Rhinu. Zajeme sta za obdelavo uporabila tudi Študent 01 in Študent 05.",
       "text_en": "A systematic comparison of capture apps, then captures of the UL FA ground floor and basement with SiteScape and Scaniverse and a hand-built basement model in Rhino. Students 01 and 05 also processed these captures.",
       "exercises": [
         {
-          "n": 1, "date": "2026-10-10", "steps": [1],
-          "title_sl": "Prvi zajem in uvoz v Rhino", "title_en": "First capture and Rhino import",
+          "n": 1,
+          "date": "2026-10-10",
+          "steps": [
+            1
+          ],
+          "title_sl": "Prvi zajem in uvoz v Rhino",
+          "title_en": "First capture and Rhino import",
           "summary_sl": [
             "Zasebni prostor s stopniščem (ni objavljen), zajem s Polycam.",
             "Rhino 3D Scan ne zajame prostorov (način za predmete) oziroma jih pretvori v NURBS; Polycam deluje.",
@@ -109,11 +393,27 @@
             "The GLB opens directly in Rhino; converting to OBJ breaks the textures.",
             "No repeat because of the limited number of free captures."
           ],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "images": [],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": [
+            {
+              "file": "data/s02/s02_v01_01_v1_2026-11-14.mp4",
+              "poster": "data/s02/s02_v01_01_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Polycam: prvi zajem, odprt v Rhinu",
+              "caption_en": "Polycam: first capture opened in Rhino"
+            }
+          ]
         },
         {
-          "n": 2, "date": "2026-10-18", "steps": [1],
-          "title_sl": "Primerjava petih aplikacij", "title_en": "Five apps compared",
+          "n": 2,
+          "date": "2026-10-18",
+          "steps": [
+            1
+          ],
+          "title_sl": "Primerjava petih aplikacij",
+          "title_en": "Five apps compared",
           "summary_sl": [
             "Isti prostor zajet s Polycam, Scaniverse, KIRI Engine, RealityScan in SiteScape, vsak zajem 3 do 5 min.",
             "Najboljši oblak točk: SiteScape (PLY, E57, datoteke nad 200 MB); najboljša teksturirana mreža: Polycam, nato Scaniverse.",
@@ -124,11 +424,48 @@
             "Best point cloud: SiteScape (PLY, E57, files over 200 MB); best textured mesh: Polycam, then Scaniverse.",
             "What did not work: Scaniverse processing stopped after 2 h; KIRI Engine over-generalises (vertical walls, missing slab between floors, generic furniture inserted); RealityScan loses most of the model; SiteScape misses glass."
           ],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "images": [
+            {
+              "file": "data/s02/s02_v02_01_v1_2026-11-14.jpg",
+              "caption_sl": "Polycam",
+              "caption_en": "Polycam"
+            },
+            {
+              "file": "data/s02/s02_v02_02_v1_2026-11-14.jpg",
+              "caption_sl": "Scaniverse",
+              "caption_en": "Scaniverse"
+            },
+            {
+              "file": "data/s02/s02_v02_03_v1_2026-11-14.jpg",
+              "caption_sl": "KIRI Engine",
+              "caption_en": "KIRI Engine"
+            },
+            {
+              "file": "data/s02/s02_v02_04_v1_2026-11-14.jpg",
+              "caption_sl": "RealityScan",
+              "caption_en": "RealityScan"
+            },
+            {
+              "file": "data/s02/s02_v02_05_v1_2026-11-14.jpg",
+              "caption_sl": "SiteScape",
+              "caption_en": "SiteScape"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": []
         },
         {
-          "n": 3, "date": "2026-10-26", "steps": [1, 3, 5],
-          "title_sl": "Zajem pritličja in kleti UL FA", "title_en": "Capture of the UL FA ground floor and basement",
+          "n": 3,
+          "date": "2026-10-26",
+          "steps": [
+            1,
+            3,
+            5
+          ],
+          "title_sl": "Zajem pritličja in kleti UL FA",
+          "title_en": "Capture of the UL FA ground floor and basement",
           "summary_sl": [
             "Štirje zajemi s SiteScape (gostota Ultra, največji doseg), shranjeni v en projekt in izvoženi kot ena datoteka (5,5 GB).",
             "Mere preverjene s trakom: model je v merilu 1 : 1, razlike so majhne (številke niso navedene).",
@@ -139,11 +476,41 @@
             "Dimensions checked with a tape: the model is at 1:1, differences are small (no numbers given).",
             "The capture was hindered by an exhibition in the basement and a photo shoot."
           ],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "images": [
+            {
+              "file": "data/s02/s02_v03_01_v1_2026-11-14.jpg",
+              "caption_sl": "SiteScape: klet UL FA, najboljši rezultat",
+              "caption_en": "SiteScape: UL FA basement, best result"
+            },
+            {
+              "file": "data/s02/s02_v03_02_v1_2026-11-14.jpg",
+              "caption_sl": "Meritev s trakom",
+              "caption_en": "Tape measurement"
+            },
+            {
+              "file": "data/s02/s02_v03_03_v1_2026-11-14.jpg",
+              "caption_sl": "Meritev s trakom",
+              "caption_en": "Tape measurement"
+            },
+            {
+              "file": "data/s02/s02_v03_04_v1_2026-11-14.jpg",
+              "caption_sl": "Meritev s trakom",
+              "caption_en": "Tape measurement"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": []
         },
         {
-          "n": 4, "date": "2026-11-02", "steps": [1],
-          "title_sl": "Tretji zajem UL FA s Scaniverse", "title_en": "Third UL FA capture with Scaniverse",
+          "n": 4,
+          "date": "2026-11-02",
+          "steps": [
+            1
+          ],
+          "title_sl": "Tretji zajem UL FA s Scaniverse",
+          "title_en": "Third UL FA capture with Scaniverse",
           "summary_sl": [
             "Starejša različica Scaniverse zaradi izvoza LAS; izvozi OBJ, STL, LAS, PLY, GLB, FBX in USDZ.",
             "Gost in razmeroma natančen oblak (778.087 točk), brez napak pri srednje hitrem obračanju.",
@@ -156,11 +523,21 @@
             "Students 01 and 05 processed this capture.",
             "What did not work: LAS does not open directly in Rhino, Blender or Supersplat."
           ],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "images": [],
+          "video": null,
+          "mesh": null,
+          "sheet": null
         },
         {
-          "n": 5, "date": "2026-11-09", "steps": [5, 7, 8],
-          "title_sl": "Ročni model kleti v Rhinu", "title_en": "Hand-built basement model in Rhino",
+          "n": 5,
+          "date": "2026-11-09",
+          "steps": [
+            5,
+            7,
+            8
+          ],
+          "title_sl": "Ročni model kleti v Rhinu",
+          "title_en": "Hand-built basement model in Rhino",
           "summary_sl": [
             "Oblak točk (PLY) uvožen v Rhino, mere preverjene z meritvami na terenu.",
             "Ploskve modelirane ročno med točkami sten, ker so robovi v oblaku zabrisani; mere niso zaokrožene, koti niso vedno pravi.",
@@ -171,29 +548,96 @@
             "Surfaces modelled by hand between the wall points because edges are fuzzy in the cloud; dimensions not rounded, angles not always square.",
             "3DM model plus plan and section (PDF)."
           ],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "images": [
+            {
+              "file": "data/s02/s02_v05_01_v1_2026-11-14.jpg",
+              "caption_sl": "Tloris in prerez kleti",
+              "caption_en": "Basement plan and section"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": []
         }
-      ]
+      ],
+      "cover": "data/s02/s02_v03_01_v1_2026-11-14.jpg"
     },
     {
-      "id": "s03", "display_name": "", "consent_name": false, "avatar_seed": "p5n1-cz27",
-      "phase": 2, "status": "in_progress", "reached_step": 4, "scene": "",
-      "location": { "name": "Ni navedeno", "name_en": "Not stated", "lat": null, "lon": null, "type": "unknown" },
-      "consent_location_publication": false,
-      "devices": [], "lidar": null,
-      "apps": ["Supersplat", "Rhino", "Blender"],
-      "ai_models": [{ "name": "Claude (brezplačna različica)", "reached_step": 4 }],
-      "metrics": { "points": null, "median_dev_cm": null, "within_5cm_pct": null, "scale_err_cm": null },
+      "id": "s03",
+      "display_name": "Liza",
+      "consent_name": true,
+      "avatar_seed": "p5n1-cz27",
+      "phase": 2,
+      "status": "in_progress",
+      "reached_step": 8,
+      "scene": "",
+      "location": {
+        "name": "UL FA, pritličje in klet",
+        "name_en": "UL FA, ground floor and basement",
+        "lat": 46.0446,
+        "lon": 14.5003,
+        "type": "public"
+      },
+      "consent_location_publication": true,
+      "devices": [],
+      "lidar": null,
+      "apps": [
+        "Supersplat",
+        "Rhino",
+        "Blender",
+        "RealityScan",
+        "3D Scanner App",
+        "AutoCAD"
+      ],
+      "ai_models": [
+        {
+          "name": "ChatGPT Plus",
+          "reached_step": 8
+        },
+        {
+          "name": "ChatGPT (brezplačna različica)",
+          "reached_step": 8
+        },
+        {
+          "name": "Claude (brezplačna različica)",
+          "reached_step": 4
+        }
+      ],
+      "metrics": {
+        "points": null,
+        "median_dev_cm": null,
+        "within_5cm_pct": null,
+        "scale_err_cm": null
+      },
       "measurements": [],
-      "files": { "pointcloud": null, "pointcloud_count": 0, "splat": null, "mesh": null, "model_glb": null, "model_json": null, "plan_svg": null, "sheets": [], "downloads": [] },
+      "files": {
+        "pointcloud": null,
+        "pointcloud_count": 0,
+        "splat": null,
+        "mesh": null,
+        "model_glb": null,
+        "model_json": null,
+        "plan_svg": null,
+        "sheets": [],
+        "downloads": []
+      },
       "worklog": [],
-      "exhibition": { "selected": null, "print": null },
-      "text_sl": "Primerjava formatov (splat, mreža, oblak) v Supersplatu, Rhinu in Blenderju, rekonstrukcija iz videa s pomočjo Claude in model v Rhinu. Dva dnevnika sta samo v slikah, zato še nista povzeta. [preveri]",
-      "text_en": "Formats compared (splat, mesh, cloud) in Supersplat, Rhino and Blender, a video reconstruction with help from Claude and a Rhino model. Two logs are images only and are not summarised yet. [preveri]",
+      "exhibition": {
+        "selected": null,
+        "print": null
+      },
+      "text_sl": "Primerjava formatov (splat, mreža, oblak) v treh programih, zajem prehoda med sobama, rekonstrukcija iz videa s Claude in primerjava AI agentov pri tlorisu, prerezu in modelu kleti UL FA.",
+      "text_en": "Formats compared (splat, mesh, cloud) in three programs, a capture of a passage between two rooms, a video reconstruction with Claude, and AI agents compared on the plan, section and model of the UL FA basement.",
       "exercises": [
         {
-          "n": 1, "date": "2026-10-13", "steps": [1],
-          "title_sl": "Splat, mreža in oblak v treh programih", "title_en": "Splat, mesh and cloud in three programs",
+          "n": 1,
+          "date": "2026-10-13",
+          "steps": [
+            1
+          ],
+          "title_sl": "Splat, mreža in oblak v treh programih",
+          "title_en": "Splat, mesh and cloud in three programs",
           "summary_sl": [
             "Odpiranje splata in mreže v Supersplatu, Rhinu in Blenderju.",
             "Splat (PLY) se v Rhinu in Blenderju odpre kot oblak z zelo veliko točkami; GLB kot mreža (v Rhinu brez teksture), PLY kot oblak točk."
@@ -202,18 +646,85 @@
             "Opening a splat and a mesh in Supersplat, Rhino and Blender.",
             "The splat (PLY) opens in Rhino and Blender as a cloud with very many points; the GLB as a mesh (in Rhino without texture), the PLY as a point cloud."
           ],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "images": [
+            {
+              "file": "data/s03/s03_v01_01_v1_2026-11-14.jpg",
+              "caption_sl": "Stopnišče: mreža s teksturo",
+              "caption_en": "Stair: textured mesh"
+            },
+            {
+              "file": "data/s03/s03_v01_02_v1_2026-11-14.jpg",
+              "caption_sl": "Stopnišče: oblak točk",
+              "caption_en": "Stair: point cloud"
+            },
+            {
+              "file": "data/s03/s03_v01_03_v1_2026-11-14.jpg",
+              "caption_sl": "Stopnišče: splat",
+              "caption_en": "Stair: splat"
+            },
+            {
+              "file": "data/s03/s03_v01_04_v1_2026-11-14.jpg",
+              "caption_sl": "Stopnišče v Blenderju",
+              "caption_en": "Stair in Blender"
+            },
+            {
+              "file": "data/s03/s03_v01_05_v1_2026-11-14.jpg",
+              "caption_sl": "Soba: mreža",
+              "caption_en": "Room: mesh"
+            },
+            {
+              "file": "data/s03/s03_v01_06_v1_2026-11-14.jpg",
+              "caption_sl": "Soba: splat kot oblak točk",
+              "caption_en": "Room: splat as point cloud"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": []
         },
         {
-          "n": 2, "date": "2026-11-08", "steps": [],
-          "title_sl": "Dnevnik v slikah", "title_en": "Log as images",
-          "summary_sl": ["Dnevnik je samo v slikah, povzetek še ni pripravljen. [vnesi]"],
-          "summary_en": ["The log is images only; no summary yet. [vnesi]"],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "n": 2,
+          "date": "2026-11-08",
+          "steps": [
+            1
+          ],
+          "title_sl": "Prehod med sobama: RealityScan in 3D Scanner App",
+          "title_en": "Passage between two rooms: RealityScan and 3D Scanner App",
+          "summary_sl": [
+            "Skeniranje večnivojskega prehoda iz ene sobe v drugo z RealityScan.",
+            "Isti prehod s 3D Scanner App; izvoz datoteke ni mogoč brez plačljive različice."
+          ],
+          "summary_en": [
+            "Scanning a multi-level passage from one room to another with RealityScan.",
+            "The same passage with 3D Scanner App; exporting the file is not possible without the paid version."
+          ],
+          "images": [
+            {
+              "file": "data/s03/s03_v02_01_v1_2026-11-14.jpg",
+              "caption_sl": "RealityScan: prehod med sobama",
+              "caption_en": "RealityScan: passage between two rooms"
+            },
+            {
+              "file": "data/s03/s03_v02_02_v1_2026-11-14.jpg",
+              "caption_sl": "3D Scanner App",
+              "caption_en": "3D Scanner App"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": []
         },
         {
-          "n": 3, "date": "2026-10-20", "steps": [1, 4],
-          "title_sl": "Rekonstrukcija iz videa", "title_en": "Reconstruction from video",
+          "n": 3,
+          "date": "2026-10-20",
+          "steps": [
+            1,
+            4
+          ],
+          "title_sl": "Rekonstrukcija iz videa",
+          "title_en": "Reconstruction from video",
           "summary_sl": [
             "Dva videoposnetka s telefonom.",
             "Rekonstrukcija posnetka, izdelana s pomočjo Claude (brezplačna različica), oddana kot video."
@@ -222,36 +733,165 @@
             "Two phone videos.",
             "A reconstruction of the footage made with help from Claude (free version), submitted as a video."
           ],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "images": [],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": [
+            {
+              "file": "data/s03/s03_v03_01_v1_2026-11-14.mp4",
+              "poster": "data/s03/s03_v03_01_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Rekonstrukcija iz videa s Claude (brezplačna različica)",
+              "caption_en": "Reconstruction from video with Claude (free version)"
+            },
+            {
+              "file": "data/s03/s03_v03_02_v1_2026-11-14.mp4",
+              "poster": "data/s03/s03_v03_02_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Izvorni video 1",
+              "caption_en": "Source video 1"
+            },
+            {
+              "file": "data/s03/s03_v03_03_v1_2026-11-14.mp4",
+              "poster": "data/s03/s03_v03_03_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Izvorni video 2",
+              "caption_en": "Source video 2"
+            }
+          ]
         },
         {
-          "n": 4, "date": null, "steps": [7, 8],
-          "title_sl": "Model kleti in stopnišča v Rhinu", "title_en": "Rhino model of a basement and stair",
-          "summary_sl": ["Oddan je model v Rhinu (klet in stopnišče). Dnevnik je samo v slikah, zato koraki niso potrjeni. [preveri]"],
-          "summary_en": ["A Rhino model (basement and stair) is submitted. The log is images only, so the steps are not confirmed. [preveri]"],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "n": 4,
+          "date": null,
+          "steps": [
+            6,
+            7,
+            8
+          ],
+          "title_sl": "Klet in stopnišče: tloris, prerez in model z AI",
+          "title_en": "Basement and stair: plan, section and model with AI",
+          "summary_sl": [
+            "Vsi AI agenti so dobili isto navodilo: iz PLY datoteke LiDAR skena stopnišča in kleti izluščiti tloris in prerez ter narediti DWG/DXF; v drugem koraku 3D model, ki ga odpre Rhino.",
+            "Tloris in prerez: ChatGPT brezplačna različica je rezultat dala po 5 do 6 minutah, ChatGPT Plus po 45 minutah. Claude brezplačna različica PLY datoteke ni sprejel, prek vtičnika RhinoAiMCP se je povezal z Rhinom in se po 15 minutah sesul, brez rezultata.",
+            "3D model: ChatGPT brezplačna različica ni delovala, ChatGPT Plus je model dal po 45 minutah.",
+            "Izdelki: tloris kleti in stopnišča, prereza A-A in B-B, kontrola z izvornim skenom, 3D model (Klet_stopnisce_Rhino.3dm)."
+          ],
+          "summary_en": [
+            "All AI agents got the same prompt: from the PLY file of the LiDAR scan of the stair and basement, extract a plan and a section and make a DWG/DXF; in a second step, a 3D model that opens in Rhino.",
+            "Plan and section: ChatGPT free gave a result after 5 to 6 minutes, ChatGPT Plus after 45 minutes. Claude free did not accept the PLY file, connected to Rhino through the RhinoAiMCP plug-in and crashed after 15 minutes, with no result.",
+            "3D model: ChatGPT free did not work, ChatGPT Plus delivered a model after 45 minutes.",
+            "Outputs: plan of the basement and stair, sections A-A and B-B, check against the source scan, 3D model (Klet_stopnisce_Rhino.3dm)."
+          ],
+          "images": [
+            {
+              "file": "data/s03/s03_v04_01_v1_2026-11-14.jpg",
+              "caption_sl": "Oblak točk kleti in stopnišča",
+              "caption_en": "Point cloud of basement and stair"
+            },
+            {
+              "file": "data/s03/s03_v04_02_v1_2026-11-14.jpg",
+              "caption_sl": "Tloris in vzdolžni prerez iz oblaka",
+              "caption_en": "Plan and longitudinal section from the cloud"
+            },
+            {
+              "file": "data/s03/s03_v04_03_v1_2026-11-14.jpg",
+              "caption_sl": "Tloris kleti in stopnišča",
+              "caption_en": "Plan of basement and stair"
+            },
+            {
+              "file": "data/s03/s03_v04_04_v1_2026-11-14.jpg",
+              "caption_sl": "Prereza A-A in B-B",
+              "caption_en": "Sections A-A and B-B"
+            },
+            {
+              "file": "data/s03/s03_v04_05_v1_2026-11-14.jpg",
+              "caption_sl": "Kontrola z izvornim skenom",
+              "caption_en": "Check against the source scan"
+            },
+            {
+              "file": "data/s03/s03_v04_06_v1_2026-11-14.jpg",
+              "caption_sl": "3D model",
+              "caption_en": "3D model"
+            },
+            {
+              "file": "data/s03/s03_v04_07_v1_2026-11-14.jpg",
+              "caption_sl": "Potek dela",
+              "caption_en": "Workflow"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": []
         }
-      ]
+      ],
+      "cover": "data/s03/s03_v01_01_v1_2026-11-14.jpg"
     },
     {
-      "id": "s04", "display_name": "", "consent_name": false, "avatar_seed": "t9w4-hb63",
-      "phase": 2, "status": "in_progress", "reached_step": 8, "scene": "",
-      "location": { "name": "Zasebni prostori (niso objavljeni)", "name_en": "Private spaces (not published)", "lat": null, "lon": null, "type": "private" },
-      "consent_location_publication": false,
-      "devices": ["Google Pixel 10a"], "lidar": false,
-      "apps": ["Scaniverse", "RealityScan", "KIRI Engine", "3D Live Scanner", "VGGT-Omega", "COLMAP", "Autodesk ReCap", "Rhino", "Blender"],
+      "id": "s04",
+      "display_name": "Robert Medvedec",
+      "consent_name": true,
+      "avatar_seed": "t9w4-hb63",
+      "phase": 2,
+      "status": "in_progress",
+      "reached_step": 8,
+      "scene": "",
+      "location": {
+        "name": "Zasebni prostori (niso objavljeni)",
+        "name_en": "Private spaces (not published)",
+        "lat": null,
+        "lon": null,
+        "type": "private"
+      },
+      "consent_location_publication": true,
+      "devices": [
+        "Google Pixel 10a"
+      ],
+      "lidar": false,
+      "apps": [
+        "Scaniverse",
+        "RealityScan",
+        "KIRI Engine",
+        "3D Live Scanner",
+        "VGGT-Omega",
+        "COLMAP",
+        "Autodesk ReCap",
+        "Rhino",
+        "Blender"
+      ],
       "ai_models": [],
-      "metrics": { "points": null, "median_dev_cm": null, "within_5cm_pct": null, "scale_err_cm": null },
+      "metrics": {
+        "points": null,
+        "median_dev_cm": null,
+        "within_5cm_pct": null,
+        "scale_err_cm": null
+      },
       "measurements": [],
-      "files": { "pointcloud": null, "pointcloud_count": 0, "splat": null, "mesh": null, "model_glb": null, "model_json": null, "plan_svg": null, "sheets": [], "downloads": [] },
+      "files": {
+        "pointcloud": null,
+        "pointcloud_count": 0,
+        "splat": null,
+        "mesh": null,
+        "model_glb": null,
+        "model_json": null,
+        "plan_svg": null,
+        "sheets": [],
+        "downloads": []
+      },
       "worklog": [],
-      "exhibition": { "selected": null, "print": null },
+      "exhibition": {
+        "selected": null,
+        "print": null
+      },
       "text_sl": "Zajem na telefonu brez LiDAR-ja: Scaniverse, metode s fotografijami in videom ter več poskusov rekonstrukcije (VGGT-Omega, COLMAP, ReCap). Na koncu modela in tlorisi v Rhinu.",
       "text_en": "Capture on a phone without LiDAR: Scaniverse, photo and video methods and several reconstruction attempts (VGGT-Omega, COLMAP, ReCap). Finally models and plans in Rhino.",
       "exercises": [
         {
-          "n": 1, "date": "2026-10-22", "steps": [1],
-          "title_sl": "Zajem treh povezanih prostorov", "title_en": "Capture of three connected rooms",
+          "n": 1,
+          "date": "2026-10-22",
+          "steps": [
+            1
+          ],
+          "title_sl": "Zajem treh povezanih prostorov",
+          "title_en": "Capture of three connected rooms",
           "summary_sl": [
             "Kopalnica, hodnik in stopnišče, zajeti s Scaniverse na telefonu brez LiDAR-ja; izvoz OBJ, uvoz v Rhino in Blender deluje.",
             "Kaj ni delovalo: pri zajemu vseh treh prostorov hkrati tretji manjka; zahtevni predmeti (brisače, sanitarna oprema, steklenice) so slabi; aplikacija občasno izgubi orientacijo in zajem je treba ponoviti.",
@@ -262,11 +902,51 @@
             "What did not work: capturing all three rooms at once misses the third; complex objects (towels, sanitary fittings, bottles) are poor; the app sometimes loses orientation and the capture has to be repeated.",
             "Good: the interface shows unscanned areas while capturing."
           ],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "images": [
+            {
+              "file": "data/s04/s04_v01_01_v1_2026-11-14.jpg",
+              "caption_sl": "Kopalnica: sken v Blenderju",
+              "caption_en": "Bathroom: scan in Blender"
+            },
+            {
+              "file": "data/s04/s04_v01_02_v1_2026-11-14.jpg",
+              "caption_sl": "Kopalnica: pogled od znotraj",
+              "caption_en": "Bathroom: view from inside"
+            },
+            {
+              "file": "data/s04/s04_v01_03_v1_2026-11-14.jpg",
+              "caption_sl": "Kopalnica: sken v Rhinu",
+              "caption_en": "Bathroom: scan in Rhino"
+            },
+            {
+              "file": "data/s04/s04_v01_04_v1_2026-11-14.jpg",
+              "caption_sl": "Trije prostori: sken v Blenderju",
+              "caption_en": "Three rooms: scan in Blender"
+            },
+            {
+              "file": "data/s04/s04_v01_05_v1_2026-11-14.jpg",
+              "caption_sl": "Trije prostori: pogled od znotraj",
+              "caption_en": "Three rooms: view from inside"
+            },
+            {
+              "file": "data/s04/s04_v01_06_v1_2026-11-14.jpg",
+              "caption_sl": "Trije prostori: sken v Rhinu",
+              "caption_en": "Three rooms: scan in Rhino"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": []
         },
         {
-          "n": 2, "date": "2026-10-22", "steps": [1],
-          "title_sl": "Metode s fotografijami in videom", "title_en": "Photo and video methods",
+          "n": 2,
+          "date": "2026-10-22",
+          "steps": [
+            1
+          ],
+          "title_sl": "Metode s fotografijami in videom",
+          "title_en": "Photo and video methods",
           "summary_sl": [
             "RealityScan: najboljša kakovost mreže in teksture, a ena stran prostora vedno manjka.",
             "KIRI Engine: samo način za predmete, omogoča merjenje in spremembo merila.",
@@ -277,11 +957,47 @@
             "KIRI Engine: object mode only, allows measuring and rescaling.",
             "3D Live Scanner (open source): best capture interface, hides walls automatically. Sketchfab for viewing."
           ],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "images": [
+            {
+              "file": "data/s04/s04_v02_01_v1_2026-11-14.jpg",
+              "caption_sl": "RealityScan",
+              "caption_en": "RealityScan"
+            },
+            {
+              "file": "data/s04/s04_v02_02_v1_2026-11-14.jpg",
+              "caption_sl": "KIRI Engine",
+              "caption_en": "KIRI Engine"
+            },
+            {
+              "file": "data/s04/s04_v02_03_v1_2026-11-14.jpg",
+              "caption_sl": "KIRI Engine: merjenje",
+              "caption_en": "KIRI Engine: measuring"
+            },
+            {
+              "file": "data/s04/s04_v02_04_v1_2026-11-14.jpg",
+              "caption_sl": "3D Live Scanner",
+              "caption_en": "3D Live Scanner"
+            },
+            {
+              "file": "data/s04/s04_v02_05_v1_2026-11-14.jpg",
+              "caption_sl": "Sketchfab: mreža",
+              "caption_en": "Sketchfab: mesh"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": []
         },
         {
-          "n": 3, "date": "2026-10-28", "steps": [1, 4],
-          "title_sl": "Hodnik z zunanjim stopniščem: rekonstrukcija iz videa", "title_en": "Hallway with an outdoor stair: reconstruction from video",
+          "n": 3,
+          "date": "2026-10-28",
+          "steps": [
+            1,
+            4
+          ],
+          "title_sl": "Hodnik z zunanjim stopniščem: rekonstrukcija iz videa",
+          "title_en": "Hallway with an outdoor stair: reconstruction from video",
           "summary_sl": [
             "Dva videa 4K, 30 fps (počasi ob stenah 2:01, hitreje po sredini 1:14) in več kot 115 fotografij.",
             "Poskusi: CUT3R (namestitev ni uspela), VGGT-Omega (GLB, rezultat neprepoznaven), COLMAP (približno 2 h, kaotično), uvoznik v Blenderju (ne deluje), Autodesk ReCap (napaka strežnika)."
@@ -290,40 +1006,156 @@
             "Two 4K 30 fps videos (slow along the walls 2:01, faster through the middle 1:14) and over 115 photos.",
             "Attempts: CUT3R (installation failed), VGGT-Omega (GLB, unrecognisable result), COLMAP (about 2 h, chaotic), Blender importer (not working), Autodesk ReCap (server error)."
           ],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "images": [
+            {
+              "file": "data/s04/s04_v03_02_v1_2026-11-14.jpg",
+              "caption_sl": "VGGT: rekonstrukcija iz videa",
+              "caption_en": "VGGT: reconstruction from video"
+            },
+            {
+              "file": "data/s04/s04_v03_03_v1_2026-11-14.jpg",
+              "caption_sl": "Kamere in oblak točk",
+              "caption_en": "Cameras and point cloud"
+            },
+            {
+              "file": "data/s04/s04_v03_04_v1_2026-11-14.jpg",
+              "caption_sl": "COLMAP: 115 fotografij",
+              "caption_en": "COLMAP: 115 photos"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": [
+            {
+              "file": "data/s04/s04_v03_01_v1_2026-11-14.mp4",
+              "poster": "data/s04/s04_v03_01_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Izvorni video hodnika",
+              "caption_en": "Source video of the hallway"
+            }
+          ]
         },
         {
-          "n": 4, "date": null, "steps": [7, 8],
-          "title_sl": "Modeli in tlorisi v Rhinu", "title_en": "Models and plans in Rhino",
-          "summary_sl": ["Dva modela v Rhinu in tlorisi (klet, spodnja in zgornja etaža). Dnevnik ni oddan. [vnesi]"],
-          "summary_en": ["Two Rhino models and plans (basement, lower and upper floor). No log submitted. [vnesi]"],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "n": 4,
+          "date": null,
+          "steps": [
+            7,
+            8
+          ],
+          "title_sl": "Modeli in tlorisi v Rhinu",
+          "title_en": "Models and plans in Rhino",
+          "summary_sl": [
+            "Dva modela v Rhinu in tlorisi (klet, spodnja in zgornja etaža). Dnevnik ni oddan. [vnesi]"
+          ],
+          "summary_en": [
+            "Two Rhino models and plans (basement, lower and upper floor). No log submitted. [vnesi]"
+          ],
+          "images": [
+            {
+              "file": "data/s04/s04_v04_01_v1_2026-11-14.jpg",
+              "caption_sl": "Tloris: spodnja etaža",
+              "caption_en": "Plan: lower floor"
+            },
+            {
+              "file": "data/s04/s04_v04_02_v1_2026-11-14.jpg",
+              "caption_sl": "Tloris: zgornja etaža",
+              "caption_en": "Plan: upper floor"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": []
         }
-      ]
+      ],
+      "cover": "data/s04/s04_v01_01_v1_2026-11-14.jpg"
     },
     {
-      "id": "s05", "display_name": "", "consent_name": false, "avatar_seed": "c2j6-ue85",
-      "phase": 1, "status": "in_progress", "reached_step": 8, "scene": "",
-      "location": { "name": "UL FA, klet", "name_en": "UL FA, basement", "lat": 46.0446, "lon": 14.5003, "type": "public" },
-      "consent_location_publication": false,
-      "devices": ["Samsung Galaxy A53"], "lidar": false,
-      "apps": ["Scaniverse", "Polycam", "KIRI Engine", "RealityScan", "FFmpeg", "COLMAP", "CloudCompare", "rhino3dm"],
-      "ai_models": [],
-      "metrics": { "points": 151854, "median_dev_cm": 1.52, "within_5cm_pct": 90.8, "scale_err_cm": null },
-      "measurements": [
-        { "element": "corridor_width", "tape_cm": null, "cloud_cm": 225.8, "model_cm": 224.0 },
-        { "element": "clear_height", "tape_cm": null, "cloud_cm": 251.9, "model_cm": 250.0 },
-        { "element": "passage_width", "tape_cm": null, "cloud_cm": 209.2, "model_cm": 209.0 }
+      "id": "s05",
+      "display_name": "Tomaž Ražen",
+      "consent_name": true,
+      "avatar_seed": "c2j6-ue85",
+      "phase": 1,
+      "status": "in_progress",
+      "reached_step": 8,
+      "scene": "",
+      "location": {
+        "name": "UL FA, klet",
+        "name_en": "UL FA, basement",
+        "lat": 46.0446,
+        "lon": 14.5003,
+        "type": "public"
+      },
+      "consent_location_publication": true,
+      "devices": [
+        "Samsung Galaxy A53"
       ],
-      "files": { "pointcloud": null, "pointcloud_count": 0, "splat": null, "mesh": null, "model_glb": null, "model_json": null, "plan_svg": null, "sheets": [], "downloads": [] },
+      "lidar": false,
+      "apps": [
+        "Scaniverse",
+        "Polycam",
+        "KIRI Engine",
+        "RealityScan",
+        "FFmpeg",
+        "COLMAP",
+        "CloudCompare",
+        "rhino3dm"
+      ],
+      "ai_models": [],
+      "metrics": {
+        "points": 151854,
+        "median_dev_cm": 1.52,
+        "within_5cm_pct": 90.8,
+        "scale_err_cm": null
+      },
+      "measurements": [
+        {
+          "element": "corridor_width",
+          "tape_cm": null,
+          "cloud_cm": 225.8,
+          "model_cm": 224
+        },
+        {
+          "element": "clear_height",
+          "tape_cm": null,
+          "cloud_cm": 251.9,
+          "model_cm": 250
+        },
+        {
+          "element": "passage_width",
+          "tape_cm": null,
+          "cloud_cm": 209.2,
+          "model_cm": 209
+        }
+      ],
+      "files": {
+        "pointcloud": "data/s05/s05_pointcloud_v1_2026-11-14.bin",
+        "pointcloud_count": 59333,
+        "splat": null,
+        "mesh": null,
+        "model_glb": null,
+        "model_json": null,
+        "plan_svg": null,
+        "sheets": [],
+        "downloads": [],
+        "pointcloud_rgb": true
+      },
       "worklog": [],
-      "exhibition": { "selected": null, "print": null },
+      "exhibition": {
+        "selected": null,
+        "print": null
+      },
       "text_sl": "Primerjava aplikacij na telefonu brez LiDAR-ja, rekonstrukcija iz videa s COLMAP in nato celoten postopek na zajemu Študenta 02: čiščenje, lokalni koordinatni sistem, rezi, model iz zaprtih teles in kontrola oblak : model.",
       "text_en": "App comparison on a phone without LiDAR, a video reconstruction with COLMAP and then the full workflow on the capture by Student 02: cleaning, local coordinates, slices, a model of closed solids and a cloud-to-model check.",
       "exercises": [
         {
-          "n": 2, "date": "2026-10-19", "steps": [1],
-          "title_sl": "Stopnišče: primerjava štirih aplikacij", "title_en": "Stairwell: four apps compared",
+          "n": 2,
+          "date": "2026-10-19",
+          "steps": [
+            1
+          ],
+          "title_sl": "Stopnišče: primerjava štirih aplikacij",
+          "title_en": "Stairwell: four apps compared",
           "summary_sl": [
             "Stopnišče stanovanjske stavbe od kleti proti vhodu: Scaniverse 6 min, Polycam 5 min, KIRI Engine 7 min, RealityScan 7 min.",
             "Najboljši in najhitrejši Polycam.",
@@ -334,11 +1166,42 @@
             "Polycam was best and fastest.",
             "What did not work: Scaniverse misses almost half the space without a warning (a repeat does not help); Polycam has no live preview and the free export fails; KIRI Engine does not process; RealityScan builds the model from a single image."
           ],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "images": [
+            {
+              "file": "data/s05/s05_v02_01_v1_2026-11-14.jpg",
+              "caption_sl": "Polycam: najboljši rezultat",
+              "caption_en": "Polycam: best result"
+            },
+            {
+              "file": "data/s05/s05_v02_02_v1_2026-11-14.jpg",
+              "caption_sl": "Scaniverse: manjka skoraj pol prostora",
+              "caption_en": "Scaniverse: almost half the space missing"
+            },
+            {
+              "file": "data/s05/s05_v02_03_v1_2026-11-14.jpg",
+              "caption_sl": "KIRI Engine: obdelava ni uspela",
+              "caption_en": "KIRI Engine: processing failed"
+            },
+            {
+              "file": "data/s05/s05_v02_04_v1_2026-11-14.jpg",
+              "caption_sl": "RealityScan: 102 sliki",
+              "caption_en": "RealityScan: 102 images"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": []
         },
         {
-          "n": 3, "date": "2026-10-20", "steps": [1, 4],
-          "title_sl": "Video v 3D na UL FA", "title_en": "Video to 3D at UL FA",
+          "n": 3,
+          "date": "2026-10-20",
+          "steps": [
+            1,
+            4
+          ],
+          "title_sl": "Video v 3D na UL FA",
+          "title_en": "Video to 3D at UL FA",
           "summary_sl": [
             "Hodnik in prehod v klet UL FA, dva posnetka (približno 29 s in 56 s, 60 fps); en v smeri hoje, drug proti stenam.",
             "FFmpeg 3 sličice na sekundo, 256 slik, COLMAP (srednja kakovost, na procesorju, ker se je obdelava na grafični kartici sesula).",
@@ -351,11 +1214,44 @@
             "Result: two separate sparse clouds (66,168 and 22,405 points), exported as PLY and LAS.",
             "What did not work: the clouds are not reliably aligned, the end of the second video is missing, there are no surfaces, the scale is not set from a measured distance."
           ],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "images": [
+            {
+              "file": "data/s05/s05_v03_03_v1_2026-11-14.jpg",
+              "caption_sl": "COLMAP: poravnava slik",
+              "caption_en": "COLMAP: image registration"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": [
+            {
+              "file": "data/s05/s05_v03_01_v1_2026-11-14.mp4",
+              "poster": "data/s05/s05_v03_01_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Video 1: kamera v smeri hoje",
+              "caption_en": "Video 1: camera facing the walking direction"
+            },
+            {
+              "file": "data/s05/s05_v03_02_v1_2026-11-14.mp4",
+              "poster": "data/s05/s05_v03_02_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Video 2: kamera proti stenam",
+              "caption_en": "Video 2: camera facing the walls"
+            }
+          ]
         },
         {
-          "n": 4, "date": "2026-11-10", "steps": [2, 3, 5, 6, 7, 8],
-          "title_sl": "Obokan hodnik v kleti UL FA: model in kontrola", "title_en": "Vaulted basement corridor at UL FA: model and check",
+          "n": 4,
+          "date": "2026-11-10",
+          "steps": [
+            2,
+            3,
+            5,
+            6,
+            7,
+            8
+          ],
+          "title_sl": "Obokan hodnik v kleti UL FA: model in kontrola",
+          "title_en": "Vaulted basement corridor at UL FA: model and check",
           "summary_sl": [
             "Podatki: zajem Študenta 02 (Scaniverse, 778.087 točk).",
             "CloudCompare: obrez 11,00 m, vzorčenje 1,5 cm, filter SOR, 151.854 točk; lokalni koordinatni sistem (os X vzdolž hodnika po zasuku 2,7°).",
@@ -370,29 +1266,87 @@
             "Cloud-to-model check: median 1.52 cm, 90.8 % of points within 5 cm. No tape measurements attached.",
             "Limits: a shelf hides part of the south wall, closed doors are generalised into the wall plane."
           ],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "images": [
+            {
+              "file": "data/s05/s05_v04_01_v1_2026-11-14.jpg",
+              "caption_sl": "Obokan hodnik v kleti",
+              "caption_en": "Vaulted basement corridor"
+            },
+            {
+              "file": "data/s05/s05_v04_02_v1_2026-11-14.jpg",
+              "caption_sl": "Tloris odseka iz oblaka točk",
+              "caption_en": "Plan of the section from the point cloud"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": []
         }
-      ]
+      ],
+      "cover": "data/s05/s05_v04_01_v1_2026-11-14.jpg"
     },
     {
-      "id": "s06", "display_name": "", "consent_name": false, "avatar_seed": "f8r0-lk12",
-      "phase": 1, "status": "in_progress", "reached_step": 4, "scene": "",
-      "location": { "name": "UL FA, vhod in klet", "name_en": "UL FA, entrance and basement", "lat": 46.0446, "lon": 14.5003, "type": "public" },
-      "consent_location_publication": false,
-      "devices": ["iPhone 14 Pro"], "lidar": true,
-      "apps": ["Scaniverse", "COLMAP", "Meshroom"],
+      "id": "s06",
+      "display_name": "Zeinab Manafi",
+      "consent_name": true,
+      "avatar_seed": "f8r0-lk12",
+      "phase": 1,
+      "status": "in_progress",
+      "reached_step": 4,
+      "scene": "",
+      "location": {
+        "name": "UL FA, vhod in klet",
+        "name_en": "UL FA, entrance and basement",
+        "lat": 46.0446,
+        "lon": 14.5003,
+        "type": "public"
+      },
+      "consent_location_publication": true,
+      "devices": [
+        "iPhone 14 Pro"
+      ],
+      "lidar": true,
+      "apps": [
+        "Scaniverse",
+        "COLMAP",
+        "Meshroom"
+      ],
       "ai_models": [],
-      "metrics": { "points": null, "median_dev_cm": null, "within_5cm_pct": null, "scale_err_cm": null },
+      "metrics": {
+        "points": null,
+        "median_dev_cm": null,
+        "within_5cm_pct": null,
+        "scale_err_cm": null
+      },
       "measurements": [],
-      "files": { "pointcloud": null, "pointcloud_count": 0, "splat": null, "mesh": null, "model_glb": null, "model_json": null, "plan_svg": null, "sheets": [], "downloads": [] },
+      "files": {
+        "pointcloud": null,
+        "pointcloud_count": 0,
+        "splat": null,
+        "mesh": null,
+        "model_glb": null,
+        "model_json": null,
+        "plan_svg": null,
+        "sheets": [],
+        "downloads": []
+      },
       "worklog": [],
-      "exhibition": { "selected": null, "print": null },
+      "exhibition": {
+        "selected": null,
+        "print": null
+      },
       "text_sl": "Zajem s Scaniverse in rekonstrukcija iz videa z Meshroom na poti od vhoda UL FA do kleti. Vmesno poročilo, meritve še niso opravljene.",
       "text_en": "Scaniverse capture and a video reconstruction with Meshroom along the route from the UL FA entrance to the basement. Interim report, measurements not taken yet.",
       "exercises": [
         {
-          "n": 1, "date": "2026-11-04", "steps": [1],
-          "title_sl": "Zajem sobe s Scaniverse", "title_en": "Room capture with Scaniverse",
+          "n": 1,
+          "date": "2026-11-04",
+          "steps": [
+            1
+          ],
+          "title_sl": "Zajem sobe s Scaniverse",
+          "title_en": "Room capture with Scaniverse",
           "summary_sl": [
             "Oddan je le kratek video modela, zato je ocena samo vizualna.",
             "Večji elementi so prepoznavni; zgornji del sten, strop in robovi predmetov manjkajo, nekateri deli so temni."
@@ -401,11 +1355,39 @@
             "Only a short video of the model was submitted, so the assessment is visual only.",
             "Large features are recognisable; upper walls, ceiling and object edges are missing, some parts are dark."
           ],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "images": [
+            {
+              "file": "data/s06/s06_v01_02_v1_2026-11-14.jpg",
+              "caption_sl": "Scaniverse: soba",
+              "caption_en": "Scaniverse: room"
+            },
+            {
+              "file": "data/s06/s06_v01_03_v1_2026-11-14.jpg",
+              "caption_sl": "Scaniverse: soba",
+              "caption_en": "Scaniverse: room"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": [
+            {
+              "file": "data/s06/s06_v01_01_v1_2026-11-14.mp4",
+              "poster": "data/s06/s06_v01_01_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Scaniverse: soba",
+              "caption_en": "Scaniverse: room"
+            }
+          ]
         },
         {
-          "n": 3, "date": "2026-11-02", "steps": [1, 4],
-          "title_sl": "Od vhoda UL FA do kleti: Scaniverse in Meshroom", "title_en": "From the UL FA entrance to the basement: Scaniverse and Meshroom",
+          "n": 3,
+          "date": "2026-11-02",
+          "steps": [
+            1,
+            4
+          ],
+          "title_sl": "Od vhoda UL FA do kleti: Scaniverse in Meshroom",
+          "title_en": "From the UL FA entrance to the basement: Scaniverse and Meshroom",
           "summary_sl": [
             "Dva zajema s Scaniverse (način Mesh, po približno 5 min) in navaden video.",
             "Scaniverse da berljiv pregled poti (luknje in popačeni robovi ostanejo).",
@@ -418,9 +1400,49 @@
             "Meshroom: 303 frames, 84 registered (27.7 %), 62,612 points, a 111,896-triangle mesh of a limited patch of brick wall; a CUDA error fixed with another driver, a black texture fixed by turning off exposure correction.",
             "What did not work: COLMAP closed repeatedly, the full route is not reconstructed, tape measurements not taken yet."
           ],
-          "images": [], "video": null, "mesh": null, "sheet": null
+          "images": [
+            {
+              "file": "data/s06/s06_v03_04_v1_2026-11-14.jpg",
+              "caption_sl": "Pogled od zgoraj",
+              "caption_en": "Top view"
+            },
+            {
+              "file": "data/s06/s06_v03_05_v1_2026-11-14.jpg",
+              "caption_sl": "Scaniverse: pot od vhoda do kleti",
+              "caption_en": "Scaniverse: route from the entrance to the basement"
+            },
+            {
+              "file": "data/s06/s06_v03_06_v1_2026-11-14.jpg",
+              "caption_sl": "Meshroom: obdelava",
+              "caption_en": "Meshroom: processing"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "videos": [
+            {
+              "file": "data/s06/s06_v03_01_v1_2026-11-14.mp4",
+              "poster": "data/s06/s06_v03_01_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Scaniverse: od vhoda do kleti",
+              "caption_en": "Scaniverse: from the entrance to the basement"
+            },
+            {
+              "file": "data/s06/s06_v03_02_v1_2026-11-14.mp4",
+              "poster": "data/s06/s06_v03_02_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Sken in izvorni video",
+              "caption_en": "Scan and source video"
+            },
+            {
+              "file": "data/s06/s06_v03_03_v1_2026-11-14.mp4",
+              "poster": "data/s06/s06_v03_03_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Izvorni video poti",
+              "caption_en": "Source video of the route"
+            }
+          ]
         }
-      ]
+      ],
+      "cover": "data/s06/s06_v03_05_v1_2026-11-14.jpg"
     }
   ]
 }

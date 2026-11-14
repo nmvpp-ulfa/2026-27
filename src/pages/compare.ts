@@ -17,7 +17,7 @@ const p1b = phase1.find((s) => !s.lidar && s.id !== p1a?.id) || students[1] || s
 let A: Student = byId(q.get('a')) || p1a;
 let B: Student = byId(q.get('b')) || p1b;
 let mode: 'side' | 'swipe' = q.get('mode') === 'swipe' ? 'swipe' : 'side';
-let colour: 'height' | 'ab' = 'ab';
+let colour: 'height' | 'ab' | 'rgb' = 'rgb';
 let split = 50;
 let section = 62; // shared cutaway, % of the combined height range; 100 = off
 let zRange: [number, number] = [0, 1];
@@ -53,6 +53,7 @@ function renderControls() {
       <button type="button" class="chip" data-mode="swipe" aria-pressed="${mode === 'swipe'}">${t('cmp.swipe')}</button>
     </div>
     <div class="group" style="display:flex;gap:6px;align-items:center"><span class="label">${t('cmp.colour')}</span>
+      <button type="button" class="chip" data-col="rgb" aria-pressed="${colour === 'rgb'}">${t('layer.rgb')}</button>
       <button type="button" class="chip" data-col="ab" aria-pressed="${colour === 'ab'}">${t('cmp.ab')}</button>
       <button type="button" class="chip" data-col="height" aria-pressed="${colour === 'height'}">${t('cmp.height')}</button>
     </div>
@@ -121,6 +122,7 @@ function applyMode() {
 }
 function applyColour() {
   if (colour === 'ab') { va?.setColor('flat', '#FF5A1F'); vb?.setColor('flat', '#E4E6E1'); }
+  else if (colour === 'rgb') { va?.setColor(va.hasRgb() ? 'rgb' : 'height'); vb?.setColor(vb.hasRgb() ? 'rgb' : 'height'); }
   else { va?.setColor('height'); vb?.setColor('height'); }
 }
 function syncUrl() {
@@ -150,6 +152,7 @@ async function reload() {
   renderMetrics();
   syncUrl();
   try { await Promise.all([load(a, A), load(b, B)]); } catch (e) { console.error(e); }
+  applyColour();
   a.bounds.union(b.bounds);
   if (!a.bounds.isEmpty()) zRange = [a.bounds.min.z, a.bounds.max.z];
   a.fit();

@@ -111,6 +111,8 @@ select.select { height: var(--control-h-sm); background: var(--surface-1); color
 .card-top { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border-bottom: 1px solid var(--line-1); }
 .card-thumb { aspect-ratio: 4 / 3; background: var(--graphite-800); display: grid; place-items: center; padding: 14px; border-bottom: 1px solid var(--line-1); }
 .card-thumb img { width: 100%; height: 100%; object-fit: contain; }
+.card-thumb--cover { padding: 0; overflow: hidden; }
+.card-thumb--cover img { object-fit: cover; }
 .card-body { display: grid; gap: 10px; padding: 12px; }
 .card-name { display: flex; align-items: center; gap: 10px; font: 700 18px/1.1 var(--font-display); }
 .avatar { width: 28px; height: 28px; flex: none; }

@@ -28,7 +28,7 @@ export function cardHtml(s: Student) {
       <span class="label">${s.id.toUpperCase()} // ${t('phase.' + s.phase)}</span>
       ${s.demo ? `<span class="badge badge--demo">${t('demo.tag')}</span>` : ''}
     </div>
-    <div class="card-thumb">${s.files.plan_svg ? `<img src="${url(s.files.plan_svg)}" alt="${lang() === 'sl' ? 'Tloris' : 'Plan'}, ${name}" loading="lazy">` : thumbSteps(s)}</div>
+    <div class="card-thumb${s.cover ? ' card-thumb--cover' : ''}">${s.cover ? `<img src="${url(s.cover)}" alt="${name}" loading="lazy">` : s.files.plan_svg ? `<img src="${url(s.files.plan_svg)}" alt="${lang() === 'sl' ? 'Tloris' : 'Plan'}, ${name}" loading="lazy">` : thumbSteps(s)}</div>
     <div class="card-body">
       <div class="card-name">${avatarSvg(s.avatar_seed)}${name}</div>
       <dl class="kv">
