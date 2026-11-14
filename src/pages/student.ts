@@ -123,7 +123,7 @@ function renderPage(s: Student) {
         <div class="sec-head"><span class="label"><b>03</b> // ${t('st.data')} ${demoBadge(s)}</span></div>
         <div class="metrics">
           <div class="metric"><span class="label">${t('m.points')}</span><span class="v">${s.metrics.points === null ? '—' : int(s.metrics.points)}</span></div>
-          <div class="metric"><span class="label">${t('m.median')}</span><span class="v">${s.metrics.median_dev_cm === null ? '—' : num(s.metrics.median_dev_cm) + '<small>cm</small>'}</span></div>
+          <div class="metric"><span class="label">${t('m.median')}</span><span class="v">${s.metrics.median_dev_cm === null ? '—' : num(s.metrics.median_dev_cm, 2) + '<small>cm</small>'}</span></div>
           <div class="metric"><span class="label">${t('m.within')}</span><span class="v">${s.metrics.within_5cm_pct === null ? '—' : num(s.metrics.within_5cm_pct) + '<small>%</small>'}</span></div>
           <div class="metric"><span class="label">${t('m.scale')}</span><span class="v">${s.metrics.scale_err_cm === null ? '—' : (s.metrics.scale_err_cm >= 0 ? '+' : '') + num(s.metrics.scale_err_cm) + '<small>cm</small>'}</span></div>
         </div>
