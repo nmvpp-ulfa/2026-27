@@ -6,8 +6,14 @@
   },
   "year": "2026/27",
   "holder": "doc. dr. Tomaž Berčič",
-  "faculty": { "sl": "Univerza v Ljubljani, Fakulteta za arhitekturo", "en": "University of Ljubljana, Faculty of Architecture" },
+  "faculty": {
+    "sl": "Univerza v Ljubljani, Fakulteta za arhitekturo",
+    "en": "University of Ljubljana, Faculty of Architecture"
+  },
   "faculty_url": "https://www.fa.uni-lj.si/",
-  "course_url": null,
-  "note": "course_url: link to the official course page; null shows a [vnesi] marker"
+  "course_url": {
+    "sl": "https://www.fa.uni-lj.si/predmet/napredno-modeliranje-in-vizualizacija-prostorskih-podatkov/",
+    "en": "https://www.fa.uni-lj.si/en/predmet/advanced-modelling-and-visualization-of-spatial-data/"
+  },
+  "note": "course_url: official course pages on the UL FA website (sl, en); null shows a [vnesi] marker"
 }

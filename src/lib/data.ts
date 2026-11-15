@@ -22,6 +22,8 @@ export interface Student {
   measurements: Measurement[];
   files: {
     pointcloud: string | null; pointcloud_count: number; pointcloud_rgb?: boolean; splat: string | null; mesh: string | null;
+    pointcloud_caption_sl?: string; pointcloud_caption_en?: string;
+    clouds_extra?: { file: string; count: number; rgb?: boolean; caption_sl: string; caption_en: string }[];
     model_glb: string | null; model_json: string | null; plan_svg: string | null;
     sheets: { week: number; file: string | null }[]; downloads: { type: string; file: string | null }[];
   };
@@ -35,7 +37,7 @@ export const students: Student[] = (studentsData as { students: Student[] }).stu
 export const steps = stepsData as any;
 export const course = courseData as {
   code: string; name: { sl: string; en: string }; year: string; holder: string;
-  faculty: { sl: string; en: string }; faculty_url: string; course_url: string | null;
+  faculty: { sl: string; en: string }; faculty_url: string; course_url: string | { sl: string; en: string } | null;
 };
 export const isDemo = (studentsData as { demo?: boolean }).demo === true;
 

@@ -34,8 +34,10 @@ const logoImg = (cls: string) =>
 // Course facts (name, academic year, holder, course page) from content/course.json.
 export function courseBlock(cls = '') {
   const L = lang();
-  const page = course.course_url
-    ? `<a href="${course.course_url}" target="_blank" rel="noopener">${course.course_url.replace(/^https?:\/\//, '').replace(/\/$/, '')} ↗</a>`
+  const cu = course.course_url;
+  const href = cu === null ? null : typeof cu === 'string' ? cu : cu[L];
+  const page = href
+    ? `<a href="${href}" target="_blank" rel="noopener" title="${href}">${href.replace(/^https?:\/\/(www\.)?/, '').split('/')[0]} ↗</a>`
     : rich('[vnesi]');
   return `<div class="course ${cls}">
     <div class="course-name"><span class="label label--signal">${course.code}</span><b>${course.name[L]}</b></div>

@@ -19,6 +19,7 @@ let viewer: Viewer | null = null;
 const layers = { cloud: true, rgb: true, model: false, deviation: false, mesh: false };
 let measuring = false;
 let section = 62; // default cutaway removes the ceiling so the interior is visible
+let activeCloud = 0; // index into cloudList(): 0 = main cloud (the one the model belongs to)
 const myMeasures: number[] = [];
 
 // Textured meshes, photos and videos show the place itself: only with consent for the location.
@@ -56,8 +57,17 @@ function chip(key: string, pressed: boolean, disabled = false) {
   return `<button type="button" class="chip" data-layer="${key}" aria-pressed="${pressed}"${disabled ? ' disabled' : ''}>${t('layer.' + key)}${disabled ? ` <span class="chip-note">${t('nodata')}</span>` : ''}</button>`;
 }
 
+interface CloudRef { file: string; count: number; rgb: boolean; caption: string }
+function cloudList(s: Student): CloudRef[] {
+  if (!s.files.pointcloud) return [];
+  const main = { file: s.files.pointcloud, count: s.files.pointcloud_count, rgb: !!s.files.pointcloud_rgb, caption: L(s.files, 'pointcloud_caption') || t('layer.cloud') };
+  return [main, ...(s.files.clouds_extra || []).map((c) => ({ file: c.file, count: c.count, rgb: c.rgb !== false, caption: L(c, 'caption') }))];
+}
+
 function renderPage(s: Student) {
   const hasCloud = !!s.files.pointcloud && s.consent_location_publication;
+  const clouds = cloudList(s);
+  const extra = activeCloud > 0; // the generalised model and deviation belong to the main cloud only
   const i = students.indexOf(s);
   const prev = students[(i - 1 + students.length) % students.length];
   const next = students[(i + 1) % students.length];
@@ -88,13 +98,16 @@ function renderPage(s: Student) {
     </div>
 
     <div class="viewer-tools">
+      ${hasCloud && clouds.length > 1 ? `<div class="group"><span class="label">${t('st.cloud')}</span>
+        ${clouds.map((c, k) => `<button type="button" class="chip" data-cloud="${k}" aria-pressed="${k === activeCloud}">${rich(c.caption)}</button>`).join('')}
+      </div>` : ''}
       <div class="group"><span class="label">${t('st.layers')}</span>
         ${chip('cloud', hasCloud && layers.cloud, !hasCloud)}
-        ${chip('rgb', hasCloud && layers.rgb, !hasCloud || !s.files.pointcloud_rgb)}
+        ${chip('rgb', hasCloud && layers.rgb, !hasCloud || !clouds[activeCloud]?.rgb)}
         ${chip('splat', false, !s.files.splat)}
         ${chip('mesh', layers.mesh, !meshOf(s))}
-        ${chip('model', !hasCloud || layers.model, !s.files.model_json)}
-        ${chip('deviation', hasCloud && layers.deviation, !hasCloud || !s.files.model_json)}
+        ${chip('model', !hasCloud || layers.model, !s.files.model_json || extra)}
+        ${chip('deviation', hasCloud && layers.deviation, !hasCloud || !s.files.model_json || extra)}
       </div>
       <div class="group range"><span class="label">${t('st.section')}</span>
         <input type="range" min="0" max="100" value="${section}" id="section" aria-label="${t('st.section')}">
@@ -207,6 +220,27 @@ function bindTools(s: Student, hasCloud: boolean) {
     });
     document.getElementById('devLegend')!.style.display = layers.deviation ? 'flex' : 'none';
     applyLayers(hasCloud);
+  }));
+  document.querySelectorAll<HTMLButtonElement>('[data-cloud]').forEach((b) => b.addEventListener('click', async () => {
+    const k = Number(b.dataset.cloud);
+    const c = cloudList(s)[k];
+    if (!viewer || !c || k === activeCloud) return;
+    document.querySelectorAll<HTMLButtonElement>('[data-cloud]').forEach((x) => { x.disabled = true; x.setAttribute('aria-pressed', String(x === b)); });
+    try {
+      await viewer.replaceCloud(url(c.file), c.count, k === 0);
+      activeCloud = k;
+      layers.cloud = true;
+      if (k > 0) { layers.model = false; layers.deviation = false; }
+      if (!c.rgb) layers.rgb = false;
+    } catch (e) { console.error(e); }
+    myMeasures.length = 0;
+    const y = window.scrollY;
+    renderPage(s); // refresh chip states; the viewer itself is kept
+    window.scrollTo(0, y);
+    applyLayers(hasCloud);
+    viewer.setSection(section >= 100 ? null : section / 100);
+    const sv = document.getElementById('sectionVal');
+    if (sv) sv.textContent = sectionText();
   }));
   const range = document.getElementById('section') as HTMLInputElement;
   const val = document.getElementById('sectionVal')!;

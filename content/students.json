@@ -76,7 +76,25 @@
         "plan_svg": null,
         "sheets": [],
         "downloads": [],
-        "pointcloud_rgb": true
+        "pointcloud_rgb": true,
+        "clouds_extra": [
+          {
+            "file": "data/s01/s01_pointcloud_klet_v1_2026-11-15.bin",
+            "count": 220000,
+            "rgb": true,
+            "caption_sl": "Klet in stopnišče UL FA, cel LiDAR sken",
+            "caption_en": "UL FA basement and stair, full LiDAR scan"
+          },
+          {
+            "file": "data/s01/s01_pointcloud_kafeterija_v1_2026-11-15.bin",
+            "count": 220000,
+            "rgb": true,
+            "caption_sl": "Kafeterija UL FA, LiDAR sken",
+            "caption_en": "UL FA cafeteria, LiDAR scan"
+          }
+        ],
+        "pointcloud_caption_sl": "Klet UL FA, odsek B (vaja 4)",
+        "pointcloud_caption_en": "UL FA basement, section B (exercise 4)"
       },
       "worklog": [],
       "exhibition": {
@@ -186,13 +204,15 @@
             "Trije videoposnetki na UL FA: hodnik, stopnišče v klet, klet in kavarna; tretji tudi z LiDAR-jem (3D Scanner App).",
             "Sličice s ffmpeg, rekonstrukcija s COLMAP, gost oblak z optičnim tokom; skripte s pomočjo Claude.",
             "Najboljši rezultat (širokokotni posnetek, izčrpno ujemanje, približno 15 min): 175 od 175 kamer, 40.236 točk redkega in 50.684 točk gostega oblaka.",
-            "Kaj ni delovalo: posnetki, poslani prek WhatsAppa, so bili stisnjeni s 4K na 464 × 832; model se je pri enobarvnih vratih razdelil na dva dela; stopnišče je bilo v prvem poskusu podvojeno; merilo je samo začasno (privzeta višina telefona 1,45 m), zato ni DXF."
+            "Kaj ni delovalo: posnetki, poslani prek WhatsAppa, so bili stisnjeni s 4K na 464 × 832; model se je pri enobarvnih vratih razdelil na dva dela; stopnišče je bilo v prvem poskusu podvojeno; merilo je samo začasno (privzeta višina telefona 1,45 m), zato ni DXF.",
+            "Surova LiDAR skena kleti s stopniščem in kafeterije UL FA (oddana 15. 11.), na strani kot oblaka točk v pregledovalniku."
           ],
           "summary_en": [
             "Three videos at UL FA: corridor, stair to the basement, basement and cafeteria; the third also with LiDAR (3D Scanner App).",
             "Frames with ffmpeg, reconstruction with COLMAP, dense cloud from optical flow; scripts with help from Claude.",
             "Best result (ultra-wide video, exhaustive matching, about 15 min): 175 of 175 cameras, 40,236 sparse and 50,684 dense points.",
-            "What did not work: videos sent via WhatsApp were compressed from 4K to 464 × 832; the model split in two at a plain door; the stair appeared twice in the first run; the scale is only provisional (assumed phone height 1.45 m), so no DXF."
+            "What did not work: videos sent via WhatsApp were compressed from 4K to 464 × 832; the model split in two at a plain door; the stair appeared twice in the first run; the scale is only provisional (assumed phone height 1.45 m), so no DXF.",
+            "Raw LiDAR scans of the UL FA basement with the stair and of the cafeteria (submitted 15 Nov), shown as point clouds in the viewer."
           ],
           "images": [
             {
@@ -318,7 +338,7 @@
     },
     {
       "id": "s02",
-      "display_name": "Greta",
+      "display_name": "Greta Kočar",
       "consent_name": true,
       "avatar_seed": "m3d8-xa40",
       "phase": 1,
