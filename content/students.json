@@ -585,7 +585,7 @@
     },
     {
       "id": "s03",
-      "display_name": "Liza",
+      "display_name": "Liza Bolha",
       "consent_name": true,
       "avatar_seed": "p5n1-cz27",
       "phase": 2,
@@ -608,7 +608,9 @@
         "Blender",
         "RealityScan",
         "3D Scanner App",
-        "AutoCAD"
+        "AutoCAD",
+        "Scaniverse",
+        "SiteScape"
       ],
       "ai_models": [
         {
@@ -632,23 +634,24 @@
       },
       "measurements": [],
       "files": {
-        "pointcloud": null,
-        "pointcloud_count": 0,
+        "pointcloud": "data/s03/s03_pointcloud_v1_2026-11-14.bin",
+        "pointcloud_count": 220000,
         "splat": null,
         "mesh": null,
         "model_glb": null,
         "model_json": null,
         "plan_svg": null,
         "sheets": [],
-        "downloads": []
+        "downloads": [],
+        "pointcloud_rgb": true
       },
       "worklog": [],
       "exhibition": {
         "selected": null,
         "print": null
       },
-      "text_sl": "Primerjava formatov (splat, mreža, oblak) v treh programih, zajem prehoda med sobama, rekonstrukcija iz videa s Claude in primerjava AI agentov pri tlorisu, prerezu in modelu kleti UL FA.",
-      "text_en": "Formats compared (splat, mesh, cloud) in three programs, a capture of a passage between two rooms, a video reconstruction with Claude, and AI agents compared on the plan, section and model of the UL FA basement.",
+      "text_sl": "Primerjava formatov (splat, mreža, oblak) v treh programih, zajem prehoda med sobama, rekonstrukcija iz videa s Claude, primerjava AI agentov pri tlorisu, prerezu in modelu kleti UL FA ter generaliziran model kleti z načrti 1:50 in kontrolo mer.",
+      "text_en": "Formats compared (splat, mesh, cloud) in three programs, a capture of a passage between two rooms, a video reconstruction with Claude, AI agents compared on the plan, section and model of the UL FA basement, and a generalised basement model with 1:50 drawings and a dimension check.",
       "exercises": [
         {
           "n": 1,
@@ -841,6 +844,47 @@
           "mesh": null,
           "sheet": null,
           "videos": []
+        },
+        {
+          "images": [
+            {
+              "file": "data/s03/s03_v05_01_v1_2026-11-14.jpg",
+              "caption_sl": "Tlorisa kleti in zgornje ravni 1:50",
+              "caption_en": "Plans of the basement and upper level 1:50"
+            },
+            {
+              "file": "data/s03/s03_v05_02_v1_2026-11-14.jpg",
+              "caption_sl": "Prereza A-A in B-B 1:50",
+              "caption_en": "Sections A-A and B-B 1:50"
+            }
+          ],
+          "videos": [],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "n": 5,
+          "date": "2026-11-17",
+          "steps": [
+            2,
+            3,
+            5,
+            7,
+            8
+          ],
+          "title_sl": "Klet UL FA: generaliziran model, tlorisa in prereza 1:50",
+          "title_en": "UL FA basement: generalised model, plans and sections 1:50",
+          "summary_sl": [
+            "Združen oblak dveh LiDAR zajemov (Scaniverse in SiteScape), 1,37 milijona točk, z odstranjeno opremo; tla hodnika so na višini 0.",
+            "Generaliziran model notranjosti (OBJ): obok hodnika kot en valj s polmerom 1,98 m (peta +2,10, teme +2,44), stopnišče s 15 stopnicami (1 × 14,2 cm in 14 × 15,7 cm, nastopna širina 27,6 cm).",
+            "Primerjava mer s trakom, oblakom in modelom: hodnik dolg 21,80 m in širok 2,23 m, razlike med modelom in oblakom največ 1,5 cm (višina vrat).",
+            "Tlorisa kleti in zgornje ravni ter prereza A-A in B-B v merilu 1:50 (PDF in DWG)."
+          ],
+          "summary_en": [
+            "Merged cloud of two LiDAR captures (Scaniverse and SiteScape), 1.37 million points, with furniture removed; the corridor floor is at height 0.",
+            "Generalised interior model (OBJ): the corridor vault as one cylinder with a radius of 1.98 m (springing +2.10, crown +2.44), a stair with 15 risers (1 × 14.2 cm and 14 × 15.7 cm, tread 27.6 cm).",
+            "Dimensions compared from tape, cloud and model: corridor 21.80 m long and 2.23 m wide, model and cloud differ by at most 1.5 cm (door height).",
+            "Plans of the basement and upper level and sections A-A and B-B at 1:50 (PDF and DWG)."
+          ]
         }
       ],
       "cover": "data/s03/s03_v01_01_v1_2026-11-14.jpg"
@@ -886,15 +930,41 @@
       },
       "measurements": [],
       "files": {
-        "pointcloud": null,
-        "pointcloud_count": 0,
+        "pointcloud": "data/s04/s04_pointcloud_v1_2026-11-14.bin",
+        "pointcloud_count": 220000,
         "splat": null,
         "mesh": null,
         "model_glb": null,
         "model_json": null,
         "plan_svg": null,
         "sheets": [],
-        "downloads": []
+        "downloads": [],
+        "pointcloud_rgb": true,
+        "clouds_extra": [
+          {
+            "file": "data/s04/s04_pointcloud_podhod2_v1_2026-11-17.bin",
+            "count": 220000,
+            "rgb": true,
+            "caption_sl": "Podhod, zajem 1.2",
+            "caption_en": "Underpass, capture 1.2"
+          },
+          {
+            "file": "data/s04/s04_pointcloud_garaza1_v1_2026-11-17.bin",
+            "count": 220000,
+            "rgb": true,
+            "caption_sl": "Garaža, zajem 2.1",
+            "caption_en": "Garage, capture 2.1"
+          },
+          {
+            "file": "data/s04/s04_pointcloud_garaza2_v1_2026-11-17.bin",
+            "count": 220000,
+            "rgb": true,
+            "caption_sl": "Garaža, zajem 2.2",
+            "caption_en": "Garage, capture 2.2"
+          }
+        ],
+        "pointcloud_caption_sl": "Podhod, zajem 1.1",
+        "pointcloud_caption_en": "Underpass, capture 1.1"
       },
       "worklog": [],
       "exhibition": {
@@ -1330,7 +1400,9 @@
       "apps": [
         "Scaniverse",
         "COLMAP",
-        "Meshroom"
+        "Meshroom",
+        "CloudCompare",
+        "Rhino"
       ],
       "ai_models": [],
       "metrics": {
@@ -1341,23 +1413,24 @@
       },
       "measurements": [],
       "files": {
-        "pointcloud": null,
-        "pointcloud_count": 0,
+        "pointcloud": "data/s06/s06_pointcloud_v1_2026-11-14.bin",
+        "pointcloud_count": 220000,
         "splat": null,
         "mesh": null,
         "model_glb": null,
         "model_json": null,
         "plan_svg": null,
         "sheets": [],
-        "downloads": []
+        "downloads": [],
+        "pointcloud_rgb": true
       },
       "worklog": [],
       "exhibition": {
         "selected": null,
         "print": null
       },
-      "text_sl": "Zajem s Scaniverse in rekonstrukcija iz videa z Meshroom na poti od vhoda UL FA do kleti. Vmesno poročilo, meritve še niso opravljene.",
-      "text_en": "Scaniverse capture and a video reconstruction with Meshroom along the route from the UL FA entrance to the basement. Interim report, measurements not taken yet.",
+      "text_sl": "Zajem s Scaniverse in rekonstrukcija iz videa z Meshroom na poti od vhoda UL FA do kleti ter očiščen oblak kleti v CloudCompare. Meritve s trakom še niso opravljene.",
+      "text_en": "Capture with Scaniverse and video reconstruction with Meshroom along the route from the UL FA entrance to the basement, and a cleaned basement cloud in CloudCompare. Tape measurements have not been taken yet.",
       "exercises": [
         {
           "n": 1,
@@ -1459,6 +1532,28 @@
               "caption_sl": "Izvorni video poti",
               "caption_en": "Source video of the route"
             }
+          ]
+        },
+        {
+          "images": [],
+          "videos": [],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "n": 4,
+          "date": "2026-11-17",
+          "steps": [
+            2
+          ],
+          "title_sl": "Klet UL FA: čiščenje oblaka v CloudCompare",
+          "title_en": "UL FA basement: cleaning the cloud in CloudCompare",
+          "summary_sl": [
+            "Izhodišče je LiDAR zajem kleti s Scaniverse z dne 2. 11. 2026 (isti zajem, ki ga uporablja Greta Kočar).",
+            "Oblak očiščen v CloudCompare in oddan kot LAS; prikazan je v pregledovalniku oblaka."
+          ],
+          "summary_en": [
+            "The starting point is a LiDAR capture of the basement with Scaniverse from 2 November 2026 (the same capture that Greta Kočar uses).",
+            "The cloud was cleaned in CloudCompare and submitted as LAS; it is shown in the point cloud viewer."
           ]
         }
       ],
