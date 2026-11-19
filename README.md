@@ -58,7 +58,7 @@ docs/screenshots/ slike zaslona za pregled
 
 - `content/students.json` sledi podatkovnemu modelu iz prompta (id, display_name, consent_name, avatar_seed, phase, location, consent_location_publication, devices, apps, ai_models, metrics, files, text_sl, text_en). Dodana polja: `demo`, `status`, `reached_step`, `scene`, `measurements`, `worklog`, `exhibition`, `files.model_json`.
 - Zapisi so resnični: dnevniki, poročila, videi in skeni iz mape `0 results` na SharePointu predmeta (do 10. 11. 2026). Imena, slike, videi in skeni so objavljeni s soglasjem študentov (nosilec, 14. 11. 2026). Zasebni naslovi niso objavljeni.
-- Lizin priimek v oddanem gradivu ni naveden, zato je zapisana samo z imenom.
+- Imena so v `private/apply_media.mjs` (NAMES); priimek Grete Kočar je iz njenega gradiva, priimek Lize Bolha je sporočil nosilec.
 - Pretvorba je lokalna (`private/`, ni objavljeno): `check_new.py` (nove datoteke v mapi 0 results, vsak večer jo zažene načrtovano opravilo), `import_media.py` (slike do 1600 px brez metapodatkov, videi H.264 brez zvoka, oblaki točk), `apply_media.mjs` (zapis v `content/students.json`), `make_story_tb.py` (zgodba).
 - Oblak točk: binarni int16 (mm) + odstopanje (uint8) + barva zajema (uint8 RGB), središče v izhodišču, tla na z = 0.
 - Zgodba na začetni strani: referenčni zajem nosilca, stopnišče do WC v Zlati ladjici. Dva LiDAR skena (Scaniverse, iPhone) sta poravnana na posplošen model v Rhinu (`prostor_stopnisce_model_v1.1_2026-11-01_1.3dm`); zamik skena B v koraku 03 je dejanski zamik, ki ga je dal telefon (42°, približno 9 m). Model v JSON ima mreže po plasteh in obrise.
@@ -66,9 +66,8 @@ docs/screenshots/ slike zaslona za pregled
 ## Odprto
 
 1. Ko bodo oddani posplošeni modeli študentov (GLB ali 3DM), jih dodati v pregledovalnik in primerjavo.
-2. Lizin priimek, če naj bo izpisan.
-3. Čas in "kaj ni delovalo" za korake 01 do 09 (Tomaž, iz referenčnega zajema); drugi `[vnesi]` in `[preveri]` v `content/steps.json`.
-4. `[preveri]` koordinate FA v `scripts/make_demo_data.mjs` (46.0446, 14.5003).
-5. `/student/?id=..` je zdaj poizvedba; prompt predvideva `/student/[id]`. Strani po študentih lahko ustvari gradnja v v0.3.
-6. Dovoljenje skrbnika CGP na UL FA za rabo znaka s pripisom na spletni strani (pogoj uporabe UL).
-7. Zemljevid uporablja ploščice OpenStreetMap (atribucija je prikazana). Za objavo preverite pogoje uporabe ali izberite drug vir ploščic.
+2. Čas in "kaj ni delovalo" za korake 01 do 09 (Tomaž, iz referenčnega zajema); drugi `[vnesi]` in `[preveri]` v `content/steps.json`.
+3. `[preveri]` koordinate FA v `scripts/make_demo_data.mjs` (46.0446, 14.5003).
+4. `/student/?id=..` je zdaj poizvedba; prompt predvideva `/student/[id]`. Strani po študentih lahko ustvari gradnja v v0.3.
+5. Dovoljenje skrbnika CGP na UL FA za rabo znaka s pripisom na spletni strani (pogoj uporabe UL).
+6. Zemljevid uporablja ploščice OpenStreetMap (atribucija je prikazana). Za objavo preverite pogoje uporabe ali izberite drug vir ploščic.
