@@ -1,7 +1,7 @@
 {
   "demo": false,
-  "generated": "2026-11-14",
-  "note": "Real student records with names and media, published with the students' consent (course holder, 2026-11-14). Source: course SharePoint, folder 0 results (logs, reports, videos and scans up to 2026-11-10). Private addresses are not published.",
+  "generated": "2026-11-19",
+  "note": "Real student records with names and media, published with the students' consent (course holder, 2026-11-14). Source: course SharePoint, folder 0 results (logs, reports, videos and scans), checked every evening. Private addresses are not published.",
   "students": [
     {
       "id": "s01",

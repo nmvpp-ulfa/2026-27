@@ -29,7 +29,7 @@ const T: Record<Lang, Record<string, string>> = {
   sl: {
     'nav.story': 'Potek dela', 'nav.atlas': 'Atlas', 'nav.compare': 'Primerjava', 'nav.exhibition': 'Razstava',
     'nav.protocol': 'Protokol', 'nav.about': 'O predmetu',
-    'state.tag': 'Stanje 14. 11. 2026', 'state.bar': 'Prikazan je potek dela študentov po dnevnikih vaj, s slikami, videi in skeni, objavljenimi s soglasjem študentov. Končni izdelki še niso oddani. Prizor na začetni strani je referenčni zajem nosilca predmeta.',
+    'state.tag': 'Stanje', 'state.bar': 'Prikazan je potek dela študentov po dnevnikih vaj, s slikami, videi in skeni, objavljenimi s soglasjem študentov. Končni izdelki še niso oddani. Prizor na začetni strani je referenčni zajem nosilca predmeta.',
     'demo.tag': 'Demo', 'demo.bar': 'Podatki na strani so umetni in prikazujejo samo ogrodje. Končni izdelki študentov še niso oddani.',
     'footer.course': 'Napredno modeliranje in vizualizacija prostorskih podatkov', 'footer.lead': 'Nosilec: doc. dr. Tomaž Berčič',
     'mark.vnesi': 'vnesi', 'mark.preveri': 'preveri',
@@ -73,7 +73,7 @@ const T: Record<Lang, Record<string, string>> = {
   en: {
     'nav.story': 'Workflow', 'nav.atlas': 'Atlas', 'nav.compare': 'Compare', 'nav.exhibition': 'Exhibition',
     'nav.protocol': 'Protocol', 'nav.about': 'About',
-    'state.tag': 'Status 14 Nov 2026', 'state.bar': 'Student work in progress, from the exercise logs, with images, videos and scans published with the students’ consent. Final outputs are not submitted yet. The scene on the home page is the course holder’s reference capture.',
+    'state.tag': 'Status', 'state.bar': 'Student work in progress, from the exercise logs, with images, videos and scans published with the students’ consent. Final outputs are not submitted yet. The scene on the home page is the course holder’s reference capture.',
     'demo.tag': 'Demo', 'demo.bar': 'The data on this site is synthetic and only shows the framework. Final student outputs have not been submitted yet.',
     'footer.course': 'Advanced modelling and visualisation of spatial data', 'footer.lead': 'Course lead: doc. dr. Tomaž Berčič',
     'mark.vnesi': 'to enter', 'mark.preveri': 'to verify',

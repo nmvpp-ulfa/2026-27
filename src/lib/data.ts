@@ -40,6 +40,8 @@ export const course = courseData as {
   faculty: { sl: string; en: string }; faculty_url: string; course_url: string | { sl: string; en: string } | null;
 };
 export const isDemo = (studentsData as { demo?: boolean }).demo === true;
+// date of the last data update (YYYY-MM-DD), shown in the status bar
+export const generated = (studentsData as { generated?: string }).generated ?? null;
 
 // Path from the current page to the site root ("." or ".."), set on <html data-root>.
 export const root = () => document.documentElement.dataset.root || '.';

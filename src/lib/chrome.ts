@@ -1,6 +1,6 @@
 // Shared header, demo bar and footer.
 import { initLang, lang, onLang, setLang, t, type Lang } from './i18n';
-import { course, isDemo, rich, url } from './data';
+import { course, generated, isDemo, rich, url } from './data';
 import { motionOn, onMotion, setMotion } from './motion';
 
 // Student cards tilt towards the pointer (delegated, works for cards rendered later).
@@ -30,6 +30,15 @@ type Page = 'story' | 'atlas' | 'compare' | 'student';
 const logoSrc = () => `brand/ul_fa_logo_hor_white_${lang() === 'en' ? 'en' : 'sl'}_v1_2026-11-11.png`;
 const logoImg = (cls: string) =>
   `<img class="${cls}" src="${url(logoSrc())}" alt="${t('uni.ul')}, ${t('uni.fa')}" hidden onload="this.hidden=false;this.parentElement.classList.add('has-logo')" onerror="this.remove()">`;
+
+// "Stanje 19. 11. 2026" / "Status 19 Nov 2026" from the date of the last data update.
+const MONTHS_EN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+function stateTag() {
+  const m = generated?.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!m) return t('state.tag');
+  const [y, mo, d] = [m[1], Number(m[2]), Number(m[3])];
+  return lang() === 'en' ? `${t('state.tag')} ${d} ${MONTHS_EN[mo - 1]} ${y}` : `${t('state.tag')} ${d}. ${mo}. ${y}`;
+}
 
 // Course facts (name, academic year, holder, course page) from content/course.json.
 export function courseBlock(cls = '') {
@@ -87,7 +96,7 @@ export function mountChrome(page: Page) {
     hdr.querySelector('.motion-tg')!.addEventListener('click', () => setMotion(!motionOn()));
     demo.innerHTML = isDemo
       ? `<div class="wrap"><strong>${t('demo.tag')} //</strong><span>${t('demo.bar')}</span></div>`
-      : `<div class="wrap"><strong>${t('state.tag')} //</strong><span>${t('state.bar')}</span></div>`;
+      : `<div class="wrap"><strong>${stateTag()} //</strong><span>${t('state.bar')}</span></div>`;
     ftr.innerHTML = `<div class="wrap ftr-uni">
       ${courseBlock('ftr-course')}
       <a class="uni" href="${course.faculty_url}">${logoImg('uni-logo')}<span class="uni-txt"><b>${t('uni.ul')}</b><span>${t('uni.fa')}</span></span></a>
