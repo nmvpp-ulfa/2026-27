@@ -1230,14 +1230,14 @@
           "title_sl": "Lastna lokacija: podhoda ob Slovenski cesti",
           "title_en": "Own location: two underpasses by Slovenska cesta",
           "summary_sl": [
-            "Štirje LiDAR zajemi s Scaniverse (iPhone), oddani 17. 11. 2026: Plečnikov podhod pod Slovensko cesto (zajema 1.1 in 1.2) in podhod pri bukvarni (zajema 2.1 in 2.2).",
+            "Štirje LiDAR zajemi s Scaniverse, ki jih je s telefonom iPhone 18 Pro posnel nosilec predmeta, oddani 17. 11. 2026: Plečnikov podhod pod Slovensko cesto (zajema 1.1 in 1.2) in podhod pri bukvarni (zajema 2.1 in 2.2).",
             "Zajemi so georeferencirani; v pregledovalniku jih izberete nad oblakom točk.",
-            "Dnevnik še ni oddan. [vnesi]"
+            "Dnevnik obdelave še ni oddan. [vnesi]"
           ],
           "summary_en": [
-            "Four LiDAR captures with Scaniverse (iPhone), submitted 17 Nov 2026: the Plečnik underpass below Slovenska cesta (captures 1.1 and 1.2) and the underpass by the second-hand bookshop (captures 2.1 and 2.2).",
+            "Four LiDAR captures with Scaniverse, taken by the course holder with an iPhone 18 Pro and submitted on 17 Nov 2026: the Plečnik underpass below Slovenska cesta (captures 1.1 and 1.2) and the underpass by the second-hand bookshop (captures 2.1 and 2.2).",
             "The captures are georeferenced; choose them above the point cloud in the viewer.",
-            "No log submitted yet. [vnesi]"
+            "No processing log submitted yet. [vnesi]"
           ],
           "images": [],
           "videos": [],
@@ -1324,7 +1324,7 @@
       ],
       "files": {
         "pointcloud": "data/s05/s05_pointcloud_v1_2026-11-14.bin",
-        "pointcloud_count": 59333,
+        "pointcloud_count": 57859,
         "splat": null,
         "mesh": null,
         "model_glb": null,
