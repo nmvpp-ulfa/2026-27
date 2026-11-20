@@ -122,7 +122,13 @@ function renderPage(s: Student) {
         <span class="label">${t('dev.legend')}</span><span class="data">0</span><span class="bar"></span><span class="data">5 cm</span>
       </div>
     </div>
-    <div class="viewer st-viewer" id="viewer"><div class="viewer-poster">${lang() === 'sl' ? 'Nalaganje' : 'Loading'}</div></div>
+    <div class="viewer-wrap">
+      <div class="viewer st-viewer" id="viewer"><div class="viewer-poster">${lang() === 'sl' ? 'Nalaganje' : 'Loading'}</div></div>
+      <nav class="viewer-nav" aria-label="${t('st.prev')} / ${t('st.next')}">
+        <a href="${url('student/?id=' + prev.id)}" title="${t('st.prev')}: ${label(prev)}">← <span>${label(prev)}</span></a>
+        <a href="${url('student/?id=' + next.id)}" title="${t('st.next')}: ${label(next)}"><span>${label(next)}</span> →</a>
+      </nav>
+    </div>
     ${hasCloud ? '' : `<p class="notice" style="margin-top:12px">${t('st.noConsentLoc')}</p>`}
 
     <div class="st-grid">

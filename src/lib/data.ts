@@ -16,6 +16,8 @@ export interface Student {
   id: string; demo?: boolean; cover?: string; display_name: string; consent_name: boolean; avatar_seed: string;
   phase: number; status: string; reached_step: number; scene: string;
   location: { name: string; name_en?: string; lat: number | null; lon: number | null; type: string };
+  // further capture sites (own location for the final work); planned = from the sign-up sheet, not captured yet
+  sites?: { name: string; name_en?: string; lat: number; lon: number; status: 'captured' | 'planned' }[];
   consent_location_publication: boolean; devices: string[]; lidar: boolean | null; apps: string[];
   ai_models: { name: string; reached_step: number }[];
   metrics: { points: number | null; median_dev_cm: number | null; within_5cm_pct: number | null; scale_err_cm: number | null };

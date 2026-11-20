@@ -1,6 +1,6 @@
 {
   "demo": false,
-  "generated": "2026-11-19",
+  "generated": "2026-11-20",
   "note": "Real student records with names and media, published with the students' consent (course holder, 2026-11-14). Source: course SharePoint, folder 0 results (logs, reports, videos and scans), checked every evening. Private addresses are not published.",
   "students": [
     {
@@ -357,7 +357,23 @@
           "videos": []
         }
       ],
-      "cover": "data/s01/s01_v01_03_v1_2026-11-14.jpg"
+      "cover": "data/s01/s01_v01_03_v1_2026-11-14.jpg",
+      "sites": [
+        {
+          "name": "Mestni muzej Ljubljana",
+          "name_en": "City Museum of Ljubljana",
+          "lat": 46.04697,
+          "lon": 14.50406,
+          "status": "captured"
+        },
+        {
+          "name": "Moderna galerija",
+          "name_en": "Museum of Modern Art",
+          "lat": 46.05297,
+          "lon": 14.49876,
+          "status": "captured"
+        }
+      ]
     },
     {
       "id": "s02",
@@ -604,7 +620,16 @@
           "videos": []
         }
       ],
-      "cover": "data/s02/s02_v03_01_v1_2026-11-14.jpg"
+      "cover": "data/s02/s02_v03_01_v1_2026-11-14.jpg",
+      "sites": [
+        {
+          "name": "Cerkev sv. Jakoba, kripta",
+          "name_en": "St James Church, crypt",
+          "lat": 46.04613,
+          "lon": 14.50737,
+          "status": "planned"
+        }
+      ]
     },
     {
       "id": "s03",
@@ -917,7 +942,16 @@
           ]
         }
       ],
-      "cover": "data/s03/s03_v01_01_v1_2026-11-14.jpg"
+      "cover": "data/s03/s03_v01_01_v1_2026-11-14.jpg",
+      "sites": [
+        {
+          "name": "UKC Ljubljana, tuneli",
+          "name_en": "UKC Ljubljana, tunnels",
+          "lat": 46.05412,
+          "lon": 14.52115,
+          "status": "planned"
+        }
+      ]
     },
     {
       "id": "s04",

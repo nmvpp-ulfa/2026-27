@@ -5,7 +5,7 @@ import '../styles/pages.css';
 // Leaflet 1.9 has no "module" field; import its ES build directly.
 import * as L from 'leaflet/dist/leaflet-src.esm.js';
 import { mountChrome } from '../lib/chrome';
-import { onLang, t } from '../lib/i18n';
+import { lang, onLang, t } from '../lib/i18n';
 import { label, students, url, type Student, hasCoords } from '../lib/data';
 import { cardHtml } from '../lib/cards';
 
@@ -16,9 +16,15 @@ const params = new URLSearchParams(location.search);
 for (const k of Object.keys(state)) if (params.get(k)) state[k] = params.get(k)!;
 
 // site = building or place, the part of the location name before the comma (UL FA, klet -> UL FA)
-const site = (s: Student) => s.location.name.split(',')[0].trim();
+const siteOf = (name: string) => name.split(',')[0].trim();
+interface Place { name: string; en: string; lat: number; lon: number; status: 'captured' | 'planned' }
+// every place of a student: the main location of the exercises and further capture sites
+const places = (s: Student): Place[] => [
+  ...(hasCoords(s) ? [{ name: siteOf(s.location.name), en: siteOf(s.location.name_en || s.location.name), lat: s.location.lat as number, lon: s.location.lon as number, status: 'captured' as const }] : []),
+  ...(s.sites || []).map((p) => ({ name: siteOf(p.name), en: siteOf(p.name_en || p.name), lat: p.lat, lon: p.lon, status: p.status })),
+];
 const match = (s: Student) =>
-  (state.location === 'all' || site(s) === state.location) &&
+  (state.location === 'all' || places(s).some((p) => p.name === state.location)) &&
   (state.device === 'all' || (state.device === 'lidar') === s.lidar) &&
   (state.phase === 'all' || String(s.phase) === state.phase) &&
   (state.status === 'all' || s.status === state.status);
@@ -36,29 +42,36 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
-const groups = new Map<string, Student[]>();
-for (const s of students.filter(hasCoords)) groups.set(site(s), [...(groups.get(site(s)) || []), s]);
-const markers: { name: string; m: L.Marker; list: Student[] }[] = [];
-for (const [name, list] of groups) {
-  const lat = list[0].location.lat as number, lon = list[0].location.lon as number;
-  const m = L.marker([lat, lon], { icon: L.divIcon({ className: '', html: '', iconSize: [0, 0] }) }).addTo(map);
-  markers.push({ name, m, list });
+interface Group { place: Place; entries: { s: Student; status: Place['status'] }[] }
+const groups = new Map<string, Group>();
+for (const s of students) for (const p of places(s)) {
+  const g = groups.get(p.name) || { place: p, entries: [] };
+  if (!g.entries.some((e) => e.s === s)) g.entries.push({ s, status: p.status });
+  groups.set(p.name, g);
+}
+const markers: { g: Group; m: L.Marker }[] = [];
+for (const g of groups.values()) {
+  const m = L.marker([g.place.lat, g.place.lon], { icon: L.divIcon({ className: '', html: '', iconSize: [0, 0] }) }).addTo(map);
+  markers.push({ g, m });
 }
 {
-  const uniq = new Map(students.filter(hasCoords).map((s) => [`${s.location.lat},${s.location.lon}`, [s.location.lat, s.location.lon] as [number, number]]));
-  const pts = [...uniq.values()];
-  if (pts.length > 1) map.fitBounds(L.latLngBounds(pts).pad(0.6));
+  const pts = [...groups.values()].map((g) => [g.place.lat, g.place.lon] as [number, number]);
+  // pin labels run to the right of the pin: keep more room on the right edge
+  if (pts.length > 1) map.fitBounds(L.latLngBounds(pts), { paddingTopLeft: [40, 40], paddingBottomRight: [230, 40] });
   else if (pts.length === 1) map.setView(pts[0], 15);
 }
 
 function renderMarkers() {
-  for (const { name, m, list } of markers) {
-    const on = list.filter(match);
+  for (const { g, m } of markers) {
+    const on = g.entries.filter((e) => match(e.s));
+    const planned = g.entries.every((e) => e.status === 'planned');
+    const name = lang() === 'en' ? g.place.en : g.place.name;
     m.setIcon(L.divIcon({
       className: '', iconAnchor: [13, 13],
-      html: `<div class="pin${on.length ? '' : ' dim'}"><b>${on.length}</b><span>${name}</span></div>`,
+      html: `<div class="pin${on.length ? '' : ' dim'}${planned ? ' pin--plan' : ''}"><b>${on.length}</b><span>${name}${planned ? ` // ${t('atlas.planned')}` : ''}</span></div>`,
     }));
-    m.bindPopup(`<div class="label">${name}</div>${list.map((s) => `<a href="${url('student/?id=' + s.id)}">${s.id.toUpperCase()} // ${label(s)}</a>`).join('')}`);
+    m.bindPopup(`<div class="label">${name}</div>${g.entries.map(({ s, status }) =>
+      `<a href="${url('student/?id=' + s.id)}">${s.id.toUpperCase()} // ${label(s)}${status === 'planned' ? ` <span class="pop-tag">${t('atlas.planned')}</span>` : ''}</a>`).join('')}`);
   }
 }
 
