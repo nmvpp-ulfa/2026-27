@@ -108,10 +108,9 @@
 .pin.pin--plan b { background: rgba(12, 13, 14, .9); color: var(--orange-500); border: 1px dashed var(--orange-500); }
 .pop-tag { margin-left: 4px; color: var(--orange-500); font: 400 10px/1 var(--font-mono); text-transform: uppercase; letter-spacing: var(--tracking-mono); }
 
-/* student page: previous / next student over the bottom right corner of the main viewer */
+/* student page: previous / next student right below the main viewer, aligned to its right edge */
 .viewer-wrap { position: relative; }
-.viewer-nav { position: absolute; right: 12px; bottom: 12px; z-index: 3; display: flex; gap: 6px; }
-.viewer-nav a { display: inline-flex; align-items: center; gap: 6px; max-width: 220px; padding: 7px 10px; background: rgba(12, 13, 14, .82); border: 1px solid var(--line-2); color: var(--fg-1); font: 400 11px/1.2 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; text-decoration: none; backdrop-filter: blur(4px); }
+.viewer-nav { display: flex; justify-content: flex-end; gap: 6px; margin-top: 8px; }
+.viewer-nav a { display: inline-flex; align-items: center; gap: 6px; min-width: 0; max-width: 50%; padding: 7px 10px; background: var(--graphite-800); border: 1px solid var(--line-2); color: var(--fg-1); font: 400 11px/1.2 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; text-decoration: none; }
 .viewer-nav a span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .viewer-nav a:hover, .viewer-nav a:focus-visible { border-color: var(--orange-500); color: var(--orange-500); }
-@media (max-width: 640px) { .viewer-nav a span { display: none; } }
