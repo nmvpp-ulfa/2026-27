@@ -67,7 +67,6 @@ docs/screenshots/ slike zaslona za pregled
 
 1. Ko bodo oddani posplošeni modeli študentov (GLB ali 3DM), jih dodati v pregledovalnik in primerjavo.
 2. Čas in "kaj ni delovalo" za korake 01 do 09 (Tomaž, iz referenčnega zajema); drugi `[vnesi]` in `[preveri]` v `content/steps.json`.
-3. `[preveri]` koordinate FA v `scripts/make_demo_data.mjs` (46.0446, 14.5003).
-4. `/student/?id=..` je zdaj poizvedba; prompt predvideva `/student/[id]`. Strani po študentih lahko ustvari gradnja v v0.3.
-5. Dovoljenje skrbnika CGP na UL FA za rabo znaka s pripisom na spletni strani (pogoj uporabe UL).
-6. Zemljevid uporablja ploščice OpenStreetMap (atribucija je prikazana). Za objavo preverite pogoje uporabe ali izberite drug vir ploščic.
+3. `/student/?id=..` je zdaj poizvedba; prompt predvideva `/student/[id]`. Strani po študentih lahko ustvari gradnja v v0.3.
+4. Dovoljenje skrbnika CGP na UL FA za rabo znaka s pripisom na spletni strani (pogoj uporabe UL).
+5. Zemljevid uporablja ploščice OpenStreetMap (atribucija je prikazana). Za objavo preverite pogoje uporabe ali izberite drug vir ploščic.

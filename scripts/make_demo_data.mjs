@@ -353,7 +353,7 @@ for (const [k, sc] of Object.entries(scenes)) {
 }
 
 // Demo students. All anonymous, all values computed from synthetic data, all marked demo.
-const FA = { name: 'UL FA, Zoisova 12', lat: 46.0446, lon: 14.5003, type: 'fa' };
+const FA = { name: 'UL FA, Zoisova 12', lat: 46.04573, lon: 14.50388, type: 'fa' };
 const profiles = [
   { id: 's01', scene: 'stair', phase: 1, lidar: true, N: 110000, sigma: 0.005, scale: 1.0015, gaps: [], reached: 7, loc: FA },
   { id: 's02', scene: 'stair', phase: 1, lidar: true, N: 100000, sigma: 0.007, scale: 0.998, gaps: [{ c: [1.0, 3.5, 5.6], r: 1.4 }], reached: 6, loc: FA },

@@ -15,8 +15,8 @@
       "location": {
         "name": "UL FA, klet",
         "name_en": "UL FA, basement",
-        "lat": 46.0446,
-        "lon": 14.5003,
+        "lat": 46.04573,
+        "lon": 14.50388,
         "type": "public"
       },
       "consent_location_publication": true,
@@ -387,8 +387,8 @@
       "location": {
         "name": "UL FA, pritličje in klet",
         "name_en": "UL FA, ground floor and basement",
-        "lat": 46.0446,
-        "lon": 14.5003,
+        "lat": 46.04573,
+        "lon": 14.50388,
         "type": "public"
       },
       "consent_location_publication": true,
@@ -643,8 +643,8 @@
       "location": {
         "name": "UL FA, pritličje in klet",
         "name_en": "UL FA, ground floor and basement",
-        "lat": 46.0446,
-        "lon": 14.5003,
+        "lat": 46.04573,
+        "lon": 14.50388,
         "type": "public"
       },
       "consent_location_publication": true,
@@ -1009,26 +1009,26 @@
             "file": "data/s04/s04_pointcloud_podhod2_v1_2026-11-17.bin",
             "count": 220000,
             "rgb": true,
-            "caption_sl": "Podhod, zajem 1.2",
-            "caption_en": "Underpass, capture 1.2"
+            "caption_sl": "Plečnikov podhod pod Slovensko cesto, zajem 1.2",
+            "caption_en": "Plečnik underpass below Slovenska cesta, capture 1.2"
           },
           {
             "file": "data/s04/s04_pointcloud_garaza1_v1_2026-11-17.bin",
             "count": 220000,
             "rgb": true,
-            "caption_sl": "Garaža, zajem 2.1",
-            "caption_en": "Garage, capture 2.1"
+            "caption_sl": "Podhod pri bukvarni, zajem 2.1",
+            "caption_en": "Underpass by the second-hand bookshop, capture 2.1"
           },
           {
             "file": "data/s04/s04_pointcloud_garaza2_v1_2026-11-17.bin",
             "count": 220000,
             "rgb": true,
-            "caption_sl": "Garaža, zajem 2.2",
-            "caption_en": "Garage, capture 2.2"
+            "caption_sl": "Podhod pri bukvarni, zajem 2.2",
+            "caption_en": "Underpass by the second-hand bookshop, capture 2.2"
           }
         ],
-        "pointcloud_caption_sl": "Podhod, zajem 1.1",
-        "pointcloud_caption_en": "Underpass, capture 1.1"
+        "pointcloud_caption_sl": "Plečnikov podhod pod Slovensko cesto, zajem 1.1",
+        "pointcloud_caption_en": "Plečnik underpass below Slovenska cesta, capture 1.1"
       },
       "worklog": [],
       "exhibition": {
@@ -1220,9 +1220,49 @@
           "mesh": null,
           "sheet": null,
           "videos": []
+        },
+        {
+          "n": 5,
+          "date": "2026-11-17",
+          "steps": [
+            1
+          ],
+          "title_sl": "Lastna lokacija: podhoda ob Slovenski cesti",
+          "title_en": "Own location: two underpasses by Slovenska cesta",
+          "summary_sl": [
+            "Štirje LiDAR zajemi s Scaniverse (iPhone), oddani 17. 11. 2026: Plečnikov podhod pod Slovensko cesto (zajema 1.1 in 1.2) in podhod pri bukvarni (zajema 2.1 in 2.2).",
+            "Zajemi so georeferencirani; v pregledovalniku jih izberete nad oblakom točk.",
+            "Dnevnik še ni oddan. [vnesi]"
+          ],
+          "summary_en": [
+            "Four LiDAR captures with Scaniverse (iPhone), submitted 17 Nov 2026: the Plečnik underpass below Slovenska cesta (captures 1.1 and 1.2) and the underpass by the second-hand bookshop (captures 2.1 and 2.2).",
+            "The captures are georeferenced; choose them above the point cloud in the viewer.",
+            "No log submitted yet. [vnesi]"
+          ],
+          "images": [],
+          "videos": [],
+          "video": null,
+          "mesh": null,
+          "sheet": null
         }
       ],
-      "cover": "data/s04/s04_v01_01_v1_2026-11-14.jpg"
+      "cover": "data/s04/s04_v01_01_v1_2026-11-14.jpg",
+      "sites": [
+        {
+          "name": "Plečnikov podhod pod Slovensko cesto",
+          "name_en": "Plečnik underpass below Slovenska cesta",
+          "lat": 46.05042,
+          "lon": 14.50269,
+          "status": "captured"
+        },
+        {
+          "name": "Podhod pri bukvarni",
+          "name_en": "Underpass by the second-hand bookshop",
+          "lat": 46.04977,
+          "lon": 14.50276,
+          "status": "captured"
+        }
+      ]
     },
     {
       "id": "s05",
@@ -1236,8 +1276,8 @@
       "location": {
         "name": "UL FA, klet",
         "name_en": "UL FA, basement",
-        "lat": 46.0446,
-        "lon": 14.5003,
+        "lat": 46.04573,
+        "lon": 14.50388,
         "type": "public"
       },
       "consent_location_publication": true,
@@ -1452,8 +1492,8 @@
       "location": {
         "name": "UL FA, vhod in klet",
         "name_en": "UL FA, entrance and basement",
-        "lat": 46.0446,
-        "lon": 14.5003,
+        "lat": 46.04573,
+        "lon": 14.50388,
         "type": "public"
       },
       "consent_location_publication": true,
