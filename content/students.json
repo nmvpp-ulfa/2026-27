@@ -1,6 +1,6 @@
 {
   "demo": false,
-  "generated": "2026-11-22",
+  "generated": "2026-11-24",
   "note": "Real student records with names and media, published with the students' consent (course holder, 2026-11-14). Source: course SharePoint, folder 0 results (logs, reports, videos and scans), checked every evening. Private addresses are not published.",
   "students": [
     {
@@ -10,7 +10,7 @@
       "avatar_seed": "k7q2-rv91",
       "phase": 1,
       "status": "in_progress",
-      "reached_step": 8,
+      "reached_step": 9,
       "scene": "",
       "location": {
         "name": "UL FA, klet",
@@ -37,7 +37,7 @@
       "ai_models": [
         {
           "name": "Claude",
-          "reached_step": 8
+          "reached_step": 9
         }
       ],
       "metrics": {
@@ -93,18 +93,11 @@
             "caption_en": "UL FA cafeteria, LiDAR scan"
           },
           {
-            "file": "data/s01/s01_pointcloud_muzej1_v1_2026-11-18.bin",
-            "count": 53395,
+            "file": "data/s01/s01_pointcloud_muzej_v1_2026-11-22.bin",
+            "count": 45115,
             "rgb": true,
-            "caption_sl": "Mestni muzej, surovi zajem 1",
-            "caption_en": "City Museum, raw capture 1"
-          },
-          {
-            "file": "data/s01/s01_pointcloud_muzej2_v1_2026-11-18.bin",
-            "count": 61333,
-            "rgb": true,
-            "caption_sl": "Mestni muzej, surovi zajem 2",
-            "caption_en": "City Museum, raw capture 2"
+            "caption_sl": "Mestni muzej, poravnan oblak dveh skenov (iPhone 17 brez LiDAR-ja)",
+            "caption_en": "City Museum, aligned cloud of two scans (iPhone 17 without LiDAR)"
           },
           {
             "file": "data/s01/s01_pointcloud_moderna1_v1_2026-11-18.bin",
@@ -355,6 +348,99 @@
           "mesh": null,
           "sheet": null,
           "videos": []
+        },
+        {
+          "n": 5,
+          "images": [
+            {
+              "file": "data/s01/s01_v05_01_v1_2026-11-14.jpg",
+              "caption_sl": "Posplošen zaprt model (strop skrit), niša vijolično",
+              "caption_en": "Generalised closed model (ceiling hidden), niche in purple"
+            },
+            {
+              "file": "data/s01/s01_v05_02_v1_2026-11-14.jpg",
+              "caption_sl": "Odstopanje oblaka od modela, mediana 13,6 cm",
+              "caption_en": "Cloud to model deviation, median 13.6 cm"
+            },
+            {
+              "file": "data/s01/s01_v05_03_v1_2026-11-14.jpg",
+              "caption_sl": "Tlorisa 1:50: spodnji hodnik (rez +1,10) in preddverje (rez +4,05)",
+              "caption_en": "Plans 1:50: lower corridor (cut +1.10) and foyer (cut +4.05)"
+            },
+            {
+              "file": "data/s01/s01_v05_04_v1_2026-11-14.jpg",
+              "caption_sl": "Prereza A-A in B-B 1:50, sivo oblak točk, črno model",
+              "caption_en": "Sections A-A and B-B 1:50, grey point cloud, black model"
+            },
+            {
+              "file": "data/s01/s01_v05_05_v1_2026-11-14.jpg",
+              "caption_sl": "Pot telefona iz videa 1 na tlorisu",
+              "caption_en": "Phone path from video 1 on the plan"
+            },
+            {
+              "file": "data/s01/s01_v05_06_v1_2026-11-14.jpg",
+              "caption_sl": "Skica poti skozi muzej z izmerjenimi elementi",
+              "caption_en": "Sketch of the route through the museum with the measured elements"
+            },
+            {
+              "file": "data/s01/s01_v05_07_v1_2026-11-14.jpg",
+              "caption_sl": "Kamniti lok ob vznožju stopnic",
+              "caption_en": "Stone arch at the foot of the stair"
+            },
+            {
+              "file": "data/s01/s01_v05_08_v1_2026-11-14.jpg",
+              "caption_sl": "Spodnji hodnik: dva loka zaporedno",
+              "caption_en": "Lower corridor: two arches in a row"
+            },
+            {
+              "file": "data/s01/s01_v05_09_v1_2026-11-14.jpg",
+              "caption_sl": "Pogled po stopnicah navzdol",
+              "caption_en": "View down the stair"
+            }
+          ],
+          "videos": [
+            {
+              "file": "data/s01/s01_v05_10_v1_2026-11-14.mp4",
+              "poster": "data/s01/s01_v05_10_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Video 1: pot telefona na tlorisu (COLMAP)",
+              "caption_en": "Video 1: phone path on the plan (COLMAP)"
+            },
+            {
+              "file": "data/s01/s01_v05_11_v1_2026-11-14.mp4",
+              "poster": "data/s01/s01_v05_11_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Video 1: od preddverja po stopnicah v spodnji hodnik",
+              "caption_en": "Video 1: from the foyer down the stair to the lower corridor"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "date": "2026-11-17",
+          "steps": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "title_sl": "Mestni muzej: od zajema brez LiDAR-ja do modela in pota iz videa",
+          "title_en": "City Museum: from a capture without LiDAR to a model and a path from video",
+          "summary_sl": [
+            "Zajem 17. 11. 2026 skupaj z Lizo, približno 20 minut: preddverje s stekleno ograjo, stopnišče, spodnji hodnik z lokom in niša pod stopnicami; iPhone 17 brez LiDAR-ja (Kamera, Scaniverse, Merjenje), 3 videi in 2 skena.",
+            "Mere s trakom in aplikacijo Merjenje, vsaka fotografirana: ograja 3,30 m, lok 2,30 m, niša 1,35 × 1,40 m, stopnica 16 cm, prag 10,1 cm.",
+            "Obdelava s Claude po profesorjevem promptu: čiščenje, poravnava skenov (ICP 10 do 2 cm), zaprt posplošen model (18 stopnic 16,4/27,4 cm, rama 4,65 m), tlorisa in prereza 1:50, pot telefona iz videa 1 (COLMAP, merilo iz višine stopnice).",
+            "Kaj ni delovalo: brez LiDAR-ja ima oblak le 56 do 93 tisoč točk (točka na približno 6 cm), drift med etažama do 40 cm; odstopanje oblak : model mediana 13,6 cm, pri LiDAR skenu kleti FA 4,9 cm. Splat v Scaniversu ni deloval, posamezne stopnice in mere pod 10 cm v oblaku niso vidne."
+          ],
+          "summary_en": [
+            "Captured on 17 Nov 2026 together with Liza in about 20 minutes: the foyer with a glass railing, the stair, the lower corridor with an arch and the niche under the stair; iPhone 17 without LiDAR (Camera, Scaniverse, Measure), 3 videos and 2 scans.",
+            "Tape and Measure app dimensions, each photographed: railing 3.30 m, arch 2.30 m, niche 1.35 × 1.40 m, step 16 cm, threshold 10.1 cm.",
+            "Processing with Claude following the course prompt: cleaning, scan alignment (ICP 10 to 2 cm), a closed generalised model (18 steps 16.4/27.4 cm, flight 4.65 m), plans and sections 1:50, the phone path from video 1 (COLMAP, scale from the step height).",
+            "What did not work: without LiDAR the cloud has only 56 to 93 thousand points (one point per about 6 cm) and up to 40 cm drift between floors; cloud to model deviation median 13.6 cm, against 4.9 cm for the LiDAR scan of the FA basement. The splat in Scaniverse did not work, single steps and dimensions under 10 cm are not visible in the cloud."
+          ]
         }
       ],
       "cover": "data/s01/s01_v01_03_v1_2026-11-14.jpg",
@@ -422,7 +508,18 @@
         "plan_svg": null,
         "sheets": [],
         "downloads": [],
-        "pointcloud_rgb": true
+        "pointcloud_rgb": true,
+        "clouds_extra": [
+          {
+            "file": "data/s02/s02_pointcloud_kripta_v1_2026-11-22.bin",
+            "count": 62073,
+            "rgb": false,
+            "caption_sl": "Kripta sv. Jakoba, zajem Scaniverse",
+            "caption_en": "St James crypt, Scaniverse capture"
+          }
+        ],
+        "pointcloud_caption_sl": "Klet UL FA, Scaniverse (2. 11.)",
+        "pointcloud_caption_en": "UL FA basement, Scaniverse (2 Nov)"
       },
       "worklog": [],
       "exhibition": {
@@ -574,18 +671,42 @@
             "Starejša različica Scaniverse zaradi izvoza LAS; izvozi OBJ, STL, LAS, PLY, GLB, FBX in USDZ.",
             "Gost in razmeroma natančen oblak (778.087 točk), brez napak pri srednje hitrem obračanju.",
             "Ta zajem sta za obdelavo uporabila Študent 01 in Študent 05.",
-            "Kaj ni delovalo: LAS se ne odpre neposredno v Rhinu, Blenderju in Supersplatu."
+            "Kaj ni delovalo: LAS se ne odpre neposredno v Rhinu, Blenderju in Supersplatu.",
+            "Štiri fotografije kleti UL FA (oddane 24. 11.)."
           ],
           "summary_en": [
             "An older Scaniverse version for LAS export; exports OBJ, STL, LAS, PLY, GLB, FBX and USDZ.",
             "Dense and fairly accurate cloud (778,087 points), no artefacts at medium turning speed.",
             "Students 01 and 05 processed this capture.",
-            "What did not work: LAS does not open directly in Rhino, Blender or Supersplat."
+            "What did not work: LAS does not open directly in Rhino, Blender or Supersplat.",
+            "Four photos of the UL FA basement (submitted 24 Nov)."
           ],
-          "images": [],
+          "images": [
+            {
+              "file": "data/s02/s02_v04_01_v1_2026-11-14.jpg",
+              "caption_sl": "Klet UL FA: obokan hodnik",
+              "caption_en": "UL FA basement: vaulted corridor"
+            },
+            {
+              "file": "data/s02/s02_v04_02_v1_2026-11-14.jpg",
+              "caption_sl": "Klet UL FA: stopnice ob opečnem zidu",
+              "caption_en": "UL FA basement: stair by the brick wall"
+            },
+            {
+              "file": "data/s02/s02_v04_03_v1_2026-11-14.jpg",
+              "caption_sl": "Klet UL FA: prehod z oknom",
+              "caption_en": "UL FA basement: passage with a window"
+            },
+            {
+              "file": "data/s02/s02_v04_04_v1_2026-11-14.jpg",
+              "caption_sl": "Klet UL FA: stopnišče proti izhodu",
+              "caption_en": "UL FA basement: stair towards the exit"
+            }
+          ],
           "video": null,
           "mesh": null,
-          "sheet": null
+          "sheet": null,
+          "videos": []
         },
         {
           "n": 5,
@@ -618,6 +739,68 @@
           "mesh": null,
           "sheet": null,
           "videos": []
+        },
+        {
+          "n": 6,
+          "images": [
+            {
+              "file": "data/s02/s02_v06_01_v1_2026-11-14.jpg",
+              "caption_sl": "Vhod v kripto skozi tla cerkve",
+              "caption_en": "Entrance to the crypt through the church floor"
+            },
+            {
+              "file": "data/s02/s02_v06_02_v1_2026-11-14.jpg",
+              "caption_sl": "Stopnice v kripto",
+              "caption_en": "Stair down to the crypt"
+            },
+            {
+              "file": "data/s02/s02_v06_03_v1_2026-11-14.jpg",
+              "caption_sl": "Prehod z napeljavami",
+              "caption_en": "Passage with service pipes"
+            },
+            {
+              "file": "data/s02/s02_v06_04_v1_2026-11-14.jpg",
+              "caption_sl": "Obokani prostori kripte",
+              "caption_en": "Vaulted rooms of the crypt"
+            },
+            {
+              "file": "data/s02/s02_v06_05_v1_2026-11-14.jpg",
+              "caption_sl": "Stena z napisi iz 18. stoletja",
+              "caption_en": "Wall with 18th century inscriptions"
+            },
+            {
+              "file": "data/s02/s02_v06_06_v1_2026-11-14.jpg",
+              "caption_sl": "Lestev in napeljave v kripti",
+              "caption_en": "Ladder and pipes in the crypt"
+            }
+          ],
+          "videos": [
+            {
+              "file": "data/s02/s02_v06_07_v1_2026-11-14.mp4",
+              "poster": "data/s02/s02_v06_07_v1_2026-11-14_poster.jpg",
+              "caption_sl": "Sprehod skozi kripto",
+              "caption_en": "Walk through the crypt"
+            }
+          ],
+          "video": null,
+          "mesh": null,
+          "sheet": null,
+          "date": "2026-11-22",
+          "steps": [
+            1
+          ],
+          "title_sl": "Kripta pod cerkvijo sv. Jakoba: zajem",
+          "title_en": "Crypt below St James Church: capture",
+          "summary_sl": [
+            "Lastna lokacija: kripta pod župnijsko cerkvijo sv. Jakoba, vhod skozi tla cerkve, opečni oboki in stene z napisi iz 18. stoletja.",
+            "Zajema s Scaniverse in SiteScape, oddana kot modela 3DM (22. 11. 2026); 15 fotografij in video sprehoda (23. 11.). Oblak Scaniverse je v pregledovalniku nad oblakom točk.",
+            "Dnevnik zajema še ni oddan. [vnesi]"
+          ],
+          "summary_en": [
+            "Own location: the crypt below the parish church of St James, entered through the church floor, with brick vaults and walls carrying 18th century inscriptions.",
+            "Captures with Scaniverse and SiteScape, handed in as 3DM models (22 Nov 2026); 15 photos and a walk video (23 Nov). The Scaniverse cloud can be chosen above the point cloud in the viewer.",
+            "No capture log submitted yet. [vnesi]"
+          ]
         }
       ],
       "cover": "data/s02/s02_v03_01_v1_2026-11-14.jpg",
@@ -627,7 +810,7 @@
           "name_en": "St James Church, crypt",
           "lat": 46.04613,
           "lon": 14.50737,
-          "status": "planned"
+          "status": "captured"
         }
       ]
     },
@@ -977,6 +1160,13 @@
       "cover": "data/s03/s03_v01_01_v1_2026-11-14.jpg",
       "sites": [
         {
+          "name": "Mestni muzej Ljubljana",
+          "name_en": "City Museum of Ljubljana",
+          "lat": 46.04697,
+          "lon": 14.50406,
+          "status": "captured"
+        },
+        {
           "name": "UKC Ljubljana, tuneli",
           "name_en": "UKC Ljubljana, tunnels",
           "lat": 46.05412,
@@ -1225,27 +1415,48 @@
           "n": 4,
           "date": null,
           "steps": [
+            2,
+            6,
             7,
             8
           ],
-          "title_sl": "Modeli in tlorisi v Rhinu",
-          "title_en": "Models and plans in Rhino",
+          "title_sl": "Klet UL FA iz skupnih podatkov: CloudCompare in Rhino",
+          "title_en": "UL FA basement from shared data: CloudCompare and Rhino",
           "summary_sl": [
-            "Dva modela v Rhinu in tlorisi (klet, spodnja in zgornja etaža). Dnevnik ni oddan. [vnesi]"
+            "Podatki: Gretin PLY zajem kleti UL FA. Tri kontrolne mere (vrata 198 cm, stopnica 14 cm, polica 109 cm) so pokazale, da je treba oblak pomanjšati na približno 77 %.",
+            "CloudCompare: vzorčenje na 2 cm in filter SOR (4.475.975 na 220.187 točk), ročno čiščenje na 196.373 točk, rezi zgornje in spodnje etaže; rasterizacija in RANSAC nista dala uporabnih ploskev.",
+            "Tloris spodnje etaže je ročno izrisan s Trace Polyline; v Rhinu dve različici 3D modela (ShrinkWrap in MeshFromPoints)."
           ],
           "summary_en": [
-            "Two Rhino models and plans (basement, lower and upper floor). No log submitted. [vnesi]"
+            "Data: Greta's PLY capture of the UL FA basement. Three check dimensions (door 198 cm, step 14 cm, shelf 109 cm) showed that the cloud had to be scaled to about 77 %.",
+            "CloudCompare: 2 cm subsampling and an SOR filter (4,475,975 to 220,187 points), manual cleaning to 196,373 points, slices of the upper and lower floor; rasterisation and RANSAC gave no usable planes.",
+            "The lower floor plan was traced by hand with Trace Polyline; two versions of the 3D model in Rhino (ShrinkWrap and MeshFromPoints)."
           ],
           "images": [
             {
               "file": "data/s04/s04_v04_01_v1_2026-11-14.jpg",
-              "caption_sl": "Tloris: spodnja etaža",
-              "caption_en": "Plan: lower floor"
+              "caption_sl": "Tloris kleti, sledenje v CloudCompare (Trace Polyline)",
+              "caption_en": "Basement plan traced in CloudCompare (Trace Polyline)"
             },
             {
               "file": "data/s04/s04_v04_02_v1_2026-11-14.jpg",
-              "caption_sl": "Tloris: zgornja etaža",
-              "caption_en": "Plan: upper floor"
+              "caption_sl": "Obris iz reza oblaka (izvoz kontur)",
+              "caption_en": "Outline from a cloud slice (contour export)"
+            },
+            {
+              "file": "data/s04/s04_v04_03_v1_2026-11-14.jpg",
+              "caption_sl": "CloudCompare: očiščen in pomanjšan oblak",
+              "caption_en": "CloudCompare: cleaned and scaled cloud"
+            },
+            {
+              "file": "data/s04/s04_v04_04_v1_2026-11-14.jpg",
+              "caption_sl": "CloudCompare: rez oblaka",
+              "caption_en": "CloudCompare: cloud slice"
+            },
+            {
+              "file": "data/s04/s04_v04_05_v1_2026-11-14.jpg",
+              "caption_sl": "Obris drugega dela iz reza oblaka",
+              "caption_en": "Outline of the second part from a cloud slice"
             }
           ],
           "video": null,
@@ -1259,19 +1470,45 @@
           "steps": [
             1
           ],
-          "title_sl": "Lastna lokacija: podhoda ob Slovenski cesti",
-          "title_en": "Own location: two underpasses by Slovenska cesta",
+          "title_sl": "Lastna lokacija: podhoda pod Slovensko cesto pri Kongresnem trgu",
+          "title_en": "Own location: two underpasses below Slovenska cesta by Kongresni trg",
           "summary_sl": [
-            "Štirje LiDAR zajemi s Scaniverse, ki jih je s telefonom iPhone 18 Pro posnel nosilec predmeta, oddani 17. 11. 2026: Plečnikov podhod pod Slovensko cesto (zajema 1.1 in 1.2) in podhod pri bukvarni (zajema 2.1 in 2.2).",
-            "Zajemi so georeferencirani; v pregledovalniku jih izberete nad oblakom točk.",
-            "Dnevnik obdelave še ni oddan. [vnesi]"
+            "Dva sosednja prostora pod Slovensko cesto na severni strani Kongresnega trga. Veliki podhod: smer sever–jug, širok približno 5 m in dolg 30 do 40 m, vhoda s stopnicami in rampo, ob obeh straneh valovite steklene vitrine namesto sten. Mali podhod: približno 4 × 5 m, stopnice s trga, parkirni avtomati in steklena vrata v podzemno garažo.",
+            "LiDAR zajeme je z iPhone 18 Pro posnel nosilec predmeta, Robert je posnel po dva videa za vsak prostor (ob stenah in naravnost, 60 do 110 s) in izmeril mere: veliki podhod stopnica 14 cm, širina stopnišča 170 cm, višina 220 cm; mali podhod stopnica 14 cm, ograja 95 cm, širina hodnika k WC 142 cm.",
+            "Skice tlorisov obeh prostorov. Videi niso objavljeni, ker so v njih mimoidoči."
           ],
           "summary_en": [
-            "Four LiDAR captures with Scaniverse, taken by the course holder with an iPhone 18 Pro and submitted on 17 Nov 2026: the Plečnik underpass below Slovenska cesta (captures 1.1 and 1.2) and the underpass by the second-hand bookshop (captures 2.1 and 2.2).",
-            "The captures are georeferenced; choose them above the point cloud in the viewer.",
-            "No processing log submitted yet. [vnesi]"
+            "Two adjacent spaces below Slovenska cesta on the north side of Kongresni trg. Large underpass: north to south, about 5 m wide and 30 to 40 m long, entrances with stairs and a ramp, wavy glass display cases on both sides instead of walls. Small underpass: about 4 × 5 m, stairs from the square, parking machines and a glass door to the underground garage.",
+            "The LiDAR captures were taken by the course holder with an iPhone 18 Pro; Robert recorded two videos per space (along the walls and straight through, 60 to 110 s) and measured: large underpass step 14 cm, stair width 170 cm, height 220 cm; small underpass step 14 cm, handrail 95 cm, corridor to the WC 142 cm.",
+            "Plan sketches of both spaces. The videos are not published because passers-by appear in them."
           ],
-          "images": [],
+          "images": [
+            {
+              "file": "data/s04/s04_v05_01_v1_2026-11-14.jpg",
+              "caption_sl": "Veliki podhod: skica tlorisa s stopnicami, rampama in vitrinami",
+              "caption_en": "Large underpass: plan sketch with stairs, ramps and display cases"
+            },
+            {
+              "file": "data/s04/s04_v05_02_v1_2026-11-14.jpg",
+              "caption_sl": "Mali podhod: skica tlorisa",
+              "caption_en": "Small underpass: plan sketch"
+            },
+            {
+              "file": "data/s04/s04_v05_03_v1_2026-11-14.jpg",
+              "caption_sl": "Mere s trakom v obeh podhodih",
+              "caption_en": "Tape measurements in both underpasses"
+            },
+            {
+              "file": "data/s04/s04_v05_04_v1_2026-11-14.jpg",
+              "caption_sl": "Veliki podhod: višina stopnice 14 cm",
+              "caption_en": "Large underpass: step height 14 cm"
+            },
+            {
+              "file": "data/s04/s04_v05_05_v1_2026-11-14.jpg",
+              "caption_sl": "Mali podhod: višina ograje 95 cm",
+              "caption_en": "Small underpass: handrail height 95 cm"
+            }
+          ],
           "videos": [],
           "video": null,
           "mesh": null,
@@ -1570,19 +1807,21 @@
       "exercises": [
         {
           "n": 1,
-          "date": "2026-11-04",
+          "date": "2026-10-20",
           "steps": [
             1
           ],
           "title_sl": "Zajem sobe s Scaniverse",
           "title_en": "Room capture with Scaniverse",
           "summary_sl": [
-            "Oddan je le kratek video modela, zato je ocena samo vizualna.",
-            "Večji elementi so prepoznavni; zgornji del sten, strop in robovi predmetov manjkajo, nekateri deli so temni."
+            "Dva zajema sobe s Scaniverse, 20. 10. 2026: način Area z 8K teksturo (mreža s 178.000 oglišči in 278.000 trikotniki, 120,8 MB) in Gaussian splat (329.000 Gaussovih točk, 78,1 MB).",
+            "Mreža pokaže razporeditev sobe in opreme, ob robovih ostanejo luknje; splat ohrani videz mize in predmetov, robovi in ospredje so zamegljeni.",
+            "Trajanje zajema in obdelave ni zapisano. Predogled je 5,9 s dolg vrtljiv video."
           ],
           "summary_en": [
-            "Only a short video of the model was submitted, so the assessment is visual only.",
-            "Large features are recognisable; upper walls, ceiling and object edges are missing, some parts are dark."
+            "Two room captures with Scaniverse on 20 Oct 2026: Area mode with an 8K texture (mesh with 178,000 vertices and 278,000 triangles, 120.8 MB) and a Gaussian splat (329,000 Gaussians, 78.1 MB).",
+            "The mesh shows the layout of the room and furniture with holes along the edges; the splat keeps the look of the desk and objects, the edges and foreground are blurred.",
+            "Capture and processing times were not recorded. The preview is a 5.9 s rotating video."
           ],
           "images": [
             {
@@ -1671,7 +1910,28 @@
           ]
         },
         {
-          "images": [],
+          "images": [
+            {
+              "file": "data/s06/s06_v04_01_v1_2026-11-14.jpg",
+              "caption_sl": "Od oblaka točk do modela: potek in kontrola mer",
+              "caption_en": "From point cloud to model: workflow and dimension check"
+            },
+            {
+              "file": "data/s06/s06_v04_02_v1_2026-11-14.jpg",
+              "caption_sl": "Tloris kleti 1:100",
+              "caption_en": "Basement plan 1:100"
+            },
+            {
+              "file": "data/s06/s06_v04_03_v1_2026-11-14.jpg",
+              "caption_sl": "CloudCompare: oblak hodnika v obliki črke L",
+              "caption_en": "CloudCompare: L-shaped corridor cloud"
+            },
+            {
+              "file": "data/s06/s06_v04_04_v1_2026-11-14.jpg",
+              "caption_sl": "Rhino: poenostavljen izvlečen volumen",
+              "caption_en": "Rhino: simplified extruded volume"
+            }
+          ],
           "videos": [],
           "video": null,
           "mesh": null,
@@ -1679,17 +1939,24 @@
           "n": 4,
           "date": "2026-11-17",
           "steps": [
-            2
+            2,
+            6,
+            7,
+            8
           ],
-          "title_sl": "Klet UL FA: čiščenje oblaka v CloudCompare",
-          "title_en": "UL FA basement: cleaning the cloud in CloudCompare",
+          "title_sl": "Klet UL FA: od oblaka točk do modela v Rhinu",
+          "title_en": "UL FA basement: from point cloud to a Rhino model",
           "summary_sl": [
-            "Izhodišče je LiDAR zajem kleti s Scaniverse z dne 2. 11. 2026 (isti zajem, ki ga uporablja Greta Kočar).",
-            "Oblak očiščen v CloudCompare in oddan kot LAS; prikazan je v pregledovalniku oblaka."
+            "Izhodišče je LiDAR zajem kleti s Scaniverse z dne 2. 11. 2026 (isti zajem kot pri Greti Kočar), pregledan in očiščen v CloudCompare (rezi, merjenje med dvema točkama).",
+            "V Rhinu je obris hodnika v obliki črke L izvlečen v zaprto telo, visoko 3,00 m (višina je predpostavka); tloris 1:100 (PDF, DXF).",
+            "Kontrola oblak : model: dolg rob glavnega hodnika 20,82 m : 23,10 m (+2,28 m), širina na levem koncu 2,07 m : 2,81 m (+0,74 m), notranji rob krila 7,25 m : 6,62 m (−0,63 m).",
+            "Kaj ni delovalo: končnih točk iz oblaka ni bilo mogoče zanesljivo povezati z modelom, zato so razlike le približne; model ne vsebuje stopnic, obokov in sosednjih prostorov."
           ],
           "summary_en": [
-            "The starting point is a LiDAR capture of the basement with Scaniverse from 2 November 2026 (the same capture that Greta Kočar uses).",
-            "The cloud was cleaned in CloudCompare and submitted as LAS; it is shown in the point cloud viewer."
+            "The source is the Scaniverse LiDAR capture of the basement from 2 Nov 2026 (the same capture as Greta Kočar's), inspected and cleaned in CloudCompare (slices, two-point measuring).",
+            "In Rhino the L-shaped corridor outline is extruded into a closed solid 3.00 m high (the height is an assumption); plan 1:100 (PDF, DXF).",
+            "Cloud to model check: long edge of the main corridor 20.82 m : 23.10 m (+2.28 m), width at the left end 2.07 m : 2.81 m (+0.74 m), inner edge of the wing 7.25 m : 6.62 m (−0.63 m).",
+            "What did not work: the end points in the cloud could not be matched reliably to the model, so the differences are only approximate; the model leaves out the stairs, vaults and adjoining rooms."
           ]
         }
       ],
