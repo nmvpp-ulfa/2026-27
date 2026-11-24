@@ -67,8 +67,8 @@
         }
       ],
       "files": {
-        "pointcloud": "data/s01/s01_pointcloud_v1_2026-11-14.bin",
-        "pointcloud_count": 220000,
+        "pointcloud": "data/s01/s01_pointcloud_v2_2026-11-24.bin",
+        "pointcloud_count": 45115,
         "splat": null,
         "mesh": null,
         "model_glb": null,
@@ -79,36 +79,36 @@
         "pointcloud_rgb": true,
         "clouds_extra": [
           {
-            "file": "data/s01/s01_pointcloud_klet_v1_2026-11-15.bin",
-            "count": 220000,
-            "rgb": true,
-            "caption_sl": "Klet in stopnišče UL FA, cel LiDAR sken",
-            "caption_en": "UL FA basement and stair, full LiDAR scan"
-          },
-          {
-            "file": "data/s01/s01_pointcloud_kafeterija_v1_2026-11-15.bin",
-            "count": 220000,
-            "rgb": true,
-            "caption_sl": "Kafeterija UL FA, LiDAR sken",
-            "caption_en": "UL FA cafeteria, LiDAR scan"
-          },
-          {
-            "file": "data/s01/s01_pointcloud_muzej_v1_2026-11-22.bin",
-            "count": 45115,
-            "rgb": true,
-            "caption_sl": "Mestni muzej, poravnan oblak dveh skenov (iPhone 17 brez LiDAR-ja)",
-            "caption_en": "City Museum, aligned cloud of two scans (iPhone 17 without LiDAR)"
-          },
-          {
             "file": "data/s01/s01_pointcloud_moderna1_v1_2026-11-18.bin",
             "count": 62649,
             "rgb": true,
             "caption_sl": "Moderna galerija, surovi zajem",
             "caption_en": "Museum of Modern Art, raw capture"
+          },
+          {
+            "file": "data/s01/s01_pointcloud_odsekb_v1_2026-11-10.bin",
+            "count": 220000,
+            "rgb": true,
+            "caption_sl": "Klet UL FA, odsek B (vaja 4, preizkus metode)",
+            "caption_en": "UL FA basement, section B (exercise 4, method test)"
+          },
+          {
+            "file": "data/s01/s01_pointcloud_klet_v1_2026-11-15.bin",
+            "count": 220000,
+            "rgb": true,
+            "caption_sl": "Klet in stopnišče UL FA, LiDAR sken (preizkus metode)",
+            "caption_en": "UL FA basement and stair, LiDAR scan (method test)"
+          },
+          {
+            "file": "data/s01/s01_pointcloud_kafeterija_v1_2026-11-15.bin",
+            "count": 220000,
+            "rgb": true,
+            "caption_sl": "Kafeterija UL FA, LiDAR sken (preizkus metode)",
+            "caption_en": "UL FA cafeteria, LiDAR scan (method test)"
           }
         ],
-        "pointcloud_caption_sl": "Klet UL FA, odsek B (vaja 4)",
-        "pointcloud_caption_en": "UL FA basement, section B (exercise 4)"
+        "pointcloud_caption_sl": "Mestni muzej, poravnan oblak dveh skenov (vaja 5)",
+        "pointcloud_caption_en": "City Museum, aligned cloud of two scans (exercise 5)"
       },
       "worklog": [],
       "exhibition": {
@@ -443,7 +443,7 @@
           ]
         }
       ],
-      "cover": "data/s01/s01_v01_03_v1_2026-11-14.jpg",
+      "cover": "data/s01/s01_v05_01_v1_2026-11-14.jpg",
       "sites": [
         {
           "name": "Mestni muzej Ljubljana",
@@ -499,8 +499,8 @@
       },
       "measurements": [],
       "files": {
-        "pointcloud": "data/s02/s02_pointcloud_v1_2026-11-14.bin",
-        "pointcloud_count": 220000,
+        "pointcloud": "data/s02/s02_pointcloud_v2_2026-11-24.bin",
+        "pointcloud_count": 62073,
         "splat": null,
         "mesh": null,
         "model_glb": null,
@@ -508,18 +508,18 @@
         "plan_svg": null,
         "sheets": [],
         "downloads": [],
-        "pointcloud_rgb": true,
+        "pointcloud_rgb": false,
         "clouds_extra": [
           {
-            "file": "data/s02/s02_pointcloud_kripta_v1_2026-11-22.bin",
-            "count": 62073,
-            "rgb": false,
-            "caption_sl": "Kripta sv. Jakoba, zajem Scaniverse",
-            "caption_en": "St James crypt, Scaniverse capture"
+            "file": "data/s02/s02_pointcloud_klet_v1_2026-11-02.bin",
+            "count": 220000,
+            "rgb": true,
+            "caption_sl": "Klet UL FA, Scaniverse (2. 11., preizkus metode)",
+            "caption_en": "UL FA basement, Scaniverse (2 Nov, method test)"
           }
         ],
-        "pointcloud_caption_sl": "Klet UL FA, Scaniverse (2. 11.)",
-        "pointcloud_caption_en": "UL FA basement, Scaniverse (2 Nov)"
+        "pointcloud_caption_sl": "Kripta sv. Jakoba, zajem Scaniverse (vaja 6)",
+        "pointcloud_caption_en": "St James crypt, Scaniverse capture (exercise 6)"
       },
       "worklog": [],
       "exhibition": {
@@ -803,7 +803,7 @@
           ]
         }
       ],
-      "cover": "data/s02/s02_v03_01_v1_2026-11-14.jpg",
+      "cover": "data/s02/s02_v06_04_v1_2026-11-14.jpg",
       "sites": [
         {
           "name": "Cerkev sv. Jakoba, kripta",

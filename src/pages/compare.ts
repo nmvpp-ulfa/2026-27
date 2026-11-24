@@ -19,7 +19,7 @@ let B: Student = byId(q.get('b')) || p1b;
 let mode: 'side' | 'swipe' = q.get('mode') === 'swipe' ? 'swipe' : 'side';
 let colour: 'height' | 'ab' | 'rgb' = 'rgb';
 let split = 50;
-let section = 62; // shared cutaway, % of the combined height range; 100 = off
+let section = 100; // shared cutaway, % of the combined height range; 100 = off (default: whole clouds)
 let zRange: [number, number] = [0, 1];
 let va: Viewer | null = null, vb: Viewer | null = null;
 

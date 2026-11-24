@@ -18,7 +18,7 @@ const fmtM = (m: number) => `${num(m, 2)} m`;
 let viewer: Viewer | null = null;
 const layers = { cloud: true, rgb: true, model: false, deviation: false, mesh: false };
 let measuring = false;
-let section = 62; // default cutaway removes the ceiling so the interior is visible
+let section = 100; // default: whole cloud, no cutaway (100 = off); the slider cuts from the top
 let activeCloud = 0; // index into cloudList(): 0 = main cloud (the one the model belongs to)
 const myMeasures: number[] = [];
 
@@ -237,7 +237,7 @@ function bindTools(s: Student, hasCloud: boolean) {
       activeCloud = k;
       layers.cloud = true;
       if (k > 0) { layers.model = false; layers.deviation = false; }
-      if (!c.rgb) layers.rgb = false;
+      layers.rgb = c.rgb && !layers.deviation; // captured colours whenever the cloud has them
     } catch (e) { console.error(e); }
     myMeasures.length = 0;
     const y = window.scrollY;
