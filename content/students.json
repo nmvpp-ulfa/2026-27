@@ -1,6 +1,6 @@
 {
   "demo": false,
-  "generated": "2026-11-24",
+  "generated": "2026-11-27",
   "note": "Real student records with names and media, published with the students' consent (course holder, 2026-11-14). Source: course SharePoint, folder 0 results (logs, reports, videos and scans), checked every evening. Private addresses are not published.",
   "students": [
     {
@@ -499,8 +499,8 @@
       },
       "measurements": [],
       "files": {
-        "pointcloud": "data/s02/s02_pointcloud_v2_2026-11-24.bin",
-        "pointcloud_count": 62073,
+        "pointcloud": "data/s02/s02_pointcloud_v3_2026-11-27.bin",
+        "pointcloud_count": 220000,
         "splat": null,
         "mesh": null,
         "model_glb": null,
@@ -508,8 +508,15 @@
         "plan_svg": null,
         "sheets": [],
         "downloads": [],
-        "pointcloud_rgb": false,
+        "pointcloud_rgb": true,
         "clouds_extra": [
+          {
+            "file": "data/s02/s02_pointcloud_kripta1_v1_2026-11-22.bin",
+            "count": 62073,
+            "rgb": false,
+            "caption_sl": "Kripta sv. Jakoba, prvi zajem Scaniverse (22. 11.)",
+            "caption_en": "St James crypt, first Scaniverse capture (22 Nov)"
+          },
           {
             "file": "data/s02/s02_pointcloud_klet_v1_2026-11-02.bin",
             "count": 220000,
@@ -518,8 +525,8 @@
             "caption_en": "UL FA basement, Scaniverse (2 Nov, method test)"
           }
         ],
-        "pointcloud_caption_sl": "Kripta sv. Jakoba, zajem Scaniverse (vaja 6)",
-        "pointcloud_caption_en": "St James crypt, Scaniverse capture (exercise 6)"
+        "pointcloud_caption_sl": "Kripta sv. Jakoba, zajem Scaniverse v barvah (25. 11., vaja 6)",
+        "pointcloud_caption_en": "St James crypt, Scaniverse capture in colour (25 Nov, exercise 6)"
       },
       "worklog": [],
       "exhibition": {
@@ -772,6 +779,31 @@
               "file": "data/s02/s02_v06_06_v1_2026-11-14.jpg",
               "caption_sl": "Lestev in napeljave v kripti",
               "caption_en": "Ladder and pipes in the crypt"
+            },
+            {
+              "file": "data/s02/s02_v06_08_v1_2026-11-14.jpg",
+              "caption_sl": "Ročna mera: zunanja odprtina v tleh cerkve, 104 cm",
+              "caption_en": "Hand measurement: outer opening in the church floor, 104 cm"
+            },
+            {
+              "file": "data/s02/s02_v06_09_v1_2026-11-14.jpg",
+              "caption_sl": "Ročna mera: višina vhodne odprtine, 170 cm",
+              "caption_en": "Hand measurement: height of the entrance opening, 170 cm"
+            },
+            {
+              "file": "data/s02/s02_v06_10_v1_2026-11-14.jpg",
+              "caption_sl": "Ročna mera: stopnica, 20 cm",
+              "caption_en": "Hand measurement: step, 20 cm"
+            },
+            {
+              "file": "data/s02/s02_v06_11_v1_2026-11-14.jpg",
+              "caption_sl": "Ročna mera: širina prehoda, 102 cm",
+              "caption_en": "Hand measurement: width of the passage, 102 cm"
+            },
+            {
+              "file": "data/s02/s02_v06_12_v1_2026-11-14.jpg",
+              "caption_sl": "Ročna mera: širina kripte, 269 cm (odčitek na traku)",
+              "caption_en": "Hand measurement: width of the crypt, 269 cm (tape reading)"
             }
           ],
           "videos": [
@@ -793,12 +825,16 @@
           "title_en": "Crypt below St James Church: capture",
           "summary_sl": [
             "Lastna lokacija: kripta pod župnijsko cerkvijo sv. Jakoba, vhod skozi tla cerkve, opečni oboki in stene z napisi iz 18. stoletja.",
-            "Zajema s Scaniverse in SiteScape, oddana kot modela 3DM (22. 11. 2026); 15 fotografij in video sprehoda (23. 11.). Oblak Scaniverse je v pregledovalniku nad oblakom točk.",
+            "Zajema s Scaniverse in SiteScape, oddana kot modela 3DM (22. 11. 2026); 15 fotografij in video sprehoda (23. 11.).",
+            "Nov zajem Scaniverse z barvami (datoteka 25. 11., oddana 26. 11.), 836.114 točk. V pregledovalniku je prikazan privzeto, prvi zajem z 22. 11. je na izbiro nad oblakom točk.",
+            "Ročne mere s trakom (oddane 26. 11.): širina kripte 269 cm, širina prehoda 102 cm, zunanja odprtina 104 cm, stopnica 20 cm, višina vhodne odprtine 170 cm. Tabela navaja le mere na terenu, primerjave z oblakom točk še ni.",
             "Dnevnik zajema še ni oddan. [vnesi]"
           ],
           "summary_en": [
             "Own location: the crypt below the parish church of St James, entered through the church floor, with brick vaults and walls carrying 18th century inscriptions.",
-            "Captures with Scaniverse and SiteScape, handed in as 3DM models (22 Nov 2026); 15 photos and a walk video (23 Nov). The Scaniverse cloud can be chosen above the point cloud in the viewer.",
+            "Captures with Scaniverse and SiteScape, handed in as 3DM models (22 Nov 2026); 15 photos and a walk video (23 Nov).",
+            "New Scaniverse capture with colour (file dated 25 Nov, submitted 26 Nov), 836,114 points. The viewer shows it by default; the first capture of 22 Nov can be chosen above the point cloud.",
+            "Tape measurements (submitted 26 Nov): crypt width 269 cm, passage width 102 cm, outer opening 104 cm, step 20 cm, entrance opening height 170 cm. The table lists field measurements only; there is no comparison with the point cloud yet.",
             "No capture log submitted yet. [vnesi]"
           ]
         }
