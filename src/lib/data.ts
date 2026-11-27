@@ -63,6 +63,16 @@ export const textOf = (s: Student) => (lang() === 'sl' ? s.text_sl : s.text_en);
 export const locName = (s: Student) => (lang() === 'en' && s.location.name_en) || s.location.name;
 export const hasCoords = (s: Student) => typeof s.location.lat === 'number' && typeof s.location.lon === 'number';
 
+// All published clouds of a student (main cloud first) with their generalised model, if the student uploaded one.
+export interface CloudInfo { file: string; count: number; rgb: boolean; caption: string; model: string | null }
+export function cloudsOf(s: Student): CloudInfo[] {
+  if (!s.files.pointcloud || !s.consent_location_publication) return [];
+  const cap = (o: { caption_sl?: string; caption_en?: string }) => (lang() === 'en' ? o.caption_en : o.caption_sl) ?? o.caption_sl ?? '';
+  const main: CloudInfo = { file: s.files.pointcloud, count: s.files.pointcloud_count, rgb: !!s.files.pointcloud_rgb,
+    caption: cap({ caption_sl: s.files.pointcloud_caption_sl, caption_en: s.files.pointcloud_caption_en }) || t('layer.cloud'), model: s.files.model_json };
+  return [main, ...(s.files.clouds_extra || []).map((c) => ({ file: c.file, count: c.count, rgb: c.rgb !== false, caption: cap(c), model: c.model_json ?? null }))];
+}
+
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
 
 // Escape text and turn [vnesi] / [preveri: ...] markers from the draft into visible tags.

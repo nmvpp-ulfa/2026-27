@@ -3,7 +3,7 @@ import '../styles/base.css';
 import '../styles/pages.css';
 import { mountChrome } from '../lib/chrome';
 import { num, int, onLang, t } from '../lib/i18n';
-import { byId, label, students, url, type Student, locName } from '../lib/data';
+import { byId, cloudsOf, label, students, url, type Student, locName } from '../lib/data';
 import { appLabel, deviceLabel } from '../lib/cards';
 import { Viewer } from '../three/viewer';
 import { motionOn, onMotion } from '../lib/motion';
@@ -17,7 +17,10 @@ const p1b = phase1.find((s) => !s.lidar && s.id !== p1a?.id) || students[1] || s
 let A: Student = byId(q.get('a')) || p1a;
 let B: Student = byId(q.get('b')) || p1b;
 let mode: 'side' | 'swipe' = q.get('mode') === 'swipe' ? 'swipe' : 'side';
-let colour: 'height' | 'ab' | 'rgb' = 'rgb';
+// which of the student's clouds is shown on each side (0 = latest result) and whether the models are drawn
+let ca = Number(q.get('ca')) || 0, cb = Number(q.get('cb')) || 0;
+let showModel = q.get('model') === '1';
+let colour: 'height' | 'ab' | 'rgb' | 'dev' = 'rgb';
 let split = 50;
 let section = 100; // shared cutaway, % of the combined height range; 100 = off (default: whole clouds)
 let zRange: [number, number] = [0, 1];
@@ -40,13 +43,19 @@ const stage = document.getElementById('stage')!;
 function opt(sel: Student) {
   return students.map((s) => `<option value="${s.id}"${s.id === sel.id ? ' selected' : ''}>${s.id.toUpperCase()} // ${label(s)} · ${t('phase.' + s.phase).split(':')[0]}</option>`).join('');
 }
+function cloudOpt(s: Student, k: number) {
+  return cloudsOf(s).map((c, i) => `<option value="${i}"${i === k ? ' selected' : ''}>${c.caption}${c.model ? ' + ' + t('layer.model').toLowerCase() : ''}</option>`).join('');
+}
+const cloudA = () => cloudsOf(A)[ca] ?? null, cloudB = () => cloudsOf(B)[cb] ?? null;
 function renderControls() {
   document.getElementById('ttl')!.textContent = t('cmp.title');
   document.getElementById('lead')!.textContent = t('cmp.lead');
   document.getElementById('mt')!.textContent = t('st.data');
   document.getElementById('controls')!.innerHTML = `
     <label><span class="label">${t('cmp.a')}</span><select class="select" id="selA">${opt(A)}</select></label>
+    ${cloudsOf(A).length > 1 ? `<label><span class="label">${t('st.cloud')} A</span><select class="select" id="cloudA">${cloudOpt(A, ca)}</select></label>` : ''}
     <label><span class="label">${t('cmp.b')}</span><select class="select" id="selB">${opt(B)}</select></label>
+    ${cloudsOf(B).length > 1 ? `<label><span class="label">${t('st.cloud')} B</span><select class="select" id="cloudB">${cloudOpt(B, cb)}</select></label>` : ''}
     <button type="button" class="btn" id="p1">${t('cmp.phase1')}</button>
     <div class="group" style="display:flex;gap:6px;align-items:center">
       <button type="button" class="chip" data-mode="side" aria-pressed="${mode === 'side'}">${t('cmp.side')}</button>
@@ -56,6 +65,10 @@ function renderControls() {
       <button type="button" class="chip" data-col="rgb" aria-pressed="${colour === 'rgb'}">${t('layer.rgb')}</button>
       <button type="button" class="chip" data-col="ab" aria-pressed="${colour === 'ab'}">${t('cmp.ab')}</button>
       <button type="button" class="chip" data-col="height" aria-pressed="${colour === 'height'}">${t('cmp.height')}</button>
+      <button type="button" class="chip" data-col="dev" aria-pressed="${colour === 'dev'}"${anyModel() ? '' : ' disabled'}>${t('layer.deviation')}</button>
+    </div>
+    <div class="group" style="display:flex;gap:6px;align-items:center">
+      <button type="button" class="chip" id="modelTg" aria-pressed="${showModel && anyModel()}"${anyModel() ? '' : ' disabled'}>${t('layer.model')}${anyModel() ? '' : ` <span class="chip-note">${t('nodata')}</span>`}</button>
     </div>
     <div class="range"><span class="label">${t('st.section')}</span>
       <input type="range" min="0" max="100" value="${section}" id="section" aria-label="${t('st.section')}">
@@ -63,15 +76,25 @@ function renderControls() {
     </div>`;
   const range = document.getElementById('section') as HTMLInputElement;
   range.addEventListener('input', () => { section = Number(range.value); applySection(); document.getElementById('sectionVal')!.textContent = sectionText(); });
-  (document.getElementById('selA') as HTMLSelectElement).addEventListener('change', (e) => { A = byId((e.target as HTMLSelectElement).value)!; reload(); });
-  (document.getElementById('selB') as HTMLSelectElement).addEventListener('change', (e) => { B = byId((e.target as HTMLSelectElement).value)!; reload(); });
-  document.getElementById('p1')!.addEventListener('click', () => { A = p1a; B = p1b; reload(); });
+  (document.getElementById('selA') as HTMLSelectElement).addEventListener('change', (e) => { A = byId((e.target as HTMLSelectElement).value)!; ca = 0; reload(); });
+  (document.getElementById('selB') as HTMLSelectElement).addEventListener('change', (e) => { B = byId((e.target as HTMLSelectElement).value)!; cb = 0; reload(); });
+  document.getElementById('cloudA')?.addEventListener('change', (e) => { ca = Number((e.target as HTMLSelectElement).value); reload(); });
+  document.getElementById('cloudB')?.addEventListener('change', (e) => { cb = Number((e.target as HTMLSelectElement).value); reload(); });
+  document.getElementById('modelTg')!.addEventListener('click', () => { showModel = !showModel; applyModels(); renderControls(); syncUrl(); });
+  document.getElementById('p1')!.addEventListener('click', () => { A = p1a; B = p1b; ca = 0; cb = 0; reload(); });
   document.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach((b) => b.addEventListener('click', () => { mode = b.dataset.mode as typeof mode; applyMode(); renderControls(); syncUrl(); }));
   document.querySelectorAll<HTMLButtonElement>('[data-col]').forEach((b) => b.addEventListener('click', () => { colour = b.dataset.col as typeof colour; applyColour(); renderControls(); }));
 }
 
 function tag(s: Student, letter: string, col: string) {
-  return `<div class="cmp-tag"><i style="background:${col}"></i>${letter} // ${label(s)} · ${deviceLabel(s)}</div>`;
+  const c = cloudsOf(s)[letter === 'A' ? ca : cb];
+  return `<div class="cmp-tag"><i style="background:${col}"></i>${letter} // ${label(s)}${c ? ' · ' + c.caption : ' · ' + deviceLabel(s)}</div>`;
+}
+const anyModel = () => !!(cloudA()?.model || cloudB()?.model);
+function applyModels() {
+  // model drawn over its cloud when switched on (and always when a side has no cloud)
+  va?.setModelVisible(showModel || !cloudA(), cloudA() ? 0.25 : 0.55);
+  vb?.setModelVisible(showModel || !cloudB(), cloudB() ? 0.25 : 0.55);
 }
 
 // No published point cloud on either side: say so instead of showing two empty viewers.
@@ -121,21 +144,28 @@ function applyMode() {
   requestAnimationFrame(() => { va?.resize(); vb?.resize(); });
 }
 function applyColour() {
-  if (colour === 'ab') { va?.setColor('flat', '#FF5A1F'); vb?.setColor('flat', '#E4E6E1'); }
+  if (colour === 'dev') {  // deviation from the side's own generalised model; a side without a model keeps captured colours
+    va?.setColor(cloudA()?.model ? 'deviation' : va.hasRgb() ? 'rgb' : 'height');
+    vb?.setColor(cloudB()?.model ? 'deviation' : vb.hasRgb() ? 'rgb' : 'height');
+  } else if (colour === 'ab') { va?.setColor('flat', '#FF5A1F'); vb?.setColor('flat', '#E4E6E1'); }
   else if (colour === 'rgb') { va?.setColor(va.hasRgb() ? 'rgb' : 'height'); vb?.setColor(vb.hasRgb() ? 'rgb' : 'height'); }
   else { va?.setColor('height'); vb?.setColor('height'); }
 }
 function syncUrl() {
   const p = new URLSearchParams({ a: A.id, b: B.id });
+  if (ca) p.set('ca', String(ca));
+  if (cb) p.set('cb', String(cb));
+  if (showModel) p.set('model', '1');
   if (mode === 'swipe') p.set('mode', 'swipe');
   history.replaceState(null, '', `?${p}`);
 }
 
-async function load(v: Viewer, s: Student) {
-  const hasCloud = !!s.files.pointcloud && s.consent_location_publication;
-  if (hasCloud) await v.loadCloud(url(s.files.pointcloud!), s.files.pointcloud_count);
-  if (s.files.model_json) await v.loadModel(url(s.files.model_json));
-  v.setModelVisible(!hasCloud, 0.55);
+async function load(v: Viewer, s: Student, k: number) {
+  const c = cloudsOf(s)[k];
+  if (c) {
+    await v.loadCloud(url(c.file), c.count);
+    if (c.model) await v.loadModel(url(c.model));
+  } else if (s.files.model_json) await v.loadModel(url(s.files.model_json));
 }
 
 async function reload() {
@@ -151,7 +181,11 @@ async function reload() {
   renderControls();
   renderMetrics();
   syncUrl();
-  try { await Promise.all([load(a, A), load(b, B)]); } catch (e) { console.error(e); }
+  if (ca >= cloudsOf(A).length) ca = 0;
+  if (cb >= cloudsOf(B).length) cb = 0;
+  try { await Promise.all([load(a, A, ca), load(b, B, cb)]); } catch (e) { console.error(e); }
+  if (colour === 'dev' && !anyModel()) colour = 'rgb';
+  applyModels();
   applyColour();
   a.bounds.union(b.bounds);
   if (!a.bounds.isEmpty()) zRange = [a.bounds.min.z, a.bounds.max.z];
