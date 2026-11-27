@@ -1011,8 +1011,8 @@
       ],
       "metrics": {
         "points": 1372935,
-        "median_dev_cm": 2.55,
-        "within_5cm_pct": 72.7,
+        "median_dev_cm": null,
+        "within_5cm_pct": null,
         "scale_err_cm": null
       },
       "measurements": [
