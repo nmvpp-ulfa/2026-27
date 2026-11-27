@@ -41,29 +41,41 @@
         }
       ],
       "metrics": {
-        "points": null,
-        "median_dev_cm": 4.9,
-        "within_5cm_pct": null,
+        "points": 47657,
+        "median_dev_cm": 13.6,
+        "within_5cm_pct": 20,
         "scale_err_cm": null
       },
       "measurements": [
         {
-          "element": "door_height",
-          "tape_cm": 198,
-          "cloud_cm": 201,
-          "model_cm": 201
-        },
-        {
-          "element": "counter_height",
-          "tape_cm": 109,
-          "cloud_cm": 108,
-          "model_cm": 108
-        },
-        {
           "element": "stair_riser",
-          "tape_cm": 14.2,
-          "cloud_cm": 13.8,
-          "model_cm": 14.2
+          "tape_cm": 16,
+          "cloud_cm": 16.4,
+          "model_cm": 16.4
+        },
+        {
+          "element": "railing_length",
+          "tape_cm": 330,
+          "cloud_cm": 350,
+          "model_cm": 350
+        },
+        {
+          "element": "niche_width",
+          "tape_cm": 135,
+          "cloud_cm": 150,
+          "model_cm": 144
+        },
+        {
+          "element": "niche_height",
+          "tape_cm": 140,
+          "cloud_cm": 140,
+          "model_cm": 140
+        },
+        {
+          "element": "arch_height",
+          "tape_cm": 230,
+          "cloud_cm": 240,
+          "model_cm": 240
         }
       ],
       "files": {
@@ -72,7 +84,7 @@
         "splat": null,
         "mesh": null,
         "model_glb": null,
-        "model_json": null,
+        "model_json": "data/s01/s01_model_v2_2026-11-24.json",
         "plan_svg": null,
         "sheets": [],
         "downloads": [],
@@ -83,34 +95,69 @@
             "count": 62649,
             "rgb": true,
             "caption_sl": "Moderna galerija, surovi zajem",
-            "caption_en": "Museum of Modern Art, raw capture"
+            "caption_en": "Museum of Modern Art, raw capture",
+            "model_json": null
           },
           {
             "file": "data/s01/s01_pointcloud_odsekb_v1_2026-11-10.bin",
             "count": 220000,
             "rgb": true,
             "caption_sl": "Klet UL FA, odsek B (vaja 4, preizkus metode)",
-            "caption_en": "UL FA basement, section B (exercise 4, method test)"
+            "caption_en": "UL FA basement, section B (exercise 4, method test)",
+            "model_json": "data/s01/s01_model_odsekb_v1_2026-11-10.json"
           },
           {
             "file": "data/s01/s01_pointcloud_klet_v1_2026-11-15.bin",
             "count": 220000,
             "rgb": true,
             "caption_sl": "Klet in stopnišče UL FA, LiDAR sken (preizkus metode)",
-            "caption_en": "UL FA basement and stair, LiDAR scan (method test)"
+            "caption_en": "UL FA basement and stair, LiDAR scan (method test)",
+            "model_json": null
           },
           {
             "file": "data/s01/s01_pointcloud_kafeterija_v1_2026-11-15.bin",
             "count": 220000,
             "rgb": true,
             "caption_sl": "Kafeterija UL FA, LiDAR sken (preizkus metode)",
-            "caption_en": "UL FA cafeteria, LiDAR scan (method test)"
+            "caption_en": "UL FA cafeteria, LiDAR scan (method test)",
+            "model_json": null
           }
         ],
         "pointcloud_caption_sl": "Mestni muzej, poravnan oblak dveh skenov (vaja 5)",
         "pointcloud_caption_en": "City Museum, aligned cloud of two scans (exercise 5)"
       },
-      "worklog": [],
+      "worklog": [
+        {
+          "date": "20. 10. 2026",
+          "text_sl": "Vaja 1: Zajem z LiDAR-jem in tloris",
+          "text_en": "Exercise 1: LiDAR capture and plan"
+        },
+        {
+          "date": "1. 11. 2026",
+          "text_sl": "Vaja 2: Video v 3D (SfM) na UL FA",
+          "text_en": "Exercise 2: Video to 3D (SfM) at UL FA"
+        },
+        {
+          "date": "10. 11. 2026",
+          "text_sl": "Vaja 4: Klet UL FA: od oblaka do modela",
+          "text_en": "Exercise 4: UL FA basement: from cloud to model"
+        },
+        {
+          "date": "17. 11. 2026",
+          "text_sl": "Vaja 5: Mestni muzej: od zajema brez LiDAR-ja do modela in pota iz videa",
+          "text_en": "Exercise 5: City Museum: from a capture without LiDAR to a model and a path from video"
+        },
+        {
+          "date": "22. 11. 2026",
+          "text_sl": "Mestni muzej: poravnava skenov, posplošen model, tlorisa in prereza 1:50",
+          "text_en": "City Museum: scan alignment, generalised model, plans and sections 1:50"
+        },
+        {
+          "date": "24. 11. 2026",
+          "text_sl": "Mestni muzej: pot telefona iz videa na tlorisu, dnevnik vaje 5",
+          "text_en": "City Museum: phone path from the video on the plan, log of exercise 5"
+        }
+      ],
       "exhibition": {
         "selected": null,
         "print": null
@@ -497,7 +544,38 @@
         "within_5cm_pct": null,
         "scale_err_cm": null
       },
-      "measurements": [],
+      "measurements": [
+        {
+          "element": "opening_width",
+          "tape_cm": 104,
+          "cloud_cm": null,
+          "model_cm": null
+        },
+        {
+          "element": "entrance_height",
+          "tape_cm": 170,
+          "cloud_cm": null,
+          "model_cm": null
+        },
+        {
+          "element": "stair_riser",
+          "tape_cm": 20,
+          "cloud_cm": null,
+          "model_cm": null
+        },
+        {
+          "element": "passage_width",
+          "tape_cm": 102,
+          "cloud_cm": null,
+          "model_cm": null
+        },
+        {
+          "element": "room_width",
+          "tape_cm": 269,
+          "cloud_cm": null,
+          "model_cm": null
+        }
+      ],
       "files": {
         "pointcloud": "data/s02/s02_pointcloud_v3_2026-11-27.bin",
         "pointcloud_count": 220000,
@@ -515,20 +593,58 @@
             "count": 62073,
             "rgb": false,
             "caption_sl": "Kripta sv. Jakoba, prvi zajem Scaniverse (22. 11.)",
-            "caption_en": "St James crypt, first Scaniverse capture (22 Nov)"
+            "caption_en": "St James crypt, first Scaniverse capture (22 Nov)",
+            "model_json": null
           },
           {
             "file": "data/s02/s02_pointcloud_klet_v1_2026-11-02.bin",
             "count": 220000,
             "rgb": true,
             "caption_sl": "Klet UL FA, Scaniverse (2. 11., preizkus metode)",
-            "caption_en": "UL FA basement, Scaniverse (2 Nov, method test)"
+            "caption_en": "UL FA basement, Scaniverse (2 Nov, method test)",
+            "model_json": "data/s02/s02_model_klet_v1_2026-11-02.json"
           }
         ],
         "pointcloud_caption_sl": "Kripta sv. Jakoba, zajem Scaniverse v barvah (25. 11., vaja 6)",
         "pointcloud_caption_en": "St James crypt, Scaniverse capture in colour (25 Nov, exercise 6)"
       },
-      "worklog": [],
+      "worklog": [
+        {
+          "date": "10. 10. 2026",
+          "text_sl": "Vaja 1: Prvi zajem in uvoz v Rhino",
+          "text_en": "Exercise 1: First capture and Rhino import"
+        },
+        {
+          "date": "18. 10. 2026",
+          "text_sl": "Vaja 2: Primerjava petih aplikacij",
+          "text_en": "Exercise 2: Five apps compared"
+        },
+        {
+          "date": "26. 10. 2026",
+          "text_sl": "Vaja 3: Zajem pritličja in kleti UL FA",
+          "text_en": "Exercise 3: Capture of the UL FA ground floor and basement"
+        },
+        {
+          "date": "2. 11. 2026",
+          "text_sl": "Vaja 4: Tretji zajem UL FA s Scaniverse",
+          "text_en": "Exercise 4: Third UL FA capture with Scaniverse"
+        },
+        {
+          "date": "9. 11. 2026",
+          "text_sl": "Vaja 5: Ročni model kleti v Rhinu",
+          "text_en": "Exercise 5: Hand-built basement model in Rhino"
+        },
+        {
+          "date": "22. 11. 2026",
+          "text_sl": "Vaja 6: Kripta pod cerkvijo sv. Jakoba: zajem",
+          "text_en": "Exercise 6: Crypt below St James Church: capture"
+        },
+        {
+          "date": "25. 11. 2026",
+          "text_sl": "Kripta: nov zajem Scaniverse v barvah, ročne mere",
+          "text_en": "Crypt: new Scaniverse capture in colour, hand measurements"
+        }
+      ],
       "exhibition": {
         "selected": null,
         "print": null
@@ -894,25 +1010,83 @@
         }
       ],
       "metrics": {
-        "points": null,
-        "median_dev_cm": null,
-        "within_5cm_pct": null,
+        "points": 1372935,
+        "median_dev_cm": 2.55,
+        "within_5cm_pct": 72.7,
         "scale_err_cm": null
       },
-      "measurements": [],
+      "measurements": [
+        {
+          "element": "door_height",
+          "tape_cm": 198,
+          "cloud_cm": 199.5,
+          "model_cm": 198
+        },
+        {
+          "element": "shelf_height",
+          "tape_cm": 105,
+          "cloud_cm": 105.8,
+          "model_cm": null
+        },
+        {
+          "element": "stair_riser",
+          "tape_cm": 15.7,
+          "cloud_cm": null,
+          "model_cm": 15.7
+        },
+        {
+          "element": "corridor_width",
+          "tape_cm": null,
+          "cloud_cm": 222.8,
+          "model_cm": 223
+        },
+        {
+          "element": "corridor_length",
+          "tape_cm": null,
+          "cloud_cm": 2180.1,
+          "model_cm": 2180
+        },
+        {
+          "element": "stair_rise",
+          "tape_cm": null,
+          "cloud_cm": 233.9,
+          "model_cm": 234
+        }
+      ],
       "files": {
         "pointcloud": "data/s03/s03_pointcloud_v1_2026-11-14.bin",
         "pointcloud_count": 220000,
         "splat": null,
         "mesh": null,
         "model_glb": null,
-        "model_json": null,
+        "model_json": "data/s03/s03_model_v1_2026-11-14.json",
         "plan_svg": null,
         "sheets": [],
         "downloads": [],
         "pointcloud_rgb": true
       },
-      "worklog": [],
+      "worklog": [
+        {
+          "date": "13. 10. 2026",
+          "text_sl": "Vaja 1: Splat, mreža in oblak v treh programih",
+          "text_en": "Exercise 1: Splat, mesh and cloud in three programs"
+        },
+        {
+          "date": "20. 10. 2026",
+          "text_sl": "Vaja 3: Rekonstrukcija iz videa",
+          "text_en": "Exercise 3: Reconstruction from video"
+        },
+        {
+          "date": "8. 11. 2026",
+          "text_sl": "Vaja 2: Prehod med sobama: RealityScan in 3D Scanner App",
+          "text_en": "Exercise 2: Passage between two rooms: RealityScan and 3D Scanner App"
+        },
+        {
+          "date": "17. 11. 2026",
+          "text_sl": "Vaja 5: Klet UL FA: generaliziran model, tlorisa in prereza 1:50",
+          "text_en": "Exercise 5: UL FA basement: generalised model, plans and sections 1:50"
+        }
+      ],
       "exhibition": {
         "selected": null,
         "print": null
@@ -1250,7 +1424,26 @@
         "within_5cm_pct": null,
         "scale_err_cm": null
       },
-      "measurements": [],
+      "measurements": [
+        {
+          "element": "stair_riser",
+          "tape_cm": 14,
+          "cloud_cm": null,
+          "model_cm": null
+        },
+        {
+          "element": "stair_width",
+          "tape_cm": 170,
+          "cloud_cm": null,
+          "model_cm": null
+        },
+        {
+          "element": "clear_height",
+          "tape_cm": 220,
+          "cloud_cm": null,
+          "model_cm": null
+        }
+      ],
       "files": {
         "pointcloud": "data/s04/s04_pointcloud_v1_2026-11-14.bin",
         "pointcloud_count": 220000,
@@ -1268,27 +1461,56 @@
             "count": 220000,
             "rgb": true,
             "caption_sl": "Plečnikov podhod pod Slovensko cesto, zajem 1.2",
-            "caption_en": "Plečnik underpass below Slovenska cesta, capture 1.2"
+            "caption_en": "Plečnik underpass below Slovenska cesta, capture 1.2",
+            "model_json": null
           },
           {
             "file": "data/s04/s04_pointcloud_garaza1_v1_2026-11-17.bin",
             "count": 220000,
             "rgb": true,
             "caption_sl": "Podhod pri bukvarni, zajem 2.1",
-            "caption_en": "Underpass by the second-hand bookshop, capture 2.1"
+            "caption_en": "Underpass by the second-hand bookshop, capture 2.1",
+            "model_json": null
           },
           {
             "file": "data/s04/s04_pointcloud_garaza2_v1_2026-11-17.bin",
             "count": 220000,
             "rgb": true,
             "caption_sl": "Podhod pri bukvarni, zajem 2.2",
-            "caption_en": "Underpass by the second-hand bookshop, capture 2.2"
+            "caption_en": "Underpass by the second-hand bookshop, capture 2.2",
+            "model_json": null
           }
         ],
         "pointcloud_caption_sl": "Plečnikov podhod pod Slovensko cesto, zajem 1.1",
         "pointcloud_caption_en": "Plečnik underpass below Slovenska cesta, capture 1.1"
       },
-      "worklog": [],
+      "worklog": [
+        {
+          "date": "22. 10. 2026",
+          "text_sl": "Vaja 1: Zajem treh povezanih prostorov",
+          "text_en": "Exercise 1: Capture of three connected rooms"
+        },
+        {
+          "date": "22. 10. 2026",
+          "text_sl": "Vaja 2: Metode s fotografijami in videom",
+          "text_en": "Exercise 2: Photo and video methods"
+        },
+        {
+          "date": "28. 10. 2026",
+          "text_sl": "Vaja 3: Hodnik z zunanjim stopniščem: rekonstrukcija iz videa",
+          "text_en": "Exercise 3: Hallway with an outdoor stair: reconstruction from video"
+        },
+        {
+          "date": "17. 11. 2026",
+          "text_sl": "Vaja 5: Lastna lokacija: podhoda pod Slovensko cesto pri Kongresnem trgu",
+          "text_en": "Exercise 5: Own location: two underpasses below Slovenska cesta by Kongresni trg"
+        },
+        {
+          "date": "23. 11. 2026",
+          "text_sl": "Dnevnika vaj 4 in 5, mere in skici podhodov",
+          "text_en": "Logs of exercises 4 and 5, measurements and sketches of the underpasses"
+        }
+      ],
       "exhibition": {
         "selected": null,
         "print": null
@@ -1628,18 +1850,46 @@
         }
       ],
       "files": {
-        "pointcloud": "data/s05/s05_pointcloud_v1_2026-11-14.bin",
-        "pointcloud_count": 57859,
+        "pointcloud": "data/s05/s05_pointcloud_v2_2026-11-27.bin",
+        "pointcloud_count": 147900,
         "splat": null,
         "mesh": null,
         "model_glb": null,
-        "model_json": null,
+        "model_json": "data/s05/s05_model_v2_2026-11-27.json",
         "plan_svg": null,
         "sheets": [],
         "downloads": [],
-        "pointcloud_rgb": true
+        "pointcloud_rgb": true,
+        "clouds_extra": [
+          {
+            "file": "data/s05/s05_pointcloud_video_v1_2026-10-20.bin",
+            "count": 57859,
+            "rgb": true,
+            "caption_sl": "Video v 3D (COLMAP), hodnik UL FA (vaja 3, preizkus metode)",
+            "caption_en": "Video to 3D (COLMAP), UL FA corridor (exercise 3, method test)",
+            "model_json": null
+          }
+        ],
+        "pointcloud_caption_sl": "Klet UL FA, očiščen oblak z modelom (vaja 4, preizkus metode)",
+        "pointcloud_caption_en": "UL FA basement, cleaned cloud with model (exercise 4, method test)"
       },
-      "worklog": [],
+      "worklog": [
+        {
+          "date": "19. 10. 2026",
+          "text_sl": "Vaja 2: Stopnišče: primerjava štirih aplikacij",
+          "text_en": "Exercise 2: Stairwell: four apps compared"
+        },
+        {
+          "date": "20. 10. 2026",
+          "text_sl": "Vaja 3: Video v 3D na UL FA",
+          "text_en": "Exercise 3: Video to 3D at UL FA"
+        },
+        {
+          "date": "10. 11. 2026",
+          "text_sl": "Vaja 4: Obokan hodnik v kleti UL FA: model in kontrola",
+          "text_en": "Exercise 4: Vaulted basement corridor at UL FA: model and check"
+        }
+      ],
       "exhibition": {
         "selected": null,
         "print": null
@@ -1820,7 +2070,26 @@
         "within_5cm_pct": null,
         "scale_err_cm": null
       },
-      "measurements": [],
+      "measurements": [
+        {
+          "element": "corridor_length",
+          "tape_cm": null,
+          "cloud_cm": 2082.1,
+          "model_cm": 2310
+        },
+        {
+          "element": "corridor_width",
+          "tape_cm": null,
+          "cloud_cm": 207.3,
+          "model_cm": 281
+        },
+        {
+          "element": "wing_edge",
+          "tape_cm": null,
+          "cloud_cm": 724.8,
+          "model_cm": 662
+        }
+      ],
       "files": {
         "pointcloud": "data/s06/s06_pointcloud_v1_2026-11-14.bin",
         "pointcloud_count": 220000,
@@ -1833,7 +2102,28 @@
         "downloads": [],
         "pointcloud_rgb": true
       },
-      "worklog": [],
+      "worklog": [
+        {
+          "date": "20. 10. 2026",
+          "text_sl": "Vaja 1: Zajem sobe s Scaniverse",
+          "text_en": "Exercise 1: Room capture with Scaniverse"
+        },
+        {
+          "date": "2. 11. 2026",
+          "text_sl": "Vaja 3: Od vhoda UL FA do kleti: Scaniverse in Meshroom",
+          "text_en": "Exercise 3: From the UL FA entrance to the basement: Scaniverse and Meshroom"
+        },
+        {
+          "date": "17. 11. 2026",
+          "text_sl": "Vaja 4: Klet UL FA: od oblaka točk do modela v Rhinu",
+          "text_en": "Exercise 4: UL FA basement: from point cloud to a Rhino model"
+        },
+        {
+          "date": "23. 11. 2026",
+          "text_sl": "Vaja 4: model v Rhinu, tloris 1:100 in kontrola mer",
+          "text_en": "Exercise 4: Rhino model, plan 1:100 and dimension check"
+        }
+      ],
       "exhibition": {
         "selected": null,
         "print": null

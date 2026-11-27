@@ -57,17 +57,17 @@ function chip(key: string, pressed: boolean, disabled = false) {
   return `<button type="button" class="chip" data-layer="${key}" aria-pressed="${pressed}"${disabled ? ' disabled' : ''}>${t('layer.' + key)}${disabled ? ` <span class="chip-note">${t('nodata')}</span>` : ''}</button>`;
 }
 
-interface CloudRef { file: string; count: number; rgb: boolean; caption: string }
+interface CloudRef { file: string; count: number; rgb: boolean; caption: string; model: string | null }
 function cloudList(s: Student): CloudRef[] {
   if (!s.files.pointcloud) return [];
-  const main = { file: s.files.pointcloud, count: s.files.pointcloud_count, rgb: !!s.files.pointcloud_rgb, caption: L(s.files, 'pointcloud_caption') || t('layer.cloud') };
-  return [main, ...(s.files.clouds_extra || []).map((c) => ({ file: c.file, count: c.count, rgb: c.rgb !== false, caption: L(c, 'caption') }))];
+  const main = { file: s.files.pointcloud, count: s.files.pointcloud_count, rgb: !!s.files.pointcloud_rgb, caption: L(s.files, 'pointcloud_caption') || t('layer.cloud'), model: s.files.model_json };
+  return [main, ...(s.files.clouds_extra || []).map((c) => ({ file: c.file, count: c.count, rgb: c.rgb !== false, caption: L(c, 'caption'), model: c.model_json ?? null }))];
 }
 
 function renderPage(s: Student) {
   const hasCloud = !!s.files.pointcloud && s.consent_location_publication;
   const clouds = cloudList(s);
-  const extra = activeCloud > 0; // the generalised model and deviation belong to the main cloud only
+  const noModel = clouds.length ? !clouds[activeCloud]?.model : !s.files.model_json; // model and deviation belong to the shown cloud
   const i = students.indexOf(s);
   const prev = students[(i - 1 + students.length) % students.length];
   const next = students[(i + 1) % students.length];
@@ -106,8 +106,8 @@ function renderPage(s: Student) {
         ${chip('rgb', hasCloud && layers.rgb, !hasCloud || !clouds[activeCloud]?.rgb)}
         ${chip('splat', false, !s.files.splat)}
         ${chip('mesh', layers.mesh, !meshOf(s))}
-        ${chip('model', !hasCloud || layers.model, !s.files.model_json || extra)}
-        ${chip('deviation', hasCloud && layers.deviation, !hasCloud || !s.files.model_json || extra)}
+        ${chip('model', !hasCloud || layers.model, noModel)}
+        ${chip('deviation', hasCloud && layers.deviation, !hasCloud || noModel)}
       </div>
       <div class="group range"><span class="label">${t('st.section')}</span>
         <input type="range" min="0" max="100" value="${section}" id="section" aria-label="${t('st.section')}">
@@ -233,10 +233,10 @@ function bindTools(s: Student, hasCloud: boolean) {
     if (!viewer || !c || k === activeCloud) return;
     document.querySelectorAll<HTMLButtonElement>('[data-cloud]').forEach((x) => { x.disabled = true; x.setAttribute('aria-pressed', String(x === b)); });
     try {
-      await viewer.replaceCloud(url(c.file), c.count, k === 0);
+      await viewer.replaceCloud(url(c.file), c.count, c.model ? url(c.model) : null);
       activeCloud = k;
       layers.cloud = true;
-      if (k > 0) { layers.model = false; layers.deviation = false; }
+      if (!c.model) { layers.model = false; layers.deviation = false; }
       layers.rgb = c.rgb && !layers.deviation; // captured colours whenever the cloud has them
     } catch (e) { console.error(e); }
     myMeasures.length = 0;

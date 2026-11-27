@@ -25,7 +25,7 @@ export interface Student {
   files: {
     pointcloud: string | null; pointcloud_count: number; pointcloud_rgb?: boolean; splat: string | null; mesh: string | null;
     pointcloud_caption_sl?: string; pointcloud_caption_en?: string;
-    clouds_extra?: { file: string; count: number; rgb?: boolean; caption_sl: string; caption_en: string }[];
+    clouds_extra?: { file: string; count: number; rgb?: boolean; caption_sl: string; caption_en: string; model_json?: string | null }[];
     model_glb: string | null; model_json: string | null; plan_svg: string | null;
     sheets: { week: number; file: string | null }[]; downloads: { type: string; file: string | null }[];
   };

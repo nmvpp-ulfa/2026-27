@@ -5,7 +5,8 @@ import * as THREE from 'three';
 export interface Surf { layer: string; o: number[]; u: number[]; v: number[]; lu: number; lv: number; holes: number[][] }
 // Mesh models (from Rhino): triangles per layer plus outline polylines.
 export interface MeshPart { layer: string; pos: number[]; idx: number[] }
-export interface LinePart { layer: string; pts: number[] }
+// pts = polyline; with segs, pts are independent segments (pairs of points), e.g. sharp edges of a mesh
+export interface LinePart { layer: string; pts: number[]; segs?: boolean }
 export interface ModelJson { surfaces: Surf[]; openings: Surf[]; meshes?: MeshPart[]; lines?: LinePart[] }
 
 const BASE = new THREE.Color('#3A3D40');
@@ -84,6 +85,7 @@ export function buildModel(json: ModelJson, clippingPlanes: THREE.Plane[] = []) 
   const openPts: number[] = [];
   for (const l of json.lines ?? []) {
     const out = l.layer === '05_OPENINGS' ? openPts : layer(l.layer).edges;
+    if (l.segs) { for (let i = 0; i < l.pts.length; i++) out.push(l.pts[i]); continue; }
     for (let i = 0; i + 5 < l.pts.length; i += 3) out.push(l.pts[i], l.pts[i + 1], l.pts[i + 2], l.pts[i + 3], l.pts[i + 4], l.pts[i + 5]);
   }
   if (openPts.length) layer('05_OPENINGS').g.add(lines(openPts, openMat));

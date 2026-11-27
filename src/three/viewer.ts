@@ -83,18 +83,19 @@ export class Viewer {
     this.resize();
   }
 
-  // swap the point cloud for another one of the same student; the model belongs to the main cloud only
-  async replaceCloud(path: string, count: number, withModel: boolean) {
+  // swap the point cloud for another one of the same student, together with that cloud's generalised model
+  async replaceCloud(path: string, count: number, modelPath: string | null) {
     if (this.points) {
       this.scene.remove(this.points);
       this.points.geometry.dispose();
       (this.points.material as THREE.Material).dispose();
       this.points = null;
     }
+    if (this.model) { this.scene.remove(this.model); this.disposeObject(this.model); this.model = null; }
     this.clearMeasures();
     this.bounds.makeEmpty();
     await this.loadCloud(path, count);
-    if (withModel && this.model) this.bounds.union(new THREE.Box3().setFromObject(this.model));
+    if (modelPath) await this.loadModel(modelPath);
     this.fit();
   }
 
